@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#03010a">
+<title>Pragma — Философия действия</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #07050a;
+  --ink2:   #0f0c14;
+  --ink3:   #17131f;
+  --ink4:   #211c2c;
+  --gold:   #c9a84c;
+  --gold2:  #e8c96a;
+  --gold3:  #f5e0a0;
+  --prose:  #e8e0d0;
+  --muted:  #7a6e8a;
+  --dim:    #3a3248;
+  --border: #1e1929;
+  --glow:   rgba(201,168,76,0.12);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #03010a;
+  color: var(--prose);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── SPACE BACKGROUND ── */
+#space-bg {
+  position: fixed; inset: 0;
+  z-index: 0;
+  background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=85&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center center;
+  background-color: #03010a;
+}
+#space-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.55)  0%,
+    rgba(10,0,30,0.70) 30%,
+    rgba(5,0,20,0.85)  65%,
+    rgba(7,5,10,0.97)  100%
+  );
+}
+
+/* ── NEBULA ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -5%,  rgba(100,60,200,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 15% 60%,  rgba(60,30,140,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 65% at 88% 25%,  rgba(80,40,160,0.20) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 70% 75%,  rgba(201,168,76,0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── STARS ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background-image:
+    radial-gradient(1px 1px at 12% 8%,  rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 28% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 43% 6%,  rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 67% 11%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 81% 4%,  rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 93% 19%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 19% 31%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 54% 33%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 72% 24%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 47% 48%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 61% 55%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 38% 71%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 74% 78%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 9%  17%, rgba(255,255,255,1.0) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 58% 12%, rgba(201,180,255,1.0) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 77% 58%, rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(2px 2px at 63% 22%, rgba(201,168,76,0.9) 0%, transparent 100%),
+    radial-gradient(2px 2px at 29% 58%, rgba(201,168,76,0.7) 0%, transparent 100%);
+  animation: starTwinkle 6s ease-in-out infinite alternate;
+}
+@keyframes starTwinkle {
+  0%   { opacity: 0.7; }
+  50%  { opacity: 1.0; }
+  100% { opacity: 0.8; }
+}
+
+/* ── LAYOUT ── */
+.wrap {
+  position: relative;
+  z-index: 10;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 1.4rem;
+}
+
+/* ── NAV ── */
+nav {
+  position: relative; z-index: 10;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 1.6rem 1.4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: var(--prose);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.8);
+}
+.logo-dot {
+  width: 5px; height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin-bottom: 3px;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--gold);
+}
+.nav-cta {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 20px;
+  padding: 0.4rem 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  font-weight: 400;
+}
+.nav-cta:hover {
+  background: rgba(201,168,76,0.1);
+  border-color: rgba(201,168,76,0.6);
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative; z-index: 10;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 3.5rem 1.4rem 2rem;
+  text-align: center;
+}
+.hero-eyebrow {
+  font-size: 0.52rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: '';
+  width: 24px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.hero-eyebrow::after {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1.08;
+  color: var(--prose);
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.95), 0 1px 6px rgba(0,0,0,0.8);
+  margin-bottom: 0.9rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold2);
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: rgba(201,168,76,0.75);
+  line-height: 1.55;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.8);
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+.hero-desc {
+  font-size: 0.78rem;
+  color: rgba(200,195,215,0.65);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.7;
+  max-width: 360px;
+  margin: 0 auto 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(18px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ── PREVIEW CARDS ── */
+.preview-cards {
+  position: relative; z-index: 10;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 1.4rem 2.5rem;
+}
+.preview-label {
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.4);
+  text-align: center;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.preview-label::before, .preview-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent);
+}
+.cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.pcard {
+  background: rgba(10,7,20,0.7);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+.pcard:hover {
+  border-color: rgba(201,168,76,0.2);
+  background: rgba(15,10,30,0.8);
+}
+.pcard-cat {
+  font-size: 0.48rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 6px;
+  padding: 0.22rem 0.55rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-weight: 500;
+}
+.pcard-q {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: rgba(232,224,208,0.85);
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+}
+.pcard-lock {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  opacity: 0.25;
+  padding-top: 2px;
+}
+.pcard.locked {
+  filter: blur(2px);
+  pointer-events: none;
+  opacity: 0.4;
+}
+.locked-overlay {
+  text-align: center;
+  padding: 1.5rem 0 0.5rem;
+}
+.locked-msg {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.45);
+  font-weight: 400;
+}
+
+/* ── FEATURES ── */
+.features {
+  position: relative; z-index: 10;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 1.4rem 2.5rem;
+}
+.features-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(232,224,208,0.8);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+.feat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+.feat {
+  background: rgba(10,7,20,0.65);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 14px;
+  padding: 1rem 1rem;
+  backdrop-filter: blur(6px);
+  transition: border-color 0.2s;
+}
+.feat:hover { border-color: rgba(201,168,76,0.2); }
+.feat-icon {
+  font-size: 1.35rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.feat-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.3;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.01em;
+}
+.feat-desc {
+  font-size: 0.6rem;
+  color: rgba(180,165,205,0.55);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* ── QUOTE ── */
+.quote-block {
+  position: relative; z-index: 10;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 1.4rem 2.5rem;
+  text-align: center;
+}
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(201,168,76,0.7);
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+}
+.quote-author {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(122,110,138,0.6);
+  margin-top: 0.9rem;
+  font-weight: 400;
+}
+
+/* ── PAYMENT BLOCK ── */
+.payment-section {
+  position: relative; z-index: 10;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 1.4rem 5rem;
+  text-align: center;
+}
+.payment-card {
+  background: rgba(10,7,22,0.85);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 22px;
+  padding: 2rem 1.6rem 1.8rem;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.06),
+    0 20px 60px rgba(0,0,0,0.6),
+    0 0 40px rgba(201,168,76,0.04);
+}
+.payment-eyebrow {
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 1rem;
+  opacity: 0.75;
+}
+.payment-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--prose);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.02em;
+}
+.payment-desc {
+  font-size: 0.65rem;
+  color: rgba(180,165,205,0.5);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  margin-bottom: 1.6rem;
+}
+
+/* price */
+.price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.price-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.4rem;
+  font-weight: 600;
+  color: var(--gold2);
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(201,168,76,0.3);
+}
+.price-currency {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: rgba(201,168,76,0.6);
+}
+.price-note {
+  font-size: 0.58rem;
+  color: rgba(180,165,205,0.4);
+  letter-spacing: 0.08em;
+  font-weight: 300;
+  margin-bottom: 1.6rem;
+}
+
+/* includes */
+.includes {
+  list-style: none;
+  margin-bottom: 1.8rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.includes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.72rem;
+  color: rgba(232,224,208,0.75);
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+.includes li::before {
+  content: '✦';
+  color: var(--gold);
+  font-size: 0.55rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+  opacity: 0.8;
+}
+
+/* CTA button */
+.pay-btn {
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, #c9a84c, #a8832a);
+  border: none;
+  border-radius: 14px;
+  padding: 1.05rem 1.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #03010a;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow:
+    0 4px 24px rgba(201,168,76,0.35),
+    0 1px 0 rgba(255,255,255,0.15) inset;
+  animation: goldPulse 3.5s ease-in-out infinite;
+  transition: transform 0.15s, box-shadow 0.15s;
+  margin-bottom: 1rem;
+}
+.pay-btn:active {
+  transform: scale(0.97);
+  animation: none;
+}
+@keyframes goldPulse {
+  0%,100% { box-shadow: 0 4px 24px rgba(201,168,76,0.35); }
+  50%      { box-shadow: 0 6px 36px rgba(201,168,76,0.55); }
+}
+
+.pay-security {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.55rem;
+  color: rgba(180,165,205,0.35);
+  letter-spacing: 0.05em;
+  font-weight: 300;
+}
+.pay-security::before {
+  content: '🔒';
+  font-size: 0.6rem;
+  opacity: 0.5;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  position: relative; z-index: 10;
+  max-width: 520px;
+  margin: 0 auto 2rem;
+  padding: 0 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.divider-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent);
+}
+.divider-nodes {
+  display: flex; gap: 0.5rem; align-items: center;
+}
+.dnode {
+  width: 3px; height: 3px; border-radius: 50%;
+  background: var(--gold); opacity: 0.35;
+}
+.dnode.big {
+  width: 5px; height: 5px; opacity: 0.6;
+  box-shadow: 0 0 5px rgba(201,168,76,0.4);
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 10;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+.footer-text {
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(122,110,138,0.3);
+  font-weight: 300;
+}
+
+/* ── MODAL SUCCESS ── */
+#successModal {
+  display: none;
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(3,1,10,0.92);
+  backdrop-filter: blur(12px);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+#successModal.open { display: flex; }
+.success-card {
+  background: rgba(10,7,22,0.95);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 22px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  max-width: 340px;
+  width: 100%;
+  box-shadow: 0 0 60px rgba(201,168,76,0.08);
+}
+.success-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.success-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--gold2);
+  margin-bottom: 0.6rem;
+}
+.success-text {
+  font-size: 0.72rem;
+  color: rgba(180,165,205,0.65);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.success-btn {
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, #c9a84c, #a8832a);
+  border: none;
+  border-radius: 12px;
+  padding: 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #03010a;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+</style>
+</head>
+<body>
+
+<div id="space-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-wrap">
+    <span class="logo">Pragma</span>
+    <div class="logo-dot"></div>
+  </div>
+  <a href="#buy" class="nav-cta">Получить доступ →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Философия действия</div>
+  <h1 class="hero-title">
+    Когда <em>не можешь</em><br>заставить себя<br>начать
+  </h1>
+  <p class="hero-sub">
+    30 протоколов выхода из прокрастинации —<br>основанных на философии стоицизма
+  </p>
+  <p class="hero-desc">
+    Не мотивационные цитаты. Не планировщики.<br>
+    Задай вопрос — получи конкретный ответ с шагами<br>
+    и таймером. Марк Аврелий, Эпиктет, Сенека.
+  </p>
+</div>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-nodes">
+    <div class="dnode"></div>
+    <div class="dnode big"></div>
+    <div class="dnode"></div>
+  </div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- PREVIEW CARDS -->
+<div class="preview-cards">
+  <div class="preview-label">Примеры из базы</div>
+  <div class="cards-grid">
+    <div class="pcard">
+      <span class="pcard-cat">Старт</span>
+      <span class="pcard-q">Не знаю с чего начать — слишком много вариантов</span>
+    </div>
+    <div class="pcard">
+      <span class="pcard-cat">Страх</span>
+      <span class="pcard-q">Боюсь что не получится</span>
+    </div>
+    <div class="pcard">
+      <span class="pcard-cat">Путь</span>
+      <span class="pcard-q">Перфекционизм мешает завершить дело</span>
+    </div>
+    <div class="pcard locked">
+      <span class="pcard-cat">Сила</span>
+      <span class="pcard-q">Нет никакой мотивации — как заставить себя?</span>
+      <span class="pcard-lock">🔒</span>
+    </div>
+    <div class="pcard locked">
+      <span class="pcard-cat">Смысл</span>
+      <span class="pcard-q">Зачем вообще что-то делать?</span>
+      <span class="pcard-lock">🔒</span>
+    </div>
+  </div>
+  <div class="locked-overlay">
+    <span class="locked-msg">+ 27 вопросов доступны после оплаты</span>
+  </div>
+</div>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-nodes">
+    <div class="dnode"></div>
+    <div class="dnode big"></div>
+    <div class="dnode"></div>
+  </div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+  <p class="features-title">Что внутри</p>
+  <div class="feat-grid">
+    <div class="feat">
+      <span class="feat-icon">📖</span>
+      <div class="feat-title">30 вопросов</div>
+      <div class="feat-desc">Старт, Путь, Сила, Страх, Смысл — 5 категорий стоической философии</div>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">⏱</span>
+      <div class="feat-title">Встроенные таймеры</div>
+      <div class="feat-desc">Каждый шаг с точным временем и сигналом завершения</div>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">🆘</span>
+      <div class="feat-title">Протокол SOS</div>
+      <div class="feat-desc">Кнопка «Нужна поддержка» — для самых тяжёлых моментов</div>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">✦</span>
+      <div class="feat-title">Прогресс</div>
+      <div class="feat-desc">Отмечай выполненные протоколы, строй цепочку привычек</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<div class="quote-block">
+  <p class="quote-text">«Пока откладываешь,<br>жизнь проходит мимо.»</p>
+  <p class="quote-author">— Сенека, О краткости жизни</p>
+</div>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <div class="divider-nodes">
+    <div class="dnode"></div>
+    <div class="dnode big"></div>
+    <div class="dnode"></div>
+  </div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- PAYMENT -->
+<div class="payment-section" id="buy">
+  <div class="payment-card">
+    <div class="payment-eyebrow">Полный доступ</div>
+    <h2 class="payment-title">Pragma</h2>
+    <p class="payment-desc">Один раз — навсегда. Без подписки.</p>
+
+    <div class="price-row">
+      <span class="price-amount">999</span>
+      <span class="price-currency">₽</span>
+    </div>
+    <p class="price-note">разовая оплата · доступ навсегда</p>
+
+    <ul class="includes">
+      <li>Все 30 вопросов с пошаговыми стоическими протоколами</li>
+      <li>5 категорий: Старт, Путь, Сила, Страх, Смысл</li>
+      <li>Встроенные таймеры с вибрацией и звуком</li>
+      <li>Протокол SOS — поддержка в самые тяжёлые моменты</li>
+      <li>Поиск по ситуации и случайный вопрос</li>
+      <li>Работает офлайн, без приложений</li>
+    </ul>
+
+    <!-- 
+      ИНСТРУКЦИЯ: Замени href ниже на свою ссылку Stripe Payment Link.
+      Создай её на: https://dashboard.stripe.com/payment-links
+    -->
+    <a href="STRIPE_PAYMENT_LINK_HERE" class="pay-btn" id="payBtn" onclick="handlePay(event)">
+      Получить доступ за 999 ₽
+    </a>
+
+    <div class="pay-security">Оплата через Stripe · Карты RU / международные</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-text">Pragma · Философия действия · 2025</p>
+</footer>
+
+<!-- SUCCESS MODAL (показывается после редиректа со Stripe) -->
+<div id="successModal">
+  <div class="success-card">
+    <div class="success-icon">✦</div>
+    <div class="success-title">Доступ открыт</div>
+    <p class="success-text">Оплата прошла успешно.<br>Pragma полностью открыта для тебя.</p>
+    <a href="pragma_app.html" class="success-btn">Перейти в приложение →</a>
+  </div>
+</div>
+
+<script>
+// Показываем success modal если вернулись со Stripe с ?success=1
+const params = new URLSearchParams(window.location.search);
+if (params.get('success') === '1') {
+  document.getElementById('successModal').classList.add('open');
+  // Сохраняем флаг в localStorage (до подключения Supabase)
+  localStorage.setItem('pragma_paid', '1');
+}
+
+function handlePay(e) {
+  // Если Stripe ссылка ещё не настроена — показываем подсказку
+  const btn = document.getElementById('payBtn');
+  if (btn.href.includes('STRIPE_PAYMENT_LINK_HERE')) {
+    e.preventDefault();
+    alert('⚙️ Настрой Stripe Payment Link:\n\n1. Зайди на dashboard.stripe.com\n2. Создай Payment Link на 999₽\n3. Замени STRIPE_PAYMENT_LINK_HERE в коде\n\nПосле этого кнопка заработает!');
+  }
+}
+
+// Плавная прокрутка к блоку оплаты
+document.querySelectorAll('a[href="#buy"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('buy').scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
