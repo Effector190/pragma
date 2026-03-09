@@ -1,7 +1,7 @@
 {
   "name": "Pragma",
   "short_name": "Pragma",
-  "start_url": ".",
+  "start_url": "/pragma_app.html",
   "display": "standalone",
   "background_color": "#080608",
   "theme_color": "#080608",
