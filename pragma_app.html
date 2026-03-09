@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <script>
+  (function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const secretKey = 'ef1ect0r0307'; 
+    const isPaid = localStorage.getItem('pragma_access_granted');
+
+    // 1. Проверка входа по секретной ссылке
+    if (urlParams.get('access') === secretKey) {
+      localStorage.setItem('pragma_access_granted', 'true');
+      // Очищаем URL от ключа, чтобы не светился
+      const cleanUrl = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, cleanUrl);
+      return; // Разрешаем просмотр
+    }
+
+    // 2. Если доступа нет — редирект на главную (лендинг)
+    if (isPaid !== 'true') {
+      window.location.href = "index.html";
+    }
+  })();
+  </script>
 <meta charset="UTF-8">
   <link rel="manifest" href="manifest.json?v=6">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
