@@ -1,23 +1,32 @@
-const CACHE_NAME = 'pragma-cache-v1';
+const CACHE_NAME = 'pragma-v7'; // Поменяли версию
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/pragma_app.html',
-  '/icon-512.png',
-  'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap'
+  './',
+  './index.html',
+  './pragma_app.html',
+  './manifest.json',
+  './icon-512.png'
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        console.log('Кэшируем ресурсы');
+        // Используем addAll, но если что-то не скачается, воркер не умрет
+        return cache.addAll(ASSETS);
+      })
+      .then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+      Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) return caches.delete(key);
+        })
+      )
     )
   );
   self.clients.claim();
@@ -25,6 +34,10 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request))
+    caches.match(event.request).then(cached => {
+      return cached || fetch(event.request).catch(() => {
+        // Если нет сети и нет в кэше — просто не падаем
+      });
+    })
   );
 });
