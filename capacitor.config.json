@@ -1,0 +1,8 @@
+{
+  "appId": "com.pragma.stoic",
+  "appName": "Pragma",
+  "webDir": ".",
+  "server": {
+    "androidScheme": "https"
+  }
+}
