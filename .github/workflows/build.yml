@@ -24,13 +24,18 @@ jobs:
 
       - name: Configure bubblewrap
         run: |
+          SDK_PATH="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
+          JDK_PATH=$(dirname $(dirname $(readlink -f $(which java))))
+          echo "SDK: $SDK_PATH"
+          echo "JDK: $JDK_PATH"
           mkdir -p ~/.bubblewrap
-          cat > ~/.bubblewrap/config.json << 'EOF'
+          cat > ~/.bubblewrap/config.json << EOF
           {
-            "jdkPath": "/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64",
-            "androidSdkPath": "/usr/local/lib/android/sdk"
+            "jdkPath": "$JDK_PATH",
+            "androidSdkPath": "$SDK_PATH"
           }
           EOF
+          cat ~/.bubblewrap/config.json
 
       - name: Create TWA config
         run: |
