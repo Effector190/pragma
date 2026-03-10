@@ -71,17 +71,13 @@ jobs:
       - name: Fix splash screen
         run: |
           RES="android/app/src/main/res"
-          mkdir -p "$RES/drawable"
           rm -f "$RES/drawable/splash.png"
           rm -f "$RES/drawable/splash.xml"
-          cat > "$RES/drawable/splash.xml" << 'EOF'
-          <?xml version="1.0" encoding="utf-8"?>
-          <shape xmlns:android="http://schemas.android.com/apk/res/android">
-            <solid android:color="#03010a"/>
-          </shape>
-          EOF
-          find android -name "styles.xml" | xargs -I{} sed -i 's|#ffffff|#03010a|g' {} || true
-          find android -name "styles.xml" | xargs -I{} sed -i 's|#FFFFFF|#03010a|g' {} || true
+          find android -name "launch_background.xml" -exec sed -i 's|<item>\s*<bitmap.*splash.*</item>||g' {} \; || true
+          find android -name "launch_background.xml" -exec sed -i 's|@drawable/splash|@color/background|g' {} \; || true
+          find android -name "colors.xml" -exec sed -i 's|</resources>|<color name="background">#03010a</color></resources>|' {} \; || true
+          find android -name "styles.xml" -exec sed -i 's|#ffffff|#03010a|g' {} \; || true
+          find android -name "styles.xml" -exec sed -i 's|#FFFFFF|#03010a|g' {} \; || true
 
       - name: Fix WebView permissions
         run: |
