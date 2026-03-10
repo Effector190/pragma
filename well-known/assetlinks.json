@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.pragma.stoic",
+    "sha256_cert_fingerprints": [
+      "4C:97:87:DA:F2:E2:9F:F3:46:A4:95:85:7B:FC:13:9B:EF:F4:C2:F1:81:70:42:78:81:9E:96:3A:75:75:98:CC"
+    ]
+  }
+}]
