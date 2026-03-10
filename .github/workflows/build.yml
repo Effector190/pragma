@@ -24,6 +24,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Prepare web files
+        run: |
+          mkdir -p public
+          cp pragma_app.html public/index.html
+
       - name: Install dependencies
         run: npm install
 
