@@ -330,36 +330,6 @@ body::after {
   box-shadow: 0 0 5px rgba(201,168,76,0.5);
 }
 
-/* ── SEARCH ── */
-.search-wrap {
-  position: relative;
-  margin-bottom: 0.85rem;
-}
-.search-input {
-  width: 100%;
-  background: rgba(15,12,20,0.75);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.85rem 1rem 0.85rem 2.8rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 300;
-  color: var(--prose);
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  letter-spacing: 0.02em;
-}
-.search-input::placeholder { color: var(--dim); }
-.search-input:focus {
-  border-color: rgba(201,168,76,0.35);
-  box-shadow: 0 0 0 3px rgba(201,168,76,0.06);
-}
-.search-icon {
-  position: absolute; left: 1rem; top: 50%;
-  transform: translateY(-50%);
-  color: var(--dim); font-size: 0.9rem;
-  pointer-events: none;
-}
 
 /* ── CATEGORIES ── */
 .cats-label {
@@ -960,12 +930,6 @@ body::after {
 
 <div class="header" style="padding-top:0">
 
-  <!-- SEARCH -->
-  <div class="search-wrap">
-    <span class="search-icon">⌕</span>
-    <input class="search-input" id="searchInput" type="text"
-      placeholder="Напиши что происходит..." oninput="filterQuestions()">
-  </div>
 
   <!-- CATEGORIES -->
   <div class="cats-label">Что сейчас</div>
@@ -1438,35 +1402,13 @@ function openRandom() {
   openModal(q.id);
 }
 
-function filterQuestions() {
-  const raw = document.getElementById('searchInput').value.toLowerCase().trim();
-  // 'all' view uses pre-shuffled list; category views keep original order
-  let items = activeCat === 'all' ? SHUFFLED_QA : QA.filter(q => q.cat === activeCat);
-  if (!raw) { renderList(items); return; }
-  const words = raw.split(/\s+/);
-  const scored = items.map(q => {
-    let score = 0;
-    const qText = q.q.toLowerCase();
-    const keys = (q.keys || '').toLowerCase();
-    const stepsText = q.steps.map(s => s.t.toLowerCase()).join(' ');
-    for (const w of words) {
-      if (w.length < 2) continue;
-      if (qText === raw)         score += 20;
-      if (qText.includes(w))    score += 10;
-      if (keys.includes(w))     score += 6;
-      if (stepsText.includes(w)) score += 2;
-    }
-    return { q, score };
-  }).filter(x => x.score > 0);
-  scored.sort((a, b) => b.score - a.score);
-  renderList(scored.map(x => x.q));
-}
 
 function filterCat(cat, btn) {
   activeCat = cat;
   document.querySelectorAll('.cat').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  filterQuestions();
+  const items = activeCat === 'all' ? SHUFFLED_QA : QA.filter(q => q.cat === activeCat);
+  renderList(items);
 }
 
 // ── TIMERS ──
