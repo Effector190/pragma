@@ -22,6 +22,15 @@ jobs:
       - name: Install bubblewrap
         run: npm install -g @bubblewrap/cli
 
+      - name: Find Android SDK
+        run: |
+          echo "ANDROID_HOME: $ANDROID_HOME"
+          echo "ANDROID_SDK_ROOT: $ANDROID_SDK_ROOT"
+          find /usr -name "adb" 2>/dev/null || true
+          find /opt -name "adb" 2>/dev/null || true
+          ls /usr/local/lib/android/ 2>/dev/null || true
+          ls /home/runner/ 2>/dev/null || true
+
       - name: Configure bubblewrap
         run: |
           SDK_PATH="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/usr/local/lib/android/sdk}}"
