@@ -1,4 +1,4 @@
-name: Build Pragma APK
+name: Build Pragma TWA
 
 on:
   push:
@@ -13,114 +13,39 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install ImageMagick
-        run: sudo apt-get install -y imagemagick
+      - name: Install bubblewrap
+        run: npm install -g @bubblewrap/cli
 
-      - name: Prepare web files
+      - name: Init TWA project
         run: |
-          mkdir -p public
-          cp pragma_app.html public/index.html
-          cp icon-512.png public/ || true
-          sed -i 's|if (isPaid !== .true.) {[^}]*}||g' public/index.html
-          sed -i "s|if (urlParams.get('access') === secretKey)|if (true)|" public/index.html
-          sed -i "s|window.location.href = \"index.html\";||" public/index.html
-          sed -i 's|<link href="https://fonts.googleapis.com[^"]*" rel="stylesheet">|<style>@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400\&family=Inter:wght@300;400;500\&display=swap");</style>|' public/index.html
+          mkdir -p twa-app
+          cd twa-app
+          bubblewrap init --manifest https://pragma-nine.vercel.app/manifest.json --directory . <<EOF
+          com.pragma.stoic
+          Pragma
+          pragma-nine.vercel.app
+          /pragma_app.html
+          #03010a
+          #03010a
+          portrait
+          No
+          No
+          EOF
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Add Android platform
-        run: npx cap add android
-
-      - name: Set app icons
+      - name: Build TWA APK
         run: |
-          ICON_SRC="icon-512.png"
-          RES="android/app/src/main/res"
-          declare -A SIZES=(
-            ["mipmap-mdpi"]=48
-            ["mipmap-hdpi"]=72
-            ["mipmap-xhdpi"]=96
-            ["mipmap-xxhdpi"]=144
-            ["mipmap-xxxhdpi"]=192
-          )
-          for folder in "${!SIZES[@]}"; do
-            size="${SIZES[$folder]}"
-            mkdir -p "$RES/$folder"
-            rm -f "$RES/$folder/ic_launcher.png"
-            rm -f "$RES/$folder/ic_launcher_round.png"
-            rm -f "$RES/$folder/ic_launcher_foreground.png"
-            rm -f "$RES/$folder/ic_launcher.xml"
-            rm -f "$RES/$folder/ic_launcher_round.xml"
-            convert "$ICON_SRC" -resize "${size}x${size}" "$RES/$folder/ic_launcher.png"
-            convert "$ICON_SRC" -resize "${size}x${size}" "$RES/$folder/ic_launcher_round.png"
-          done
-          rm -f "$RES/mipmap-anydpi-v26/ic_launcher.xml"
-          rm -f "$RES/mipmap-anydpi-v26/ic_launcher_round.xml"
-
-      - name: Fix splash screen
-        run: |
-          RES="android/app/src/main/res"
-          mkdir -p "$RES/drawable"
-          rm -f "$RES/drawable/splash.png"
-          rm -f "$RES/drawable/splash.xml"
-          convert icon-512.png -resize "192x192" \
-            -gravity center -background "#03010a" \
-            -extent "480x960" "$RES/drawable/splash.png"
-          find android -name "colors.xml" -exec sh -c \
-            'grep -q "splash_background" "$1" || sed -i "s|</resources>|<color name=\"splash_background\">#03010a</color></resources>|" "$1"' \
-            _ {} \; || true
-          find android -name "launch_background.xml" -exec sh -c \
-            'cat > "$1" << EOF
-          <?xml version="1.0" encoding="utf-8"?>
-          <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-            <item android:drawable="@color/splash_background"/>
-            <item>
-              <bitmap android:gravity="center" android:src="@drawable/splash"/>
-            </item>
-          </layer-list>
-          EOF' _ {} \; || true
-          find android -name "MainActivity.java" -exec sed -i \
-            's/super.onCreate(savedInstanceState);/super.onCreate(savedInstanceState);\n        getWindow().setBackgroundDrawableResource(android.R.color.black);/' \
-            {} \; || true
-          find android -name "styles.xml" -exec sed -i 's|#ffffff|#03010a|g; s|#FFFFFF|#03010a|g' {} \; || true
-
-      - name: Fix WebView permissions
-        run: |
-          sed -i 's/<application/<application android:usesCleartextTraffic="true"/' android/app/src/main/AndroidManifest.xml
-
-      - name: Sync Capacitor
-        run: npx cap sync android
-
-      - name: Make gradlew executable
-        run: chmod +x android/gradlew
-
-      - name: Build Debug APK
-        run: |
-          cd android
-          ./gradlew assembleDebug
-
-      - name: Print APK fingerprint
-        run: |
-          APK="android/app/build/outputs/apk/debug/app-debug.apk"
-          echo "=== SHA256 FINGERPRINT ==="
-          keytool -printcert -jarfile "$APK" 2>/dev/null | grep "SHA256" || \
-          keytool -list -printcert -jarfile "$APK" 2>/dev/null | grep "SHA256" || \
-          echo "Fingerprint not found"
+          cd twa-app
+          bubblewrap build
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: pragma-debug.apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: pragma-twa.apk
+          path: twa-app/app-release-unsigned.apk
           retention-days: 30
