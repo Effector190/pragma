@@ -1,4 +1,4 @@
-name: Build Pragma TWA
+name: Build Pragma APK
 
 on:
   push:
@@ -13,76 +13,78 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install Android build tools
-        run: |
-          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "build-tools;34.0.0" "platforms;android-34"
+      - name: Install ImageMagick
+        run: sudo apt-get install -y imagemagick
 
-      - name: Install bubblewrap
-        run: npm install -g @bubblewrap/cli
-
-      - name: Configure bubblewrap
+      - name: Prepare web files
         run: |
-          JDK_PATH=$(dirname $(dirname $(readlink -f $(which java))))
-          mkdir -p ~/.bubblewrap
-          cat > ~/.bubblewrap/config.json << EOF
-          {
-            "jdkPath": "$JDK_PATH",
-            "androidSdkPath": "/usr/local/lib/android/sdk"
-          }
-          EOF
+          mkdir -p public
+          cp pragma_app.html public/index.html
+          cp icon-512.png public/ || true
+          sed -i 's|if (isPaid !== .true.) {[^}]*}||g' public/index.html
+          sed -i "s|if (urlParams.get('access') === secretKey)|if (true)|" public/index.html
+          sed -i "s|window.location.href = \"index.html\";||" public/index.html
 
-      - name: Create TWA config
-        run: |
-          mkdir -p twa-app
-          cat > twa-app/twa-manifest.json << 'EOF'
-          {
-            "packageId": "com.pragma.stoic",
-            "host": "pragma-nine.vercel.app",
-            "name": "Pragma",
-            "launcherName": "Pragma",
-            "display": "standalone",
-            "orientation": "portrait",
-            "themeColor": "#03010a",
-            "navigationColor": "#03010a",
-            "navigationColorDark": "#03010a",
-            "navigationDividerColor": "#03010a",
-            "navigationDividerColorDark": "#03010a",
-            "backgroundColor": "#03010a",
-            "enableNotifications": false,
-            "startUrl": "/pragma_app.html",
-            "iconUrl": "https://pragma-nine.vercel.app/icon-512.png",
-            "maskableIconUrl": "https://pragma-nine.vercel.app/icon-512.png",
-            "monochromeIconUrl": "https://pragma-nine.vercel.app/icon-512.png",
-            "appVersion": "1",
-            "appVersionCode": 1,
-            "signingKey": {
-              "path": "android.keystore",
-              "alias": "android"
-            },
-            "splashScreenFadeOutDuration": 300,
-            "enableSiteSettingsShortcut": false,
-            "isChromeOSOnly": false,
-            "isMetaQuest": false,
-            "fullScopeUrl": "https://pragma-nine.vercel.app/",
-            "minSdkVersion": 21,
-            "fingerprints": []
-          }
-          EOF
+      - name: Install dependencies
+        run: npm install
 
-      - name: Build TWA
+      - name: Add Android platform
+        run: npx cap add android
+
+      - name: Set app icons
         run: |
-          cd twa-app
-          bubblewrap build --skipPwaValidation
+          ICON_SRC="icon-512.png"
+          RES="android/app/src/main/res"
+          declare -A SIZES=(
+            ["mipmap-mdpi"]=48
+            ["mipmap-hdpi"]=72
+            ["mipmap-xhdpi"]=96
+            ["mipmap-xxhdpi"]=144
+            ["mipmap-xxxhdpi"]=192
+          )
+          for folder in "${!SIZES[@]}"; do
+            size="${SIZES[$folder]}"
+            mkdir -p "$RES/$folder"
+            rm -f "$RES/$folder/ic_launcher.png"
+            rm -f "$RES/$folder/ic_launcher_round.png"
+            rm -f "$RES/$folder/ic_launcher_foreground.png"
+            rm -f "$RES/$folder/ic_launcher.xml"
+            rm -f "$RES/$folder/ic_launcher_round.xml"
+            convert "$ICON_SRC" -resize "${size}x${size}" "$RES/$folder/ic_launcher.png"
+            convert "$ICON_SRC" -resize "${size}x${size}" "$RES/$folder/ic_launcher_round.png"
+          done
+          rm -f "$RES/mipmap-anydpi-v26/ic_launcher.xml"
+          rm -f "$RES/mipmap-anydpi-v26/ic_launcher_round.xml"
+
+      - name: Fix WebView permissions
+        run: |
+          sed -i 's/<application/<application android:usesCleartextTraffic="true"/' android/app/src/main/AndroidManifest.xml
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
+
+      - name: Build Debug APK
+        run: |
+          cd android
+          ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: pragma-twa.apk
-          path: twa-app/app-release-unsigned.apk
+          name: pragma-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
