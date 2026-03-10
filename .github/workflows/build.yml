@@ -22,6 +22,16 @@ jobs:
       - name: Install bubblewrap
         run: npm install -g @bubblewrap/cli
 
+      - name: Configure bubblewrap
+        run: |
+          mkdir -p ~/.bubblewrap
+          cat > ~/.bubblewrap/config.json << 'EOF'
+          {
+            "jdkPath": "/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64",
+            "androidSdkPath": "/usr/local/lib/android/sdk"
+          }
+          EOF
+
       - name: Create TWA config
         run: |
           mkdir -p twa-app
@@ -61,19 +71,8 @@ jobs:
           EOF
 
       - name: Build TWA
-        env:
-          BUBBLEWRAP_JDK_PATH: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64
-          BUBBLEWRAP_SDK_PATH: /usr/local/lib/android/sdk
         run: |
           cd twa-app
-          echo '{"jdkPath":"${{ env.BUBBLEWRAP_JDK_PATH }}","androidSdkPath":"${{ env.BUBBLEWRAP_SDK_PATH }}"}' > ~/.bubblewrap/config.json
-          mkdir -p ~/.bubblewrap
-          cat > ~/.bubblewrap/config.json << 'EOF'
-          {
-            "jdkPath": "/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.18-8/x64",
-            "androidSdkPath": "/usr/local/lib/android/sdk"
-          }
-          EOF
           bubblewrap build --skipPwaValidation
 
       - name: Upload APK
