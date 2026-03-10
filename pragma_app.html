@@ -481,14 +481,7 @@ body::after {
 }
 .q-item:active .q-arrow { transform: translateX(3px); color: var(--gold); }
 
-.no-results {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: var(--dim);
-  font-size: 0.82rem;
-  font-style: italic;
-  font-family: 'Cormorant Garamond', serif;
-}
+
 
 /* ── MODAL ── */
 .overlay {
@@ -1369,10 +1362,6 @@ function updateCounts() {
 function renderList(items) {
   const el = document.getElementById('questionsList');
   document.getElementById('countLabel').textContent = items.length + ' вопрос' + (items.length===1?'':items.length<5?'а':'ов');
-  if (!items.length) {
-    el.innerHTML = '<div class="no-results">Ничего не найдено.<br>Попробуй другие слова.</div>';
-    return;
-  }
   el.innerHTML = items.map(q => `
     <div class="q-item" onclick="openModal(${q.id})">
       <div class="q-num">${String(q.id).padStart(2,'0')}</div>
@@ -1644,11 +1633,6 @@ initCounts();
         .then(reg => console.log('Pragma готова к оффлайну!'))
         .catch(err => console.log('Ошибка регистрации SW', err));
     });
-  }
-  
-  // Простая защита: если нет метки об оплате, выкидываем на лендинг
-  if (localStorage.getItem('pragma_paid') !== '1') {
-     window.location.href = 'index.html';
   }
 </script>
 </body>
