@@ -7,6 +7,18 @@
   },
   "android": {
     "allowMixedContent": true,
-    "backgroundColor": "#03010a"
+    "backgroundColor": "#03010a",
+    "splash": {
+      "backgroundColor": "#03010a",
+      "showSpinner": false
+    }
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 500,
+      "backgroundColor": "#03010a",
+      "androidSpinnerStyle": "none",
+      "showSpinner": false
+    }
   }
 }
