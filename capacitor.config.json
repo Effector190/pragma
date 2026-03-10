@@ -4,5 +4,9 @@
   "webDir": "public",
   "server": {
     "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true,
+    "backgroundColor": "#03010a"
   }
 }
