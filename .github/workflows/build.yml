@@ -72,14 +72,16 @@ jobs:
         run: |
           RES="android/app/src/main/res"
           mkdir -p "$RES/drawable"
-          mkdir -p "$RES/drawable-land"
           rm -f "$RES/drawable/splash.png"
           rm -f "$RES/drawable/splash.xml"
-          rm -f "$RES/drawable-land/splash.png"
-          rm -f "$RES/drawable-land/splash.xml"
-          convert icon-512.png -resize "192x192" "$RES/drawable/splash.png"
-          convert icon-512.png -resize "192x192" "$RES/drawable-land/splash.png"
-          find android -name "launch_background.xml" -exec sh -c 'cat > "$1" << EOF
+          convert icon-512.png -resize "192x192" \
+            -gravity center -background "#03010a" \
+            -extent "480x960" "$RES/drawable/splash.png"
+          find android -name "colors.xml" -exec sh -c \
+            'grep -q "splash_background" "$1" || sed -i "s|</resources>|<color name=\"splash_background\">#03010a</color></resources>|" "$1"' \
+            _ {} \; || true
+          find android -name "launch_background.xml" -exec sh -c \
+            'cat > "$1" << EOF
           <?xml version="1.0" encoding="utf-8"?>
           <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
             <item android:drawable="@color/splash_background"/>
@@ -88,9 +90,10 @@ jobs:
             </item>
           </layer-list>
           EOF' _ {} \; || true
-          find android -name "colors.xml" -exec sh -c 'grep -q "splash_background" "$1" || sed -i "s|</resources>|<color name=\"splash_background\">#03010a</color></resources>|" "$1"' _ {} \; || true
-          find android -name "styles.xml" -exec sed -i 's|#ffffff|#03010a|g' {} \; || true
-          find android -name "styles.xml" -exec sed -i 's|#FFFFFF|#03010a|g' {} \; || true
+          find android -name "MainActivity.java" -exec sed -i \
+            's/super.onCreate(savedInstanceState);/super.onCreate(savedInstanceState);\n        getWindow().setBackgroundDrawableResource(android.R.color.black);/' \
+            {} \; || true
+          find android -name "styles.xml" -exec sed -i 's|#ffffff|#03010a|g; s|#FFFFFF|#03010a|g' {} \; || true
 
       - name: Fix WebView permissions
         run: |
