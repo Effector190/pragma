@@ -71,11 +71,24 @@ jobs:
       - name: Fix splash screen
         run: |
           RES="android/app/src/main/res"
+          mkdir -p "$RES/drawable"
+          mkdir -p "$RES/drawable-land"
           rm -f "$RES/drawable/splash.png"
           rm -f "$RES/drawable/splash.xml"
-          find android -name "launch_background.xml" -exec sed -i 's|<item>\s*<bitmap.*splash.*</item>||g' {} \; || true
-          find android -name "launch_background.xml" -exec sed -i 's|@drawable/splash|@color/background|g' {} \; || true
-          find android -name "colors.xml" -exec sed -i 's|</resources>|<color name="background">#03010a</color></resources>|' {} \; || true
+          rm -f "$RES/drawable-land/splash.png"
+          rm -f "$RES/drawable-land/splash.xml"
+          convert icon-512.png -resize "192x192" "$RES/drawable/splash.png"
+          convert icon-512.png -resize "192x192" "$RES/drawable-land/splash.png"
+          find android -name "launch_background.xml" -exec sh -c 'cat > "$1" << EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:drawable="@color/splash_background"/>
+            <item>
+              <bitmap android:gravity="center" android:src="@drawable/splash"/>
+            </item>
+          </layer-list>
+          EOF' _ {} \; || true
+          find android -name "colors.xml" -exec sh -c 'grep -q "splash_background" "$1" || sed -i "s|</resources>|<color name=\"splash_background\">#03010a</color></resources>|" "$1"' _ {} \; || true
           find android -name "styles.xml" -exec sed -i 's|#ffffff|#03010a|g' {} \; || true
           find android -name "styles.xml" -exec sed -i 's|#FFFFFF|#03010a|g' {} \; || true
 
