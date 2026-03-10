@@ -72,14 +72,14 @@ jobs:
         run: |
           RES="android/app/src/main/res"
           mkdir -p "$RES/drawable"
+          rm -f "$RES/drawable/splash.png"
+          rm -f "$RES/drawable/splash.xml"
           cat > "$RES/drawable/splash.xml" << 'EOF'
           <?xml version="1.0" encoding="utf-8"?>
           <shape xmlns:android="http://schemas.android.com/apk/res/android">
             <solid android:color="#03010a"/>
           </shape>
           EOF
-          find "$RES" -name "launch_background.xml" | xargs -I{} sed -i 's|@drawable/splash|@drawable/splash|g' {} || true
-          find "$RES" -name "launch_background.xml" | xargs -I{} sed -i 's|android:windowBackground.*|android:windowBackground">@drawable/splash</item>|g' {} || true
           find android -name "styles.xml" | xargs -I{} sed -i 's|#ffffff|#03010a|g' {} || true
           find android -name "styles.xml" | xargs -I{} sed -i 's|#FFFFFF|#03010a|g' {} || true
 
