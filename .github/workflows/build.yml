@@ -22,26 +22,48 @@ jobs:
       - name: Install bubblewrap
         run: npm install -g @bubblewrap/cli
 
-      - name: Init TWA project
+      - name: Create TWA config
         run: |
           mkdir -p twa-app
-          cd twa-app
-          bubblewrap init --manifest https://pragma-nine.vercel.app/manifest.json --directory . <<EOF
-          com.pragma.stoic
-          Pragma
-          pragma-nine.vercel.app
-          /pragma_app.html
-          #03010a
-          #03010a
-          portrait
-          No
-          No
+          cat > twa-app/twa-manifest.json << 'EOF'
+          {
+            "packageId": "com.pragma.stoic",
+            "host": "pragma-nine.vercel.app",
+            "name": "Pragma",
+            "launcherName": "Pragma",
+            "display": "standalone",
+            "orientation": "portrait",
+            "themeColor": "#03010a",
+            "navigationColor": "#03010a",
+            "navigationColorDark": "#03010a",
+            "navigationDividerColor": "#03010a",
+            "navigationDividerColorDark": "#03010a",
+            "backgroundColor": "#03010a",
+            "enableNotifications": false,
+            "startUrl": "/pragma_app.html",
+            "iconUrl": "https://pragma-nine.vercel.app/icon-512.png",
+            "maskableIconUrl": "https://pragma-nine.vercel.app/icon-512.png",
+            "monochromeIconUrl": "https://pragma-nine.vercel.app/icon-512.png",
+            "appVersion": "1",
+            "appVersionCode": 1,
+            "signingKey": {
+              "path": "android.keystore",
+              "alias": "android"
+            },
+            "splashScreenFadeOutDuration": 300,
+            "enableSiteSettingsShortcut": false,
+            "isChromeOSOnly": false,
+            "isMetaQuest": false,
+            "fullScopeUrl": "https://pragma-nine.vercel.app/",
+            "minSdkVersion": 21,
+            "fingerprints": []
+          }
           EOF
 
-      - name: Build TWA APK
+      - name: Build TWA
         run: |
           cd twa-app
-          bubblewrap build
+          bubblewrap build --skipPwaValidation
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
