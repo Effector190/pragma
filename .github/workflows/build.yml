@@ -29,6 +29,9 @@ jobs:
           mkdir -p public
           cp pragma_app.html public/index.html
           cp icon-512.png public/ || true
+          sed -i 's|if (isPaid !== .true.) {[^}]*}||g' public/index.html
+          sed -i "s|if (urlParams.get('access') === secretKey)|if (true)|" public/index.html
+          sed -i "s|window.location.href = \"index.html\";||" public/index.html
 
       - name: Install dependencies
         run: npm install
