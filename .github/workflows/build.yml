@@ -28,12 +28,17 @@ jobs:
         run: |
           mkdir -p public
           cp pragma_app.html public/index.html
+          cp icon-512.png public/ || true
 
       - name: Install dependencies
         run: npm install
 
       - name: Add Android platform
         run: npx cap add android
+
+      - name: Fix WebView permissions
+        run: |
+          sed -i 's/<application/<application android:usesCleartextTraffic="true"/' android/app/src/main/AndroidManifest.xml
 
       - name: Sync Capacitor
         run: npx cap sync android
