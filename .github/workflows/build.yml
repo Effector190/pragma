@@ -56,9 +56,16 @@ jobs:
           for folder in "${!SIZES[@]}"; do
             size="${SIZES[$folder]}"
             mkdir -p "$RES/$folder"
+            rm -f "$RES/$folder/ic_launcher.png"
+            rm -f "$RES/$folder/ic_launcher_round.png"
+            rm -f "$RES/$folder/ic_launcher_foreground.png"
+            rm -f "$RES/$folder/ic_launcher.xml"
+            rm -f "$RES/$folder/ic_launcher_round.xml"
             convert "$ICON_SRC" -resize "${size}x${size}" "$RES/$folder/ic_launcher.png"
             convert "$ICON_SRC" -resize "${size}x${size}" "$RES/$folder/ic_launcher_round.png"
           done
+          rm -f "$RES/mipmap-anydpi-v26/ic_launcher.xml"
+          rm -f "$RES/mipmap-anydpi-v26/ic_launcher_round.xml"
 
       - name: Fix WebView permissions
         run: |
