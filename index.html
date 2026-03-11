@@ -867,5 +867,15 @@ document.querySelectorAll('a[href="#buy"]').forEach(a => {
   });
 });
 </script>
+<script>
+  window.onload = function() {
+    // Находим твой главный блок с контентом и делаем его видимым
+    // Если у тебя другой id (не main-wrapper), замени его ниже
+    const content = document.querySelector('body > div'); 
+    if (content) {
+      content.style.opacity = '1';
+    }
+  };
+</script>
 </body>
 </html>
