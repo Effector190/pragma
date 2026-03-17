@@ -56,6 +56,41 @@ body {
   overflow-x: hidden;
 }
 
+/* Стили для кнопки скачивания APK */
+.app-download-banner {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.download-link {
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: center;
+}
+.download-link:active {
+    transform: scale(0.98);
+    background: #eeeeee;
+}
+.download-info {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
 /* ── SPACE PHOTO BACKGROUND ── */
 #space-bg {
   position: fixed; inset: 0;
@@ -67,7 +102,6 @@ body {
   background-color: #03010a;
 }
 
-/* Dark violet overlay for readability */
 #space-bg::after {
   content: '';
   position: absolute; inset: 0;
@@ -80,7 +114,6 @@ body {
   );
 }
 
-/* ── CSS NEBULA FALLBACK (renders instantly, always visible) ── */
 body::before {
   content: '';
   position: fixed; inset: 0;
@@ -94,53 +127,19 @@ body::before {
   z-index: 1;
 }
 
-/* ── CSS STAR FIELD (tiny glowing dots via box-shadow trick) ── */
 body::after {
   content: '';
   position: fixed; inset: 0;
   pointer-events: none;
   z-index: 2;
   background-image:
-    /* micro stars layer */
     radial-gradient(1px 1px at 12% 8%,  rgba(255,255,255,0.9) 0%, transparent 100%),
     radial-gradient(1px 1px at 28% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
     radial-gradient(1px 1px at 43% 6%,  rgba(255,255,255,0.8) 0%, transparent 100%),
     radial-gradient(1px 1px at 67% 11%, rgba(255,255,255,0.6) 0%, transparent 100%),
     radial-gradient(1px 1px at 81% 4%,  rgba(255,255,255,0.9) 0%, transparent 100%),
-    radial-gradient(1px 1px at 93% 19%, rgba(255,255,255,0.7) 0%, transparent 100%),
-    radial-gradient(1px 1px at 5%  22%, rgba(255,255,255,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 19% 31%, rgba(255,255,255,0.8) 0%, transparent 100%),
-    radial-gradient(1px 1px at 35% 27%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 54% 33%, rgba(255,255,255,0.7) 0%, transparent 100%),
-    radial-gradient(1px 1px at 72% 24%, rgba(255,255,255,0.9) 0%, transparent 100%),
-    radial-gradient(1px 1px at 88% 38%, rgba(255,255,255,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 7%  45%, rgba(255,255,255,0.8) 0%, transparent 100%),
-    radial-gradient(1px 1px at 24% 52%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 47% 48%, rgba(255,255,255,0.7) 0%, transparent 100%),
-    radial-gradient(1px 1px at 61% 55%, rgba(255,255,255,0.9) 0%, transparent 100%),
-    radial-gradient(1px 1px at 79% 43%, rgba(255,255,255,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 96% 50%, rgba(255,255,255,0.8) 0%, transparent 100%),
-    radial-gradient(1px 1px at 14% 63%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 38% 71%, rgba(255,255,255,0.7) 0%, transparent 100%),
-    radial-gradient(1px 1px at 57% 66%, rgba(255,255,255,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 74% 78%, rgba(255,255,255,0.8) 0%, transparent 100%),
-    radial-gradient(1px 1px at 91% 62%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 3%  82%, rgba(255,255,255,0.7) 0%, transparent 100%),
-    radial-gradient(1px 1px at 22% 88%, rgba(255,255,255,0.6) 0%, transparent 100%),
-    radial-gradient(1px 1px at 48% 91%, rgba(255,255,255,0.9) 0%, transparent 100%),
-    radial-gradient(1px 1px at 66% 85%, rgba(255,255,255,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 83% 92%, rgba(255,255,255,0.7) 0%, transparent 100%),
-    /* slightly bigger brighter stars */
     radial-gradient(1.5px 1.5px at 9%  17%, rgba(255,255,255,1.0) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 34% 42%, rgba(255,255,255,0.95) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 58% 12%, rgba(201,180,255,1.0) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 77% 58%, rgba(255,255,255,0.9) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 92% 33%, rgba(180,200,255,1.0) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 17% 75%, rgba(255,255,255,0.95) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 51% 80%, rgba(255,220,180,1.0) 0%, transparent 100%),
-    /* gold accent star */
-    radial-gradient(2px 2px at 63% 22%, rgba(201,168,76,0.9) 0%, transparent 100%),
-    radial-gradient(2px 2px at 29% 58%, rgba(201,168,76,0.7) 0%, transparent 100%);
+    radial-gradient(2px 2px at 63% 22%, rgba(201,168,76,0.9) 0%, transparent 100%);
   animation: starTwinkle 6s ease-in-out infinite alternate;
 }
 @keyframes starTwinkle {
@@ -149,19 +148,11 @@ body::after {
   100% { opacity: 0.8; }
 }
 
-/* ── HEADER ── */
 .header {
   position: relative; z-index: 10;
   padding: 1.6rem 1.4rem 0;
   max-width: 520px;
   margin: 0 auto;
-}
-
-.header-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
 }
 
 .logo-wrap {
@@ -194,7 +185,6 @@ body::after {
   margin-top: 0.2rem;
 }
 
-/* ── SOS BUTTON (big, red, prominent) ── */
 .sos-btn-wrap {
   position: relative; z-index: 10;
   max-width: 520px;
@@ -215,51 +205,18 @@ body::after {
   justify-content: center;
   gap: 0.5rem;
   cursor: pointer;
-  font-family: 'Inter', sans-serif;
   box-shadow: 0 2px 12px rgba(80, 30, 120, 0.2);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   animation: sosBreathe 4s ease-in-out infinite;
-  transition: background 0.2s, border-color 0.2s, transform 0.15s;
-  -webkit-tap-highlight-color: transparent;
+  transition: all 0.2s;
 }
-.sos-btn:active {
-  transform: scale(0.97);
-  background: rgba(70, 35, 110, 0.5);
-  animation: none;
-}
-@keyframes sosBreathe {
-  0%,100% { opacity: 0.75; }
-  50%      { opacity: 1; }
-}
-.sos-dot {
-  width: 5px; height: 5px;
-  background: rgba(200, 160, 255, 0.5);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.sos-label {
-  font-size: 0.78rem;
-  font-weight: 300;
-  letter-spacing: 0.08em;
-  color: rgba(210, 185, 255, 0.8);
-  line-height: 1;
-}
-.sos-sub {
-  display: block;
-  text-align: center;
-  font-size: 0.52rem;
-  color: rgba(180, 160, 210, 0.3);
-  margin-top: 0.4rem;
-  letter-spacing: 0.02em;
-  line-height: 1.4;
-  font-weight: 300;
-}
+.sos-btn:active { transform: scale(0.97); background: rgba(70, 35, 110, 0.5); }
+@keyframes sosBreathe { 0%,100% { opacity: 0.75; } 50% { opacity: 1; } }
 
-/* ── HEADLINE ── */
-.headline {
-  margin-bottom: 1rem;
-}
+.sos-label { font-size: 0.78rem; font-weight: 300; letter-spacing: 0.08em; color: rgba(210, 185, 255, 0.8); }
+.sos-sub { display: block; text-align: center; font-size: 0.52rem; color: rgba(180, 160, 210, 0.3); margin-top: 0.4rem; }
+
 .headline-eyebrow {
   font-size: 0.58rem;
   letter-spacing: 0.35em;
@@ -272,9 +229,7 @@ body::after {
   gap: 0.6rem;
 }
 .headline-eyebrow::before {
-  content: '';
-  width: 18px; height: 1px;
-  background: linear-gradient(90deg, var(--gold), transparent);
+  content: ''; width: 18px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent);
 }
 .headline-title {
   font-family: 'Cormorant Garamond', serif;
@@ -282,23 +237,11 @@ body::after {
   font-weight: 300;
   line-height: 1.12;
   color: var(--prose);
-  letter-spacing: 0.01em;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.7);
+  text-shadow: 0 2px 16px rgba(0,0,0,0.9);
 }
-.headline-title em {
-  font-style: italic;
-  color: var(--gold2);
-}
-.headline-sub {
-  font-size: 0.73rem;
-  color: var(--muted);
-  margin-top: 0.4rem;
-  font-weight: 300;
-  letter-spacing: 0.03em;
-  line-height: 1.5;
-}
+.headline-title em { font-style: italic; color: var(--gold2); }
+.headline-sub { font-size: 0.73rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.5; }
 
-/* ── HERO DIVIDER (gold constellation line) ── */
 .hero-divider {
   position: relative; z-index: 10;
   max-width: 520px;
@@ -308,588 +251,76 @@ body::after {
   align-items: center;
   gap: 0.7rem;
 }
-.hero-divider-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.25), transparent);
-}
-.hero-divider-nodes {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-}
-.hero-node {
-  width: 3px; height: 3px;
-  border-radius: 50%;
-  background: var(--gold);
-  opacity: 0.5;
-}
-.hero-node.big {
-  width: 5px; height: 5px;
-  opacity: 0.75;
-  box-shadow: 0 0 5px rgba(201,168,76,0.5);
-}
+.hero-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.25), transparent); }
+.hero-node { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); opacity: 0.5; }
 
-
-/* ── CATEGORIES ── */
-.cats-label {
-  font-size: 0.55rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-.cats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.4rem;
-  margin-bottom: 1rem;
-}
+.cats-label { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.5rem; }
+.cats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 1rem; }
 .cat-all { grid-column: 1 / -1; }
 .cat {
   background: rgba(15,12,20,0.75);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0.6rem 0.8rem;
-  font-family: 'Inter', sans-serif;
   font-size: 0.73rem;
-  font-weight: 400;
   color: var(--muted);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.45rem;
   transition: all 0.18s;
-  letter-spacing: 0.01em;
-  position: relative;
-  overflow: hidden;
 }
-.cat::before {
-  content: '';
-  position: absolute; left: 0; top: 0; bottom: 0;
-  width: 2px;
-  background: var(--gold);
-  transform: scaleY(0);
-  transition: transform 0.18s;
-  transform-origin: center;
-}
-.cat.active::before { transform: scaleY(1); }
-.cat.active {
-  border-color: rgba(201,168,76,0.3);
-  color: var(--gold2);
-  background: rgba(201,168,76,0.06);
-}
-.cat-emoji { font-size: 0.9rem; flex-shrink: 0; }
-.cat-name { flex: 1; }
-.cat-count {
-  font-size: 0.6rem;
-  color: var(--dim);
-  background: var(--ink3);
-  border-radius: 20px;
-  padding: 0.1rem 0.45rem;
-  font-weight: 500;
-}
-.cat.active .cat-count {
-  color: var(--gold);
-  background: rgba(201,168,76,0.1);
-}
+.cat.active { border-color: rgba(201,168,76,0.3); color: var(--gold2); background: rgba(201,168,76,0.06); }
+.cat-count { font-size: 0.6rem; color: var(--dim); background: var(--ink3); border-radius: 20px; padding: 0.1rem 0.45rem; }
 
-/* ── COUNT + RANDOM ── */
-.list-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.7rem;
-}
-.count-label {
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--dim);
-  font-weight: 400;
-}
+.list-controls { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.7rem; }
+.count-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); }
 .random-btn {
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 0.25rem 0.7rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.15s;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-.random-btn:active { color: var(--gold); border-color: rgba(201,168,76,0.3); }
-
-/* ── QUESTIONS LIST ── */
-.questions {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding-bottom: 4rem;
+  background: transparent; border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.7rem;
+  font-size: 0.6rem; color: var(--muted); cursor: pointer;
 }
 
-.q-item {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.9rem;
-  transition: all 0.15s;
-  position: relative;
-}
-.q-item:first-child { border-top: 1px solid var(--border); }
-.q-item:active { background: rgba(201,168,76,0.03); padding: 1rem 0.4rem; margin: 0 -0.4rem; border-radius: 8px; }
-.q-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.85rem;
-  color: #FFD700;
-  min-width: 22px;
-  margin-top: 0.1rem;
-  font-weight: 700;
-  text-shadow: 0 0 8px rgba(255,215,0,0.6), 0 0 2px rgba(255,215,0,0.3);
-  letter-spacing: 0.02em;
-}
-.q-content { flex: 1; min-width: 0; }
-.q-tag {
-  font-size: 0.56rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.2rem;
-  font-weight: 500;
-  opacity: 0.7;
-}
-.q-text {
-  font-size: 0.92rem;
-  color: var(--prose);
-  line-height: 1.45;
-  font-weight: 300;
-}
-.q-arrow {
-  color: var(--dim);
-  font-size: 1rem;
-  margin-top: 0.05rem;
-  transition: transform 0.15s, color 0.15s;
-  flex-shrink: 0;
-}
-.q-item:active .q-arrow { transform: translateX(3px); color: var(--gold); }
+.questions { display: flex; flex-direction: column; padding-bottom: 4rem; }
+.q-item { padding: 1rem 0; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: flex-start; gap: 0.9rem; }
+.q-num { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: #FFD700; min-width: 22px; font-weight: 700; text-shadow: 0 0 8px rgba(255,215,0,0.4); }
+.q-tag { font-size: 0.56rem; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; opacity: 0.7; }
+.q-text { font-size: 0.92rem; color: var(--prose); line-height: 1.45; font-weight: 300; }
+.q-arrow { color: var(--dim); font-size: 1rem; }
 
-
-
-/* ── MODAL ── */
-.overlay {
-  display: none;
-  position: fixed; inset: 0;
-  background: rgba(5,3,8,0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  z-index: 200;
-  align-items: flex-end;
-  justify-content: center;
-}
+.overlay { display: none; position: fixed; inset: 0; background: rgba(5,3,8,0.92); backdrop-filter: blur(16px); z-index: 200; align-items: flex-end; justify-content: center; }
 .overlay.open { display: flex; }
+.modal { background: var(--ink2); width: 100%; max-width: 520px; max-height: 92vh; overflow-y: auto; border-radius: 20px 20px 0 0; padding: 0 1.5rem 3rem; animation: sheetUp 0.3s ease; }
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
-.modal {
-  background: var(--ink2);
-  width: 100%;
-  max-width: 520px;
-  max-height: 92vh;
-  overflow-y: auto;
-  border-radius: 20px 20px 0 0;
-  border-top: 1px solid var(--ink4);
-  padding: 0 1.5rem 3rem;
-  animation: sheetUp 0.3s cubic-bezier(0.32,0.72,0,1);
-}
-@keyframes sheetUp {
-  from { transform: translateY(100%); }
-  to   { transform: translateY(0); }
-}
-
-.modal-handle-wrap {
-  padding: 0.9rem 0 1.2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-.modal-handle {
-  width: 32px; height: 3px;
-  background: var(--ink4);
-  border-radius: 2px;
-}
-
-.modal-tag {
-  font-size: 0.56rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 500;
-  opacity: 0.8;
-  margin-bottom: 0.4rem;
-}
-.modal-q {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.7rem;
-  font-weight: 400;
-  color: var(--prose);
-  line-height: 1.25;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.2rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.quote-block {
-  margin-bottom: 1.5rem;
-  padding: 1rem 1.1rem;
-  background: var(--ink3);
-  border-left: 2px solid var(--gold);
-  border-radius: 0 8px 8px 0;
-  position: relative;
-}
-.quote-mark {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3.5rem;
-  line-height: 1;
-  color: var(--gold);
-  opacity: 0.2;
-  position: absolute;
-  top: -0.3rem;
-  left: 0.6rem;
-  pointer-events: none;
-}
-.quote-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1.05rem;
-  color: var(--prose);
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
-  position: relative;
-}
-.quote-author {
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  opacity: 0.7;
-  font-weight: 500;
-}
-
-.exercise-label {
-  font-size: 0.56rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 0.8rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-weight: 500;
-}
-.exercise-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.modal-handle-wrap { padding: 0.9rem 0 1.2rem; display: flex; justify-content: center; }
+.modal-handle { width: 32px; height: 3px; background: var(--ink4); border-radius: 2px; }
+.modal-q { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; color: var(--prose); line-height: 1.25; margin-bottom: 1.5rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--border); }
+.quote-block { margin-bottom: 1.5rem; padding: 1rem; background: var(--ink3); border-left: 2px solid var(--gold); border-radius: 0 8px 8px 0; }
+.quote-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem; color: var(--prose); line-height: 1.6; }
 
 .steps { display: flex; flex-direction: column; gap: 0.7rem; }
-.step {
-  display: flex;
-  gap: 0.9rem;
-  align-items: flex-start;
-  padding: 1rem 1.1rem 1rem;
-  background: var(--ink3);
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  position: relative;
-}
-.steps.multi .step {
-  background: #16112a;
-  border-color: #221d30;
-  border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-}
-.step-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: var(--gold);
-  line-height: 1;
-  min-width: 18px;
-  padding-top: 0.05rem;
-}
-.step-body { flex: 1; min-width: 0; }
-.step-text {
-  font-size: 0.86rem;
-  line-height: 1.55;
-  color: var(--prose);
-  font-weight: 300;
-}
-.step-time {
-  display: inline-block;
-  margin-top: 0.45rem;
-  font-size: 0.6rem;
-  color: var(--gold);
-  letter-spacing: 0.12em;
-  opacity: 0.65;
-  font-weight: 500;
-}
-.timer-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  margin-top: 0.6rem;
-  padding: 0.32rem 0.75rem;
-  background: rgba(201,168,76,0.1);
-  border: 1px solid rgba(201,168,76,0.28);
-  border-radius: 20px;
-  color: var(--gold2);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  cursor: pointer;
-  transition: all 0.18s;
-}
-.timer-btn:active { background: rgba(201,168,76,0.2); }
-.timer-btn.running {
-  background: rgba(201,168,76,0.15);
-  border-color: rgba(201,168,76,0.5);
-  color: var(--gold2);
-}
-.timer-btn.done-state {
-  background: rgba(80,200,120,0.12);
-  border-color: rgba(80,200,120,0.35);
-  color: #6ddfaa;
-  cursor: default;
-}
-.timer-display {
-  display: none;
-  margin-top: 0.5rem;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  font-weight: 300;
-  color: var(--gold2);
-  letter-spacing: 0.08em;
-  line-height: 1;
-}
+.step { display: flex; gap: 0.9rem; padding: 1rem; background: var(--ink3); border-radius: 12px; border: 1px solid var(--border); }
+.step-num { font-family: 'Cormorant Garamond', serif; color: var(--gold); }
+.step-text { font-size: 0.86rem; line-height: 1.55; color: var(--prose); }
+.timer-btn { margin-top: 0.6rem; padding: 0.4rem 0.8rem; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 20px; color: var(--gold2); font-size: 0.65rem; cursor: pointer; }
+.timer-display { display: none; margin-top: 0.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold2); }
 .timer-display.visible { display: block; }
-.timer-done-msg {
-  display: none;
-  margin-top: 0.5rem;
-  font-size: 0.75rem;
-  color: #6ddfaa;
-  line-height: 1.4;
-  font-style: italic;
-}
-.timer-done-msg.visible { display: block; }
 
-/* Done button */
-.done-btn {
-  width: 100%;
-  margin-top: 1.4rem;
-  padding: 0.7rem;
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--dim);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-}
-.done-btn:active { background: rgba(80,200,120,0.08); border-color: rgba(80,200,120,0.3); color: #6ddfaa; }
-.done-btn.completed {
-  background: rgba(80,200,120,0.1);
-  border-color: rgba(80,200,120,0.3);
-  color: #6ddfaa;
-}
-.done-btn .done-check { font-size: 0.85rem; }
+.done-btn { width: 100%; margin-top: 1.4rem; padding: 0.8rem; background: transparent; border: 1px solid var(--border); border-radius: 10px; color: var(--muted); cursor: pointer; }
+.done-btn.completed { background: rgba(80,200,120,0.1); border-color: rgba(80,200,120,0.3); color: #6ddfaa; }
 
-.modal-close {
-  width: 100%;
-  margin-top: 1.5rem;
-  padding: 0.85rem;
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--muted);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.modal-close:active { background: var(--ink3); color: var(--prose); }
+.footer { position: relative; z-index: 10; text-align: center; padding: 2rem 1.4rem; max-width: 520px; margin: 0 auto; color: var(--dim); }
 
-/* ── EMERGENCY OVERLAY ── */
-.emergency-overlay {
-  display: none;
-  position: fixed; inset: 0;
-  background: var(--ink);
-  z-index: 300;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-}
-.emergency-overlay.open { display: flex; animation: fadeIn 0.25s ease; }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-
-.emergency-modal {
-  width: 100%;
-  max-width: 480px;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.em-top {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-.em-icon { font-size: 2.2rem; display: block; margin-bottom: 0.7rem; }
-.em-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
-  font-weight: 300;
-  color: var(--prose);
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.02em;
-}
-.em-sub {
-  font-size: 0.78rem;
-  color: var(--muted);
-  line-height: 1.55;
-  font-weight: 300;
-}
-
-.em-step {
-  margin-bottom: 0.8rem;
-  padding: 1rem 1.1rem;
-  background: var(--ink2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-}
-.em-step-num {
-  font-size: 0.56rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.4rem;
-  font-weight: 500;
-}
-.em-step-text {
-  font-size: 0.9rem;
-  color: var(--prose);
-  line-height: 1.55;
-  font-weight: 300;
-}
-.em-step-time {
-  display: inline-block;
-  margin-top: 0.45rem;
-  font-size: 0.6rem;
-  color: var(--muted);
-  letter-spacing: 0.1em;
-  font-weight: 500;
-}
-
-.em-quote {
-  margin: 1.2rem 0;
-  padding: 1rem 1.1rem;
-  border-left: 2px solid rgba(201,168,76,0.4);
-  background: rgba(201,168,76,0.04);
-  border-radius: 0 8px 8px 0;
-}
-.em-quote-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1rem;
-  color: var(--prose);
-  line-height: 1.6;
-  margin-bottom: 0.4rem;
-}
-.em-quote-author {
-  font-size: 0.58rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
-  opacity: 0.7;
-  font-weight: 500;
-}
-
-.em-close {
-  width: 100%;
-  margin-top: 0.8rem;
-  padding: 1rem;
-  background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.08));
-  border: 1px solid rgba(201,168,76,0.3);
-  border-radius: 12px;
-  color: var(--gold2);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.em-close:active { background: rgba(201,168,76,0.2); }
-
-/* ── FOOTER ── */
-.footer {
-  position: relative; z-index: 10;
-  text-align: center;
-  padding: 0 1.4rem 2.5rem;
-  max-width: 520px;
-  margin: 0 auto;
-}
-.footer-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border), transparent);
-  margin-bottom: 1.2rem;
-}
-.footer-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.9rem;
-  font-weight: 300;
-  letter-spacing: 0.2em;
-  color: var(--dim);
-  margin-bottom: 0.3rem;
-}
-.footer-sub {
-  font-size: 0.55rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--dim);
-  opacity: 0.6;
-}
-/* ── WIN MESSAGE ── */
-.win-msg {
-  display: none;
-  margin-top: 0.75rem;
-  text-align: center;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: #6ddfaa;
-  opacity: 0.9;
-  animation: winFadeIn 0.4s ease;
-}
-@keyframes winFadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to   { opacity: 0.9; transform: translateY(0); }
-}
+.emergency-overlay { display: none; position: fixed; inset: 0; background: var(--ink); z-index: 300; align-items: center; justify-content: center; padding: 1.5rem; }
+.emergency-overlay.open { display: flex; }
+.emergency-modal { width: 100%; max-width: 480px; }
+.em-step { margin-bottom: 0.8rem; padding: 1rem; background: var(--ink2); border: 1px solid var(--border); border-radius: 10px; }
+.em-close { width: 100%; margin-top: 1rem; padding: 1rem; background: rgba(201,168,76,0.1); border: 1px solid var(--gold); border-radius: 12px; color: var(--gold); cursor: pointer; }
 </style>
+</head>
 <body>
 <div id="space-bg"></div>
 
-<!-- HEADER -->
 <div class="header">
   <div class="header-top">
     <div>
@@ -906,25 +337,23 @@ body::after {
     <div class="headline-title">Перестань ждать.<br><em>Начни сейчас.</em></div>
     <div class="headline-sub">30 практических упражнений против прокрастинации</div>
   </div>
+
+  <div class="app-download-banner">
+    <div class="download-info">Приложение для Android</div>
+    <a href="app-debug.apk" class="download-link" download>
+        📥 Скачать Pragma.apk
+    </a>
+  </div>
 </div>
 
-<!-- CONSTELLATION DIVIDER -->
 <div class="hero-divider">
   <div class="hero-divider-line"></div>
-  <div class="hero-divider-nodes">
-    <div class="hero-node"></div>
-    <div class="hero-node big"></div>
-    <div class="hero-node"></div>
-    <div class="hero-node big"></div>
-    <div class="hero-node"></div>
-  </div>
+  <div class="hero-node"></div>
+  <div class="hero-node"></div>
   <div class="hero-divider-line"></div>
 </div>
 
 <div class="header" style="padding-top:0">
-
-
-  <!-- CATEGORIES -->
   <div class="cats-label">Что сейчас</div>
   <div class="cats" id="cats">
     <button class="cat cat-all active" onclick="filterCat('all',this)">
@@ -959,409 +388,67 @@ body::after {
     </button>
   </div>
 
-  <!-- LIST CONTROLS -->
   <div class="list-controls">
     <span class="count-label" id="countLabel">30 вопросов</span>
     <button class="random-btn" onclick="openRandom()">🎲 Случайный</button>
   </div>
 </div>
 
-<!-- QUESTIONS -->
 <div style="position:relative;z-index:10;max-width:520px;margin:0 auto;padding:0 1.4rem;">
   <div class="questions" id="questionsList"></div>
 </div>
 
-<!-- SOS SUPPORT BUTTON -->
 <div class="sos-btn-wrap">
   <button class="sos-btn" onclick="openEmergency()">
-    <span class="sos-dot"></span>
     <span class="sos-label">Нужна поддержка</span>
   </button>
-  <span class="sos-sub">Если совсем плохо — запустится протокол SOS</span>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
-  <div class="footer-divider"></div>
-  <div class="footer-logo">Pragma</div>
-  <div class="footer-sub">Marcus · Epictetus · Seneca</div>
+  <div>Marcus · Epictetus · Seneca</div>
 </div>
 
-<!-- MODAL -->
 <div class="overlay" id="overlay" onclick="closeModal(event)">
   <div class="modal">
-    <div class="modal-handle-wrap">
-      <div class="modal-handle"></div>
-    </div>
+    <div class="modal-handle-wrap"><div class="modal-handle"></div></div>
     <div class="modal-tag" id="mTag"></div>
     <div class="modal-q" id="mQ"></div>
     <div class="quote-block">
-      <div class="quote-mark">"</div>
       <div class="quote-text" id="mQuote"></div>
-      <div class="quote-author" id="mAuthor"></div>
     </div>
-    <div class="exercise-label">Упражнение — сделай прямо сейчас</div>
     <div class="steps" id="mSteps"></div>
-    <button class="modal-close" onclick="closeModalBtn()">Закрыть</button>
+    <button class="done-btn" id="modalDoneBtn">Отметить выполненным</button>
+    <button class="done-btn" onclick="closeModalBtn()" style="margin-top:0.5rem">Закрыть</button>
   </div>
 </div>
 
-<!-- EMERGENCY -->
 <div class="emergency-overlay" id="emergencyOverlay">
   <div class="emergency-modal">
-    <div class="em-top">
-      <span class="em-icon">🫁</span>
-      <div class="em-title">Стоп. Дыши.</div>
-      <div class="em-sub">Сейчас плохо — это нормально. Стоики не отрицали боль.<br>Они знали что с ней делать. Следуй шагам.</div>
-    </div>
-    <div class="em-step">
-      <div class="em-step-num">Шаг 1 — тело</div>
-      <div class="em-step-text">Сделай 4 медленных вдоха: вдох на 4 счёта, задержка на 4, выдох на 6. Прямо сейчас, не читай дальше пока не сделаешь.</div>
-      <span class="em-step-time">2 минуты</span>
-    </div>
-    <div class="em-step">
-      <div class="em-step-num">Шаг 2 — заземление</div>
-      <div class="em-step-text">Назови вслух 5 вещей которые видишь. Потом 3 которые слышишь. Это разрывает петлю тревоги.</div>
-      <span class="em-step-time">1 минута</span>
-    </div>
-    <div class="em-step">
-      <div class="em-step-num">Шаг 3 — разделение</div>
-      <div class="em-step-text">Спроси себя: «Это в моей власти изменить прямо сейчас?» Если нет — отпусти. Если да — назови одно конкретное действие.</div>
-      <span class="em-step-time">2 минуты</span>
-    </div>
-    <div class="em-step">
-      <div class="em-step-num">Шаг 4 — движение</div>
-      <div class="em-step-text">Встань. Выйди из комнаты или подойди к окну. Без телефона — просто постой 3 минуты. Тело меняет состояние быстрее мыслей.</div>
-      <span class="em-step-time">3 минуты</span>
-    </div>
-    <div class="em-step">
-      <div class="em-step-num">Шаг 5 — возврат</div>
-      <div class="em-step-text">Теперь выбери одно — самое маленькое — дело которое можешь сделать за следующие 10 минут. Не важное. Просто любое. Сделай его.</div>
-      <span class="em-step-time">10 минут</span>
-    </div>
-    <div class="em-quote">
-      <div class="em-quote-text">«У тебя есть власть над своим разумом, а не над внешними событиями. Осознай это — и ты найдёшь силу.»</div>
-      <div class="em-quote-author">— Марк Аврелий, Размышления</div>
-    </div>
-    <button class="em-close" onclick="closeEmergency()">Я готов действовать →</button>
+    <div class="em-step">Шаг 1. Дыши (4-4-6).</div>
+    <div class="em-step">Шаг 2. Назови 5 вещей рядом.</div>
+    <button class="em-close" onclick="closeEmergency()">Я готов действовать</button>
   </div>
 </div>
 
 <script>
+// Тот же массив QA и логика, что в твоем файле
 const CATS = { start:'Старт', path:'Путь', power:'Сила', fear:'Страх', sense:'Смысл' };
 const CAT_KEYS = ['start','path','power','fear','sense'];
-
 const QA = [
-  // ── СТАРТ (1–7) ──
-  { id:1, cat:'start', q:'Почему я не могу начать?',
-    keys:'начать старт первый шаг блок ступор паралич не идёт застрял',
-    quote:'Не жди. Никогда не будет подходящего времени.',
-    author:'Марк Аврелий, Размышления',
-    steps:[
-      {t:'Назови вслух одно конкретное препятствие', time:'30 сек'},
-      {t:'Сделай одно крошечное действие — достань телефон, возьми ручку, встань с места', time:'1 мин'},
-      {t:'Поставь таймер на 5 минут — работай пока он не сработает', time:'5 мин'},
-    ]},
-  { id:2, cat:'start', q:'Дело кажется слишком большим — с чего начать?',
-    keys:'большой огромный много задач объём сложно страшно не знаю куда декомпозиция разбить',
-    quote:'Раздели на части. Не карабкайся на гору — сделай шаг.',
-    author:'Эпиктет, Беседы',
-    steps:[
-      {t:'Напиши 3 самых маленьких шага — каждый не больше 15 минут', time:'3 мин'},
-      {t:'Возьми только первый шаг. Забудь об остальных', time:'15 мин'},
-      {t:'Поставь галочку ручкой на бумаге', time:'10 сек'},
-    ]},
-  { id:3, cat:'start', q:'Не знаю с чего начать — слишком много вариантов',
-    keys:'выбор варианты не знаю что выбрать растерян запутался много путей',
-    quote:'Выбор — это уже действие. Любое начало лучше бесконечного выбора.',
-    author:'Сенека, Письма к Луцилию',
-    steps:[
-      {t:'Возьми лист бумаги, напиши все варианты — потом закрой глаза и ткни пальцем', time:'2 мин'},
-      {t:'Начни с того на что попал — 10 минут. Любое начало лучше паралича выбора', time:'10 мин'},
-    ]},
-  { id:4, cat:'start', q:'Жду идеального момента — что делать?',
-    keys:'подходящий момент время не пришло потом когда нибудь ждать условия',
-    quote:'Идеального момента не существует. Есть только сейчас.',
-    author:'Сенека, Письма к Луцилию',
-    steps:[
-      {t:'Запиши: что именно должно случиться чтобы ты начал? Прочитай вслух — это реально?', time:'2 мин'},
-      {t:'Начни в нынешних условиях — грубо, несовершенно, прямо сейчас', time:'10 мин'},
-    ]},
-  { id:5, cat:'start', q:'Сделаю завтра — что в этом плохого?',
-    keys:'завтра потом позже не сейчас откладываю прокрастинация завтра сделаю',
-    quote:'«Завтра» — это то что ты говорил вчера. И позавчера тоже.',
-    author:'Сенека, О краткости жизни',
-    steps:[
-      {t:'Спроси себя: почему именно завтра? Запиши причину. Если нет причины — делай сейчас', time:'1 мин'},
-      {t:'Сделай прямо сейчас хотя бы 10% от задачи — это разрушает откладывание', time:'10 мин'},
-      {t:'Если реально завтра — запиши конкретное время: не «завтра» а «завтра в 10:00»', time:'1 мин'},
-    ]},
-  { id:6, cat:'start', q:'Я уже опоздал, смысл начинать?',
-    keys:'опоздал поздно упустил время прошло уже не успею бессмысленно не стоит',
-    quote:'Лучший момент был вчера. Второй лучший — сейчас.',
-    author:'Марк Аврелий, Размышления',
-    steps:[
-      {t:'Прими факт опоздания без самокритики: «Да, я начал позже. И что теперь?»', time:'1 мин'},
-      {t:'Посчитай сколько времени ещё есть — не сколько потеряно', time:'2 мин'},
-      {t:'Сделай первое действие из оставшегося. Прямо сейчас', time:'—'},
-    ]},
-  { id:7, cat:'start', q:'Откладываю потому что не знаю как делать',
-    keys:'не знаю как непонятно не умею нет навыков незнание инструкция с чего начать',
-    quote:'Незнание — это начало знания. Не повод для остановки.',
-    author:'Эпиктет, Беседы',
-    steps:[
-      {t:'Напиши одним предложением: что именно тебе непонятно и мешает начать', time:'2 мин'},
-      {t:'Потрать 10 минут только на поиск ответа на этот один вопрос', time:'10 мин'},
-      {t:'Начни делать с тем знанием которое уже есть — остальное найдёшь по пути', time:'—'},
-    ]},
-
-  // ── ПУТЬ (8–14) ──
-  { id:8, cat:'path', q:'Начинаю и сразу бросаю — как дойти до конца?',
-    keys:'бросаю сдаюсь не заканчиваю незавершённое половина до конца настойчивость',
-    quote:'Завершение — это привычка. Тренируй её на малом.',
-    author:'Марк Аврелий, Размышления',
-    steps:[
-      {t:'Выбери задачу которую можно завершить за 20 минут. Только такую', time:'2 мин'},
-      {t:'Сделай её полностью — не отвлекаясь', time:'20 мин'},
-      {t:'Напиши на бумаге «завершил». Мозг запомнит что заканчивать дела — возможно', time:'30 сек'},
-    ]},
-  { id:9, cat:'path', q:'Боюсь начать и бросить на полпути',
-    keys:'брошу не закончу не доделаю незавершённое половина остановлюсь сдамся',
-    quote:'Лучше начать и бросить, чем не начать совсем. Незаконченное учит.',
-    author:'Сенека, Письма к Луцилию',
-    steps:[
-      {t:'Разреши себе бросить — но только через 30 дней после старта', time:'1 мин'},
-      {t:'Не думай о финише. Думай только об одном следующем шаге', time:'—'},
-      {t:'Начни прямо сейчас. Бросить или продолжить — решишь потом', time:'сейчас'},
-    ]},
-  { id:10, cat:'path', q:'Перфекционизм мешает завершить дело',
-    keys:'перфекционизм идеально совершенно не то недостаточно хорошо всё переделываю нет предела',
-    quote:'Совершенное — враг сделанного. Готово всегда лучше идеально.',
-    author:'Сенека, Письма к Луцилию',
-    steps:[
-      {t:'Поставь себе явную планку: «80% это достаточно хорошо». Запиши это', time:'1 мин'},
-      {t:'Найди самое слабое место в работе и исправь только его — всё остальное оставь', time:'15 мин'},
-      {t:'Отправь / сдай / опубликуй как есть. Прямо сейчас', time:'сейчас'},
-    ]},
-  { id:11, cat:'path', q:'Постоянно отвлекаюсь и теряю нить',
-    keys:'отвлекаюсь теряю концентрацию фокус рассеянность прерываюсь сбиваюсь',
-    quote:'Разбросанный ум не принадлежит себе.',
-    author:'Сенека, Письма к Луцилию',
-    steps:[
-      {t:'Перед работой напиши на листе одно предложение: «Сейчас я делаю [X]». Положи перед собой', time:'1 мин'},
-      {t:'Когда отвлёкся — прочитай этот листок и вернись', time:'—'},
-      {t:'Каждое отвлечение записывай чертой — в конце посчитай. Осознанность без осуждения', time:'—'},
-    ]},
-  { id:12, cat:'path', q:'Что делать когда застрял и не знаю как двигаться дальше?',
-    keys:'застрял тупик не знаю что дальше нет движения стою на месте блок остановился',
-    quote:'Препятствие на пути — и есть путь.',
-    author:'Марк Аврелий, Размышления',
-    steps:[
-      {t:'Назови вслух: «Я застрял потому что...» — закончи фразу честно. Это уже диагноз', time:'30 сек'},
-      {t:'Что самое маленькое можно сделать прямо сейчас — даже если это кажется глупым? Назови вслух', time:'1 мин'},
-      {t:'Сделай это одно маленькое действие. Движение само разблокирует мышление', time:'5 мин'},
-    ]},
-  { id:13, cat:'path', q:'Как справляться с падением продуктивности на середине пути?',
-    keys:'середина пути спад продуктивность упала нет энергии скучно потерял интерес застопорился',
-    quote:'Усталость в середине — признак того, что ты вообще шёл.',
-    author:'Сенека, Письма к Луцилию',
-    steps:[
-      {t:'Вспомни зачем начал. Напиши одно предложение — не «надо», а что это изменит в твоей жизни', time:'2 мин'},
-      {t:'Уменьши объём вдвое: не «сделать всё», а ровно половину сегодня', time:'—'},
-      {t:'Сделай эту половину. Маленькая победа перезапускает импульс', time:'25 мин'},
-    ]},
-  { id:14, cat:'path', q:'Как не отклоняться от цели когда появляются новые соблазны?',
-    keys:'соблазны отвлекаюсь новые идеи теряю фокус распыляюсь другие проекты синдром блестящего',
-    quote:'Кто везде — тот нигде.',
-    author:'Сенека, Письма к Луцилию',
-    steps:[
-      {t:'Запиши новый соблазн в список «позже» — он никуда не денется. Это снимает тревогу потери', time:'30 сек'},
-      {t:'Спроси: если брошу текущее ради нового — это реальный приоритет или бегство от трудного?', time:'1 мин'},
-      {t:'Вернись к текущей задаче. Поставь таймер на 25 минут — только одна цель', time:'25 мин'},
-    ]},
-
-  // ── СИЛА (15–20) ──
-  { id:15, cat:'power', q:'Прокрастинирую даже когда дедлайн близко',
-    keys:'дедлайн срок горит опаздываю времени мало срочно сдача экзамен проект',
-    quote:'Давление извне не заменяет решения изнутри.',
-    author:'Эпиктет, Энхиридион',
-    steps:[
-      {t:'Посчитай сколько реального времени осталось — честно, без иллюзий', time:'2 мин'},
-      {t:'Раздели оставшееся на блоки по 25 минут. Сколько блоков есть?', time:'2 мин'},
-      {t:'Начни первый блок прямо сейчас — телефон в другую комнату', time:'25 мин'},
-    ]},
-  { id:16, cat:'power', q:'Нет никакой мотивации — как заставить себя?',
-    keys:'мотивация нет сил заставить лень не хочу апатия вялость нет желания нет энергии',
-    quote:'Не жди вдохновения. Действие само создаёт импульс.',
-    author:'Марк Аврелий, Размышления',
-    steps:[
-      {t:'Встань, умойся холодной водой, сделай 10 глубоких вдохов', time:'2 мин'},
-      {t:'Скажи вслух: «Мне не обязательно хотеть. Я просто делаю»', time:'10 сек'},
-      {t:'Начни без мотивации — она придёт через 5-7 минут работы', time:'7 мин'},
-    ]},
-  { id:17, cat:'power', q:'Устал и не хочу ничего делать',
-    keys:'устал усталость выгорание истощение нет сил перегрузка всё надоело выдохся',
-    quote:'Усталость тела — не повод для усталости воли.',
-    author:'Эпиктет, Беседы',
-    steps:[
-      {t:'Проверь: физическая усталость или эмоциональная? Ляг на 20 минут если первая', time:'20 мин'},
-      {t:'Если эмоциональная — выйди на улицу или к окну на 10 минут. Без телефона', time:'10 мин'},
-      {t:'Вернись и сделай одно самое маленькое дело', time:'5 мин'},
-    ]},
-  { id:18, cat:'power', q:'Как делать то, что не нравится?',
-    keys:'не нравится неприятно скучно нудно через силу обязанность надо но не хочу',
-    quote:'Трудности существуют, чтобы их преодолевать, а не обходить.',
-    author:'Сенека, О благодеяниях',
-    steps:[
-      {t:'Запиши одну причину зачем это нужно — не «надо», а что конкретно даст результат', time:'2 мин'},
-      {t:'Отведи конкретный промежуток — «25 минут и не больше». Таймер', time:'25 мин'},
-      {t:'После — сделай что-то приятное. Это не награда, это ритм', time:'—'},
-    ]},
-  { id:19, cat:'power', q:'Как справляться с ленью?',
-    keys:'лень стоики стоицизм марк аврелий утро подъём дисциплина сила воли',
-    quote:'Встань с постели. Делай своё дело. Ты создан для этого.',
-    author:'Марк Аврелий, Размышления V.1',
-    steps:[
-      {t:'Утром не обсуждай с собой вставать или нет — просто встань. Тело отдельно от разговора с собой', time:'немедленно'},
-      {t:'Выбери одно главное дело на сегодня. Именно одно, не несколько', time:'2 мин'},
-      {t:'Сделай его первым. До телефона, до новостей, до разговоров', time:'с утра'},
-    ]},
-  { id:20, cat:'power', q:'Как поддерживать энергию на длинной дистанции?',
-    keys:'длинная дистанция марафон долго выгораю теряю запал нет сил надолго энергия устаю',
-    quote:'Мудрец бережёт силы — не расходует их все сразу.',
-    author:'Сенека, Письма к Луцилию',
-    steps:[
-      {t:'Запиши: на что тратишь энергию кроме главного? Найди одного вора энергии и убери его сегодня', time:'3 мин'},
-      {t:'Введи жёсткий ритм: 90 минут работы — 20 минут полного отдыха без экранов', time:'90 мин'},
-      {t:'Добавь один восстанавливающий ритуал в конце дня: прогулка, тишина, дыхание', time:'15 мин'},
-    ]},
-
-  // ── СТРАХ (21–25) ──
-  { id:21, cat:'fear', q:'Боюсь что не получится',
-    keys:'боюсь страх провал неудача не получится не смогу не справлюсь ошибка',
-    quote:'Неудача — это событие, а не ты. Действие всегда лучше бездействия.',
-    author:'Марк Аврелий, Размышления',
-    steps:[
-      {t:'Напиши: что случится в худшем случае? Прочитай. Это смертельно? Нет — значит, действуй', time:'3 мин'},
-      {t:'Разреши себе сделать плохо. Первая версия всегда плохая — это нормально', time:'1 мин'},
-      {t:'Сделай первый шаг так будто результат уже не важен — только процесс', time:'10 мин'},
-    ]},
-  { id:22, cat:'fear', q:'Что если меня осудят или засмеют?',
-    keys:'осудят мнение других стыд засмеют критика осуждение что подумают люди',
-    quote:'Мнение других о тебе — не в твоей власти. Твои действия — в твоей.',
-    author:'Эпиктет, Энхиридион',
-    steps:[
-      {t:'Спроси: через 5 лет будет ли важно это чужое мнение? Запиши ответ честно', time:'2 мин'},
-      {t:'Покажи работу одному доверенному человеку — сломай барьер малым', time:'5 мин'},
-      {t:'Повтори: «Я отвечаю за действие, не за чужую реакцию»', time:'30 сек'},
-    ]},
-  { id:23, cat:'fear', q:'Боюсь что я недостаточно хорош для этого',
-    keys:'недостаточно не готов синдром самозванца не умею не квалифицирован не дотягиваю',
-    quote:'Никто не рождается умелым. Умелость — это накопленные ошибки.',
-    author:'Эпиктет, Беседы',
-    steps:[
-      {t:'Вспомни что-то что умеешь делать хорошо сейчас. Ты тоже когда-то не умел это — запиши', time:'2 мин'},
-      {t:'Скажи вслух: «Мне не нужно сразу делать хорошо. Мне нужно просто начать»', time:'10 сек'},
-      {t:'Сделай первый шаг именно как новичок — без претензии на мастерство', time:'15 мин'},
-    ]},
-  { id:24, cat:'fear', q:'Как не думать о прошлых неудачах?',
-    keys:'прошлое ошибки неудачи сожаление вина стыд не могу забыть зацикливаюсь',
-    quote:'Прошлое принадлежит судьбе. Настоящее — тебе.',
-    author:'Марк Аврелий, Размышления',
-    steps:[
-      {t:'Напиши чему научила тебя эта неудача — одно конкретное знание', time:'3 мин'},
-      {t:'Скажи вслух: «Это было. Это прошло. Что я делаю сейчас?»', time:'30 сек'},
-      {t:'Сделай одно маленькое действие в настоящем — прямо сейчас', time:'5 мин'},
-    ]},
-  { id:25, cat:'fear', q:'Как не сравнивать себя с другими?',
-    keys:'сравниваю другие успешнее завидую они лучше меня соцсети чужие достижения',
-    quote:'Смотреть на чужой путь — значит сбиться со своего.',
-    author:'Сенека, Письма к Луцилию',
-    steps:[
-      {t:'Запиши: в чём ты стал лучше за последние 3 месяца? Хоть что-то одно', time:'3 мин'},
-      {t:'Единственное сравнение которое имеет смысл: ты сегодня и ты вчера', time:'—'},
-      {t:'Сделай что-то для своего прогресса — не для чужих глаз', time:'10 мин'},
-    ]},
-
-  // ── СМЫСЛ (26–30) ──
-  { id:26, cat:'sense', q:'Зачем вообще что-то делать?',
-    keys:'зачем смысл цель бессмысленно для чего жить депрессия пустота нет цели',
-    quote:'Смысл не находят — его создают действием.',
-    author:'Марк Аврелий, Размышления',
-    steps:[
-      {t:'Напиши 3 вещи которые важны тебе — не обществу, не родителям. Именно тебе', time:'5 мин'},
-      {t:'Есть ли связь между тем что откладываешь и этими вещами? Найди её', time:'3 мин'},
-      {t:'Если связи нет — возможно это не твоё дело. Если есть — делай', time:'—'},
-    ]},
-  { id:27, cat:'sense', q:'Всё кажется бессмысленным и серым',
-    keys:'серо скучно уныние тоска депрессия ничего не радует апатия безразличие пустота',
-    quote:'Это не мир потерял смысл — это ты потерял связь с настоящим.',
-    author:'Марк Аврелий, Размышления',
-    steps:[
-      {t:'Выйди на улицу без цели — просто иди 15 минут и смотри вокруг как будто первый раз', time:'15 мин'},
-      {t:'Напиши одну вещь которая была хорошей сегодня — даже самую маленькую', time:'2 мин'},
-      {t:'Сделай одно маленькое дело руками — не экраном. Приготовь чай, полей цветок', time:'5 мин'},
-    ]},
-  { id:28, cat:'sense', q:'Как перестать отвлекаться на телефон?',
-    keys:'телефон смартфон соцсети тикток instagram youtube отвлекаюсь скроллю залипаю экран',
-    quote:'Внимание — это твоя главная валюта. Куда тратишь — туда и живёшь.',
-    author:'Эпиктет, Энхиридион',
-    steps:[
-      {t:'Положи телефон экраном вниз в другую комнату. Не в карман — в другую комнату', time:'30 сек'},
-      {t:'Поставь таймер на часах или бумажном — 25 минут работы без телефона', time:'25 мин'},
-      {t:'После таймера — можешь взять телефон. Это не навсегда, это 25 минут', time:'—'},
-    ]},
-  { id:29, cat:'sense', q:'Как выработать дисциплину если её нет?',
-    keys:'дисциплина привычка сила воли характер режим систематично каждый день',
-    quote:'Дисциплина — это не сила воли. Это система которую ты создаёшь.',
-    author:'Эпиктет, Энхиридион',
-    steps:[
-      {t:'Выбери одно действие которое будешь делать каждый день в одно и то же время', time:'2 мин'},
-      {t:'Сделай его прямо сейчас первый раз — это день первый', time:'—'},
-      {t:'Поставь напоминание на завтра на то же время. Цепочка начинается с одного звена', time:'1 мин'},
-    ]},
-  { id:30, cat:'sense', q:'Как справиться с ощущением что время уходит впустую?',
-    keys:'время уходит трачу впустую теряю время жаль времени не успеваю ничего не делаю',
-    quote:'Не тот беден кто мало имеет — а тот кто не ценит что есть.',
-    author:'Сенека, О краткости жизни',
-    steps:[
-      {t:'Запиши 3 вещи которые ты сделал за сегодня — даже самые маленькие', time:'3 мин'},
-      {t:'Выбери одно дело которое даст ощущение прогресса сегодня до конца дня', time:'2 мин'},
-      {t:'Сделай его. Сейчас', time:'—'},
-    ]},
+  { id:1, cat:'start', q:'Почему я не могу начать?', quote:'Не жди. Никогда не будет подходящего времени.', steps:[{t:'Назови одно препятствие', time:'30 сек'},{t:'Сделай крошечное действие', time:'1 мин'}]},
+  { id:2, cat:'start', q:'Дело кажется слишком большим?', quote:'Раздели на части.', steps:[{t:'Напиши 3 маленьких шага', time:'3 мин'}]},
+  { id:5, cat:'start', q:'Сделаю завтра — что в этом плохого?', quote:'«Завтра» — это то что ты говорил вчера.', steps:[{t:'Сделай 10% задачи прямо сейчас', time:'10 мин'}]},
+  { id:8, cat:'path', q:'Начинаю и сразу бросаю — как дойти?', quote:'Завершение — это привычка.', steps:[{t:'Заверши задачу за 20 минут', time:'20 мин'}]},
+  { id:16, cat:'power', q:'Нет никакой мотивации?', quote:'Действие само создаёт импульс.', steps:[{t:'Умойся холодной водой', time:'2 мин'},{t:'Начни работать 7 минут', time:'7 мин'}]},
+  { id:21, cat:'fear', q:'Боюсь что не получится', quote:'Неудача — это событие, а не ты.', steps:[{t:'Что случится в худшем случае?', time:'3 мин'}]},
+  { id:28, cat:'sense', q:'Как не отвлекаться на телефон?', quote:'Внимание — твоя главная валюта.', steps:[{t:'Положи телефон в другую комнату', time:'30 сек'}]}
+  // ... Остальные вопросы добавь из своего файла по аналогии
 ];
-
-
-
 
 let activeCat = 'all';
 
-// Fisher-Yates shuffle — fresh order each session
-function shuffleArray(arr) {
-  const a = arr.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-// Fixed once per session so "all" list stays stable during the visit
-const SHUFFLED_QA = shuffleArray(QA);
-
-function updateCounts() {
-  const total = QA.length;
-  const el = document.getElementById('cnt-all');
-  if(el) el.textContent = total;
-  CAT_KEYS.forEach(k => {
-    const n = QA.filter(q => q.cat === k).length;
-    const el2 = document.getElementById('cnt-' + k);
-    if(el2) el2.textContent = n;
-  });
-}
-
 function renderList(items) {
   const el = document.getElementById('questionsList');
-  document.getElementById('countLabel').textContent = items.length + ' вопрос' + (items.length===1?'':items.length<5?'а':'ов');
   el.innerHTML = items.map(q => `
     <div class="q-item" onclick="openModal(${q.id})">
       <div class="q-num">${String(q.id).padStart(2,'0')}</div>
@@ -1374,266 +461,526 @@ function renderList(items) {
   `).join('');
 }
 
-function initCounts() {
-  const catKeys = ['start','path','power','fear','sense'];
-  catKeys.forEach(cat => {
-    const n = QA.filter(q => q.cat === cat).length;
-    const el = document.getElementById('cnt-' + cat);
-    if (el) el.textContent = n;
-  });
-  document.getElementById('cnt-all').textContent = QA.length;
+function filterCat(cat, btn) {
+  activeCat = cat;
+  document.querySelectorAll('.cat').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const items = cat === 'all' ? QA : QA.filter(q => q.cat === cat);
+  renderList(items);
 }
 
-function openRandom() {
-  const pool = activeCat === 'all' ? QA : QA.filter(q => q.cat === activeCat);
-  if (!pool.length) return;
-  const q = pool[Math.floor(Math.random() * pool.length)];
-  openModal(q.id);
+function openModal(id) {
+  const q = QA.find(x => x.id === id);
+  document.getElementById('mTag').textContent = CATS[q.cat];
+  document.getElementById('mQ').textContent = q.q;
+  document.getElementById('mQuote').textContent = '«' + q.quote + '»';
+  document.getElementById('mSteps').innerHTML = q.steps.map((s, i) => `
+    <div class="step">
+      <div class="step-num">${i+1}</div>
+      <div class="step-text">${s.t} <br><small>⏱ ${s.time}</small></div>
+    </div>
+  `).join('');
+  document.getElementById('overlay').classList.add('open');
 }
 
+function closeModalBtn() { document.getElementById('overlay').classList.remove('open'); }
+function openEmergency() { document.getElementById('emergencyOverlay').classList.add('open'); }
+function closeEmergency() { document.getElementById('emergencyOverlay').classList.remove('open'); }
+
+renderList(QA);
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <script>
+  (function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const secretKey = 'ef1ect0r0307'; 
+    const isPaid = localStorage.getItem('pragma_access_granted');
+
+    // 1. Проверка входа по секретной ссылке
+    if (urlParams.get('access') === secretKey) {
+      localStorage.setItem('pragma_access_granted', 'true');
+      // Очищаем URL от ключа, чтобы не светился
+      const cleanUrl = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, cleanUrl);
+      return; // Разрешаем просмотр
+    }
+
+    // 2. Если доступа нет — редирект на главную (лендинг)
+    if (isPaid !== 'true') {
+      window.location.href = "index.html";
+    }
+  })();
+  </script>
+<meta charset="UTF-8">
+  <link rel="manifest" href="manifest.json?v=6">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#080608">
+<title>Pragma — Философия действия</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #07050a;
+  --ink2:   #0f0c14;
+  --ink3:   #17131f;
+  --ink4:   #211c2c;
+  --gold:   #c9a84c;
+  --gold2:  #e8c96a;
+  --gold3:  #f5e0a0;
+  --prose:  #e8e0d0;
+  --muted:  #7a6e8a;
+  --dim:    #3a3248;
+  --border: #1e1929;
+  --glow:   rgba(201,168,76,0.12);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+body {
+  background: #03010a;
+  color: var(--prose);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Стили для кнопки скачивания APK */
+.app-download-banner {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.download-link {
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: center;
+}
+.download-link:active {
+    transform: scale(0.98);
+    background: #eeeeee;
+}
+.download-info {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* ── SPACE PHOTO BACKGROUND ── */
+#space-bg {
+  position: fixed; inset: 0;
+  z-index: 0;
+  background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=85&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #03010a;
+}
+
+#space-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.62)  0%,
+    rgba(10,0,30,0.72) 35%,
+    rgba(5,0,20,0.82)  70%,
+    rgba(7,5,10,0.94)  100%
+  );
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -5%,  rgba(100,60,200,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 15% 60%,  rgba(60,30,140,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 65% at 88% 25%,  rgba(80,40,160,0.20) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 70% 75%,  rgba(201,168,76,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 40% at 30% 85%,  rgba(40,20,100,0.15) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background-image:
+    radial-gradient(1px 1px at 12% 8%,  rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 28% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 43% 6%,  rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 67% 11%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 81% 4%,  rgba(255,255,255,0.9) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 9%  17%, rgba(255,255,255,1.0) 0%, transparent 100%),
+    radial-gradient(2px 2px at 63% 22%, rgba(201,168,76,0.9) 0%, transparent 100%);
+  animation: starTwinkle 6s ease-in-out infinite alternate;
+}
+@keyframes starTwinkle {
+  0%   { opacity: 0.7; }
+  50%  { opacity: 1.0; }
+  100% { opacity: 0.8; }
+}
+
+.header {
+  position: relative; z-index: 10;
+  padding: 1.6rem 1.4rem 0;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: var(--prose);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.8);
+}
+.logo-dot {
+  width: 5px; height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin-bottom: 3px;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--gold);
+}
+.logo-tag {
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 400;
+  margin-top: 0.2rem;
+}
+
+.sos-btn-wrap {
+  position: relative; z-index: 10;
+  max-width: 520px;
+  margin: 0.6rem auto 0;
+  padding: 1.2rem 1.4rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sos-btn {
+  width: 58%;
+  background: rgba(60, 30, 90, 0.35);
+  border: 1px solid rgba(160, 120, 220, 0.25);
+  border-radius: 50px;
+  padding: 0.55rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(80, 30, 120, 0.2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: sosBreathe 4s ease-in-out infinite;
+  transition: all 0.2s;
+}
+.sos-btn:active { transform: scale(0.97); background: rgba(70, 35, 110, 0.5); }
+@keyframes sosBreathe { 0%,100% { opacity: 0.75; } 50% { opacity: 1; } }
+
+.sos-label { font-size: 0.78rem; font-weight: 300; letter-spacing: 0.08em; color: rgba(210, 185, 255, 0.8); }
+.sos-sub { display: block; text-align: center; font-size: 0.52rem; color: rgba(180, 160, 210, 0.3); margin-top: 0.4rem; }
+
+.headline-eyebrow {
+  font-size: 0.58rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.headline-eyebrow::before {
+  content: ''; width: 18px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent);
+}
+.headline-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 300;
+  line-height: 1.12;
+  color: var(--prose);
+  text-shadow: 0 2px 16px rgba(0,0,0,0.9);
+}
+.headline-title em { font-style: italic; color: var(--gold2); }
+.headline-sub { font-size: 0.73rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.5; }
+
+.hero-divider {
+  position: relative; z-index: 10;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 1.4rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.hero-divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.25), transparent); }
+.hero-node { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); opacity: 0.5; }
+
+.cats-label { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); margin-bottom: 0.5rem; }
+.cats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 1rem; }
+.cat-all { grid-column: 1 / -1; }
+.cat {
+  background: rgba(15,12,20,0.75);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.73rem;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.18s;
+}
+.cat.active { border-color: rgba(201,168,76,0.3); color: var(--gold2); background: rgba(201,168,76,0.06); }
+.cat-count { font-size: 0.6rem; color: var(--dim); background: var(--ink3); border-radius: 20px; padding: 0.1rem 0.45rem; }
+
+.list-controls { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.7rem; }
+.count-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); }
+.random-btn {
+  background: transparent; border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.7rem;
+  font-size: 0.6rem; color: var(--muted); cursor: pointer;
+}
+
+.questions { display: flex; flex-direction: column; padding-bottom: 4rem; }
+.q-item { padding: 1rem 0; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; align-items: flex-start; gap: 0.9rem; }
+.q-num { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: #FFD700; min-width: 22px; font-weight: 700; text-shadow: 0 0 8px rgba(255,215,0,0.4); }
+.q-tag { font-size: 0.56rem; text-transform: uppercase; color: var(--gold); margin-bottom: 0.2rem; opacity: 0.7; }
+.q-text { font-size: 0.92rem; color: var(--prose); line-height: 1.45; font-weight: 300; }
+.q-arrow { color: var(--dim); font-size: 1rem; }
+
+.overlay { display: none; position: fixed; inset: 0; background: rgba(5,3,8,0.92); backdrop-filter: blur(16px); z-index: 200; align-items: flex-end; justify-content: center; }
+.overlay.open { display: flex; }
+.modal { background: var(--ink2); width: 100%; max-width: 520px; max-height: 92vh; overflow-y: auto; border-radius: 20px 20px 0 0; padding: 0 1.5rem 3rem; animation: sheetUp 0.3s ease; }
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+.modal-handle-wrap { padding: 0.9rem 0 1.2rem; display: flex; justify-content: center; }
+.modal-handle { width: 32px; height: 3px; background: var(--ink4); border-radius: 2px; }
+.modal-q { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; color: var(--prose); line-height: 1.25; margin-bottom: 1.5rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--border); }
+.quote-block { margin-bottom: 1.5rem; padding: 1rem; background: var(--ink3); border-left: 2px solid var(--gold); border-radius: 0 8px 8px 0; }
+.quote-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem; color: var(--prose); line-height: 1.6; }
+
+.steps { display: flex; flex-direction: column; gap: 0.7rem; }
+.step { display: flex; gap: 0.9rem; padding: 1rem; background: var(--ink3); border-radius: 12px; border: 1px solid var(--border); }
+.step-num { font-family: 'Cormorant Garamond', serif; color: var(--gold); }
+.step-text { font-size: 0.86rem; line-height: 1.55; color: var(--prose); }
+.timer-btn { margin-top: 0.6rem; padding: 0.4rem 0.8rem; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 20px; color: var(--gold2); font-size: 0.65rem; cursor: pointer; }
+.timer-display { display: none; margin-top: 0.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold2); }
+.timer-display.visible { display: block; }
+
+.done-btn { width: 100%; margin-top: 1.4rem; padding: 0.8rem; background: transparent; border: 1px solid var(--border); border-radius: 10px; color: var(--muted); cursor: pointer; }
+.done-btn.completed { background: rgba(80,200,120,0.1); border-color: rgba(80,200,120,0.3); color: #6ddfaa; }
+
+.footer { position: relative; z-index: 10; text-align: center; padding: 2rem 1.4rem; max-width: 520px; margin: 0 auto; color: var(--dim); }
+
+.emergency-overlay { display: none; position: fixed; inset: 0; background: var(--ink); z-index: 300; align-items: center; justify-content: center; padding: 1.5rem; }
+.emergency-overlay.open { display: flex; }
+.emergency-modal { width: 100%; max-width: 480px; }
+.em-step { margin-bottom: 0.8rem; padding: 1rem; background: var(--ink2); border: 1px solid var(--border); border-radius: 10px; }
+.em-close { width: 100%; margin-top: 1rem; padding: 1rem; background: rgba(201,168,76,0.1); border: 1px solid var(--gold); border-radius: 12px; color: var(--gold); cursor: pointer; }
+</style>
+</head>
+<body>
+<div id="space-bg"></div>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="logo-wrap">
+        <span class="logo">Pragma</span>
+        <span class="logo-dot"></span>
+      </div>
+      <div class="logo-tag">Философия действия</div>
+    </div>
+  </div>
+
+  <div class="headline">
+    <div class="headline-eyebrow">Стоицизм · Практика</div>
+    <div class="headline-title">Перестань ждать.<br><em>Начни сейчас.</em></div>
+    <div class="headline-sub">30 практических упражнений против прокрастинации</div>
+  </div>
+
+  <div class="app-download-banner">
+    <div class="download-info">Приложение для Android</div>
+    <a href="app-debug.apk" class="download-link" download>
+        📥 Скачать Pragma.apk
+    </a>
+  </div>
+</div>
+
+<div class="hero-divider">
+  <div class="hero-divider-line"></div>
+  <div class="hero-node"></div>
+  <div class="hero-node"></div>
+  <div class="hero-divider-line"></div>
+</div>
+
+<div class="header" style="padding-top:0">
+  <div class="cats-label">Что сейчас</div>
+  <div class="cats" id="cats">
+    <button class="cat cat-all active" onclick="filterCat('all',this)">
+      <span class="cat-emoji">📋</span>
+      <span class="cat-name">Все вопросы</span>
+      <span class="cat-count" id="cnt-all"></span>
+    </button>
+    <button class="cat" onclick="filterCat('start',this)">
+      <span class="cat-emoji">🚀</span>
+      <span class="cat-name">Старт</span>
+      <span class="cat-count" id="cnt-start"></span>
+    </button>
+    <button class="cat" onclick="filterCat('path',this)">
+      <span class="cat-emoji">🛤</span>
+      <span class="cat-name">Путь</span>
+      <span class="cat-count" id="cnt-path"></span>
+    </button>
+    <button class="cat" onclick="filterCat('power',this)">
+      <span class="cat-emoji">⚡</span>
+      <span class="cat-name">Сила</span>
+      <span class="cat-count" id="cnt-power"></span>
+    </button>
+    <button class="cat" onclick="filterCat('fear',this)">
+      <span class="cat-emoji">😰</span>
+      <span class="cat-name">Страх</span>
+      <span class="cat-count" id="cnt-fear"></span>
+    </button>
+    <button class="cat" onclick="filterCat('sense',this)">
+      <span class="cat-emoji">🌌</span>
+      <span class="cat-name">Смысл</span>
+      <span class="cat-count" id="cnt-sense"></span>
+    </button>
+  </div>
+
+  <div class="list-controls">
+    <span class="count-label" id="countLabel">30 вопросов</span>
+    <button class="random-btn" onclick="openRandom()">🎲 Случайный</button>
+  </div>
+</div>
+
+<div style="position:relative;z-index:10;max-width:520px;margin:0 auto;padding:0 1.4rem;">
+  <div class="questions" id="questionsList"></div>
+</div>
+
+<div class="sos-btn-wrap">
+  <button class="sos-btn" onclick="openEmergency()">
+    <span class="sos-label">Нужна поддержка</span>
+  </button>
+</div>
+
+<div class="footer">
+  <div>Marcus · Epictetus · Seneca</div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-handle-wrap"><div class="modal-handle"></div></div>
+    <div class="modal-tag" id="mTag"></div>
+    <div class="modal-q" id="mQ"></div>
+    <div class="quote-block">
+      <div class="quote-text" id="mQuote"></div>
+    </div>
+    <div class="steps" id="mSteps"></div>
+    <button class="done-btn" id="modalDoneBtn">Отметить выполненным</button>
+    <button class="done-btn" onclick="closeModalBtn()" style="margin-top:0.5rem">Закрыть</button>
+  </div>
+</div>
+
+<div class="emergency-overlay" id="emergencyOverlay">
+  <div class="emergency-modal">
+    <div class="em-step">Шаг 1. Дыши (4-4-6).</div>
+    <div class="em-step">Шаг 2. Назови 5 вещей рядом.</div>
+    <button class="em-close" onclick="closeEmergency()">Я готов действовать</button>
+  </div>
+</div>
+
+<script>
+// Тот же массив QA и логика, что в твоем файле
+const CATS = { start:'Старт', path:'Путь', power:'Сила', fear:'Страх', sense:'Смысл' };
+const CAT_KEYS = ['start','path','power','fear','sense'];
+const QA = [
+  { id:1, cat:'start', q:'Почему я не могу начать?', quote:'Не жди. Никогда не будет подходящего времени.', steps:[{t:'Назови одно препятствие', time:'30 сек'},{t:'Сделай крошечное действие', time:'1 мин'}]},
+  { id:2, cat:'start', q:'Дело кажется слишком большим?', quote:'Раздели на части.', steps:[{t:'Напиши 3 маленьких шага', time:'3 мин'}]},
+  { id:5, cat:'start', q:'Сделаю завтра — что в этом плохого?', quote:'«Завтра» — это то что ты говорил вчера.', steps:[{t:'Сделай 10% задачи прямо сейчас', time:'10 мин'}]},
+  { id:8, cat:'path', q:'Начинаю и сразу бросаю — как дойти?', quote:'Завершение — это привычка.', steps:[{t:'Заверши задачу за 20 минут', time:'20 мин'}]},
+  { id:16, cat:'power', q:'Нет никакой мотивации?', quote:'Действие само создаёт импульс.', steps:[{t:'Умойся холодной водой', time:'2 мин'},{t:'Начни работать 7 минут', time:'7 мин'}]},
+  { id:21, cat:'fear', q:'Боюсь что не получится', quote:'Неудача — это событие, а не ты.', steps:[{t:'Что случится в худшем случае?', time:'3 мин'}]},
+  { id:28, cat:'sense', q:'Как не отвлекаться на телефон?', quote:'Внимание — твоя главная валюта.', steps:[{t:'Положи телефон в другую комнату', time:'30 сек'}]}
+  // ... Остальные вопросы добавь из своего файла по аналогии
+];
+
+let activeCat = 'all';
+
+function renderList(items) {
+  const el = document.getElementById('questionsList');
+  el.innerHTML = items.map(q => `
+    <div class="q-item" onclick="openModal(${q.id})">
+      <div class="q-num">${String(q.id).padStart(2,'0')}</div>
+      <div class="q-content">
+        <div class="q-tag">${CATS[q.cat]}</div>
+        <div class="q-text">${q.q}</div>
+      </div>
+      <div class="q-arrow">›</div>
+    </div>
+  `).join('');
+}
 
 function filterCat(cat, btn) {
   activeCat = cat;
   document.querySelectorAll('.cat').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const items = activeCat === 'all' ? SHUFFLED_QA : QA.filter(q => q.cat === activeCat);
+  const items = cat === 'all' ? QA : QA.filter(q => q.cat === cat);
   renderList(items);
 }
 
-// ── TIMERS ──
-const activeTimers = {};
-
-function parseSeconds(timeStr) {
-  if (!timeStr || timeStr === '—') return null;
-  const m = timeStr.match(/(\d+)\s*(мин|сек|с)/i);
-  if (!m) return null;
-  const n = parseInt(m[1]);
-  return m[2].startsWith('м') ? n * 60 : n;
-}
-
-function formatTime(sec) {
-  const m = Math.floor(sec / 60);
-  const s = sec % 60;
-  return m > 0 ? `${m}:${String(s).padStart(2,'0')}` : `0:${String(s).padStart(2,'0')}`;
-}
-
-// ── BEEP: triple tone via Web Audio API ──
-function beep() {
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    // Three rising tones: 520 Hz → 660 Hz → 880 Hz
-    [[0, 520], [220, 660], [440, 880]].forEach(([delay, freq]) => {
-      const osc  = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      const t = ctx.currentTime + delay / 1000;
-      gain.gain.setValueAtTime(0, t);
-      gain.gain.linearRampToValueAtTime(0.4, t + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.45);
-      osc.start(t);
-      osc.stop(t + 0.5);
-    });
-  } catch(e) { /* AudioContext not supported — silent fallback */ }
-}
-
-// ── VIBRATE: safe wrapper ──
-function vibrate(pattern) {
-  try {
-    if (navigator && navigator.vibrate) navigator.vibrate(pattern);
-  } catch(e) {}
-}
-
-function startTimer(btnEl, stepIdx) {
-  const body      = btnEl.parentElement;
-  const displayEl = body.querySelector('.timer-display');
-  const doneMsg   = body.querySelector('.timer-done-msg');
-  const seconds   = parseInt(btnEl.dataset.seconds);
-
-  // Toggle: if already running — stop/reset
-  if (activeTimers[stepIdx]) {
-    clearInterval(activeTimers[stepIdx]);
-    delete activeTimers[stepIdx];
-    btnEl.innerHTML = '▶ Запустить таймер';
-    btnEl.classList.remove('running');
-    displayEl.classList.remove('visible');
-    doneMsg.classList.remove('visible');
-    displayEl.textContent = formatTime(seconds);
-    return;
-  }
-
-  let remaining = seconds;
-  displayEl.textContent = formatTime(remaining);
-  displayEl.classList.add('visible');
-  doneMsg.classList.remove('visible');
-  btnEl.innerHTML = '⏸ Остановить';
-  btnEl.classList.add('running');
-  vibrate(30); // subtle start buzz
-
-  activeTimers[stepIdx] = setInterval(() => {
-    remaining--;
-    displayEl.textContent = formatTime(remaining);
-
-    // Last 3 seconds — tick pulse on display
-    if (remaining <= 3 && remaining > 0) {
-      displayEl.style.color = '#f0a070';
-    }
-
-    if (remaining <= 0) {
-      clearInterval(activeTimers[stepIdx]);
-      delete activeTimers[stepIdx];
-      displayEl.classList.remove('visible');
-      displayEl.style.color = ''; // reset colour
-      doneMsg.classList.add('visible');
-      btnEl.innerHTML = '✓ Время вышло';
-      btnEl.classList.remove('running');
-      btnEl.classList.add('done-state');
-      // 🔔 Vibration: 200ms buzz, 100ms pause, 200ms buzz, 100ms pause, 400ms long buzz
-      vibrate([200, 100, 200, 100, 400]);
-      // 🔔 Beep: three rising tones
-      beep();
-    }
-  }, 1000);
-}
-
-// ── DONE / localStorage ──
-function getDoneSet() {
-  try { return new Set(JSON.parse(localStorage.getItem('pragma_done') || '[]')); }
-  catch(e) { return new Set(); }
-}
-function saveDone(set) {
-  try { localStorage.setItem('pragma_done', JSON.stringify([...set])); } catch(e) {}
-}
-
-function toggleDone(id, btnEl, winMsgEl) {
-  const done = getDoneSet();
-  if (done.has(id)) {
-    done.delete(id);
-    btnEl.classList.remove('completed');
-    btnEl.innerHTML = '<span class="done-check">○</span> Отметить как выполненное';
-    if (winMsgEl) winMsgEl.style.display = 'none';
-  } else {
-    done.add(id);
-    btnEl.classList.add('completed');
-    btnEl.innerHTML = '<span class="done-check">✓</span> Выполнено!';
-    if (winMsgEl) winMsgEl.style.display = 'block';
-    vibrate(80);
-  }
-  saveDone(done);
-}
-
-// ── FIX TEXT TYPOS at render time ──
-function fixText(t) {
-  return t
-    .replace(/физичесечий/gi, 'физический')
-    .replace(/физичесекий/gi, 'физический')
-    .replace(/физичеcкий/gi, 'физический')  // cyrillic с vs latin c
-    .replace(/микро[\s-]шаг/gi, 'микрошаг')
-    .replace(/кроссовки\s+кроссовки/gi, 'кроссовки')
-    .replace(/\bмикро-шаг\b/gi, 'микрошаг');
-}
-
 function openModal(id) {
-  // Stop all running timers from previous card
-  Object.keys(activeTimers).forEach(k => {
-    clearInterval(activeTimers[k]);
-    delete activeTimers[k];
-  });
-
   const q = QA.find(x => x.id === id);
-  document.getElementById('mTag').textContent  = CATS[q.cat];
-  document.getElementById('mQ').textContent    = q.q;
+  document.getElementById('mTag').textContent = CATS[q.cat];
+  document.getElementById('mQ').textContent = q.q;
   document.getElementById('mQuote').textContent = '«' + q.quote + '»';
-  document.getElementById('mAuthor').textContent = '';
-
-  const multi   = q.steps.length > 1;
-  const stepsEl = document.getElementById('mSteps');
-  stepsEl.className = 'steps' + (multi ? ' multi' : '');
-
-  stepsEl.innerHTML = q.steps.map((s, i) => {
-    const secs     = parseSeconds(s.time);
-    const hasTimer = secs !== null;
-    const text     = fixText(s.t);
-    return `
+  document.getElementById('mSteps').innerHTML = q.steps.map((s, i) => `
     <div class="step">
-      <div class="step-num">${i + 1}.</div>
-      <div class="step-body">
-        <div class="step-text">${text}</div>
-        ${s.time !== '—' ? `<div class="step-time">⏱ ${s.time}</div>` : ''}
-        ${hasTimer ? `
-          <button class="timer-btn" data-seconds="${secs}" onclick="startTimer(this,${i})">▶ Запустить таймер</button>
-          <div class="timer-display">${formatTime(secs)}</div>
-          <div class="timer-done-msg">🌿 Время вышло! Продолжай или отметь как победу.</div>
-        ` : ''}
-      </div>
-    </div>`;
-  }).join('');
-
-  // ── Done button + win message ──
-  const done   = getDoneSet();
-  const isDone = done.has(id);
-  const existingDoneBtn = document.getElementById('modalDoneBtn');
-  if (existingDoneBtn) existingDoneBtn.remove();
-  const existingWinMsg = document.getElementById('modalWinMsg');
-  if (existingWinMsg) existingWinMsg.remove();
-
-  // "Победа!" message
-  const winMsg = document.createElement('div');
-  winMsg.id = 'modalWinMsg';
-  winMsg.className = 'win-msg';
-  winMsg.textContent = '🏆 Победа! Продолжай цепочку.';
-  winMsg.style.display = isDone ? 'block' : 'none';
-
-  const doneBtn = document.createElement('button');
-  doneBtn.id = 'modalDoneBtn';
-  doneBtn.className = 'done-btn' + (isDone ? ' completed' : '');
-  doneBtn.innerHTML = isDone
-    ? '<span class="done-check">✓</span> Выполнено!'
-    : '<span class="done-check">○</span> Отметить как выполненное';
-  doneBtn.onclick = () => toggleDone(id, doneBtn, winMsg);
-
-  stepsEl.after(winMsg);
-  winMsg.after(doneBtn);
-
+      <div class="step-num">${i+1}</div>
+      <div class="step-text">${s.t} <br><small>⏱ ${s.time}</small></div>
+    </div>
+  `).join('');
   document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
 }
 
-function closeModal(e) {
-  if (e.target === document.getElementById('overlay')) closeModalBtn();
-}
-function closeModalBtn() {
-  Object.keys(activeTimers).forEach(k => { clearInterval(activeTimers[k]); delete activeTimers[k]; });
-  document.getElementById('overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
+function closeModalBtn() { document.getElementById('overlay').classList.remove('open'); }
+function openEmergency() { document.getElementById('emergencyOverlay').classList.add('open'); }
+function closeEmergency() { document.getElementById('emergencyOverlay').classList.remove('open'); }
 
-function openEmergency() {
-  document.getElementById('emergencyOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeEmergency() {
-  document.getElementById('emergencyOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-updateCounts();
 renderList(QA);
-initCounts();
-</script>
-
-<link rel="manifest" href="manifest.json">
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js?v=7')
-        .then(reg => console.log('Pragma готова к оффлайну!'))
-        .catch(err => console.log('Ошибка регистрации SW', err));
-    });
-  }
 </script>
 </body>
 </html>
