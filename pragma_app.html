@@ -56,6 +56,36 @@ body {
   overflow-x: hidden;
 }
 
+/* Кнопка скачивания в углу */
+.corner-download-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+}
+.corner-download-btn:active {
+    transform: scale(0.9);
+    background: rgba(255, 255, 255, 0.15);
+}
+.download-icon {
+    font-size: 18px;
+    color: #ffffff;
+    opacity: 0.8;
+}
+
 /* ── SPACE PHOTO BACKGROUND ── */
 #space-bg {
   position: fixed; inset: 0;
@@ -889,7 +919,10 @@ body::after {
 <body>
 <div id="space-bg"></div>
 
-<!-- HEADER -->
+<a href="pragma.apk" download class="corner-download-btn" title="Скачать APK для Android">
+    <span class="download-icon">📥</span>
+</a>
+
 <div class="header">
   <div class="header-top">
     <div>
@@ -908,7 +941,6 @@ body::after {
   </div>
 </div>
 
-<!-- CONSTELLATION DIVIDER -->
 <div class="hero-divider">
   <div class="hero-divider-line"></div>
   <div class="hero-divider-nodes">
@@ -924,7 +956,6 @@ body::after {
 <div class="header" style="padding-top:0">
 
 
-  <!-- CATEGORIES -->
   <div class="cats-label">Что сейчас</div>
   <div class="cats" id="cats">
     <button class="cat cat-all active" onclick="filterCat('all',this)">
@@ -959,19 +990,16 @@ body::after {
     </button>
   </div>
 
-  <!-- LIST CONTROLS -->
   <div class="list-controls">
     <span class="count-label" id="countLabel">30 вопросов</span>
     <button class="random-btn" onclick="openRandom()">🎲 Случайный</button>
   </div>
 </div>
 
-<!-- QUESTIONS -->
 <div style="position:relative;z-index:10;max-width:520px;margin:0 auto;padding:0 1.4rem;">
   <div class="questions" id="questionsList"></div>
 </div>
 
-<!-- SOS SUPPORT BUTTON -->
 <div class="sos-btn-wrap">
   <button class="sos-btn" onclick="openEmergency()">
     <span class="sos-dot"></span>
@@ -980,14 +1008,12 @@ body::after {
   <span class="sos-sub">Если совсем плохо — запустится протокол SOS</span>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
   <div class="footer-divider"></div>
   <div class="footer-logo">Pragma</div>
   <div class="footer-sub">Marcus · Epictetus · Seneca</div>
 </div>
 
-<!-- MODAL -->
 <div class="overlay" id="overlay" onclick="closeModal(event)">
   <div class="modal">
     <div class="modal-handle-wrap">
@@ -1006,7 +1032,6 @@ body::after {
   </div>
 </div>
 
-<!-- EMERGENCY -->
 <div class="emergency-overlay" id="emergencyOverlay">
   <div class="emergency-modal">
     <div class="em-top">
