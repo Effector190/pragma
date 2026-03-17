@@ -1,20 +1,22 @@
 {
   "name": "Pragma",
   "short_name": "Pragma",
-  "id": "/pragma_app.html",
-  "start_url": "/pragma_app.html",
+  "id": "pragma_app_pwa",
+  "start_url": "./pragma_app.html",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#080608",
   "theme_color": "#080608",
   "icons": [
     {
       "src": "icon-512.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "icon-512.png",
-      "sizes": "512x512",
+      "sizes": "192x192",
       "type": "image/png"
     }
   ]
