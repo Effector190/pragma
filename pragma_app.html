@@ -7,16 +7,13 @@
     const secretKey = 'ef1ect0r0307'; 
     const isPaid = localStorage.getItem('pragma_access_granted');
 
-    // 1. Проверка входа по секретной ссылке
     if (urlParams.get('access') === secretKey) {
       localStorage.setItem('pragma_access_granted', 'true');
-      // Очищаем URL от ключа, чтобы не светился
       const cleanUrl = window.location.origin + window.location.pathname;
       window.history.replaceState({}, document.title, cleanUrl);
-      return; // Разрешаем просмотр
+      return;
     }
 
-    // 2. Если доступа нет — редирект на главную (лендинг)
     if (isPaid !== 'true') {
       window.location.href = "index.html";
     }
@@ -56,13 +53,13 @@ body {
   overflow-x: hidden;
 }
 
-/* Кнопка скачивания в углу */
-.corner-download-btn {
+/* Измененная кнопка установки PWA */
+#pwaInstallBtn {
+    display: none; /* Кнопка появится только если установка возможна */
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 1000;
-    display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.05);
@@ -72,11 +69,11 @@ body {
     border-radius: 50%;
     width: 42px;
     height: 42px;
-    text-decoration: none;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    cursor: pointer;
     transition: all 0.2s ease;
 }
-.corner-download-btn:active {
+#pwaInstallBtn:active {
     transform: scale(0.9);
     background: rgba(255, 255, 255, 0.15);
 }
@@ -97,7 +94,6 @@ body {
   background-color: #03010a;
 }
 
-/* Dark violet overlay for readability */
 #space-bg::after {
   content: '';
   position: absolute; inset: 0;
@@ -110,7 +106,6 @@ body {
   );
 }
 
-/* ── CSS NEBULA FALLBACK (renders instantly, always visible) ── */
 body::before {
   content: '';
   position: fixed; inset: 0;
@@ -124,14 +119,12 @@ body::before {
   z-index: 1;
 }
 
-/* ── CSS STAR FIELD (tiny glowing dots via box-shadow trick) ── */
 body::after {
   content: '';
   position: fixed; inset: 0;
   pointer-events: none;
   z-index: 2;
   background-image:
-    /* micro stars layer */
     radial-gradient(1px 1px at 12% 8%,  rgba(255,255,255,0.9) 0%, transparent 100%),
     radial-gradient(1px 1px at 28% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
     radial-gradient(1px 1px at 43% 6%,  rgba(255,255,255,0.8) 0%, transparent 100%),
@@ -160,7 +153,6 @@ body::after {
     radial-gradient(1px 1px at 48% 91%, rgba(255,255,255,0.9) 0%, transparent 100%),
     radial-gradient(1px 1px at 66% 85%, rgba(255,255,255,0.5) 0%, transparent 100%),
     radial-gradient(1px 1px at 83% 92%, rgba(255,255,255,0.7) 0%, transparent 100%),
-    /* slightly bigger brighter stars */
     radial-gradient(1.5px 1.5px at 9%  17%, rgba(255,255,255,1.0) 0%, transparent 100%),
     radial-gradient(1.5px 1.5px at 34% 42%, rgba(255,255,255,0.95) 0%, transparent 100%),
     radial-gradient(1.5px 1.5px at 58% 12%, rgba(201,180,255,1.0) 0%, transparent 100%),
@@ -168,7 +160,6 @@ body::after {
     radial-gradient(1.5px 1.5px at 92% 33%, rgba(180,200,255,1.0) 0%, transparent 100%),
     radial-gradient(1.5px 1.5px at 17% 75%, rgba(255,255,255,0.95) 0%, transparent 100%),
     radial-gradient(1.5px 1.5px at 51% 80%, rgba(255,220,180,1.0) 0%, transparent 100%),
-    /* gold accent star */
     radial-gradient(2px 2px at 63% 22%, rgba(201,168,76,0.9) 0%, transparent 100%),
     radial-gradient(2px 2px at 29% 58%, rgba(201,168,76,0.7) 0%, transparent 100%);
   animation: starTwinkle 6s ease-in-out infinite alternate;
@@ -179,7 +170,6 @@ body::after {
   100% { opacity: 0.8; }
 }
 
-/* ── HEADER ── */
 .header {
   position: relative; z-index: 10;
   padding: 1.6rem 1.4rem 0;
@@ -224,7 +214,6 @@ body::after {
   margin-top: 0.2rem;
 }
 
-/* ── SOS BUTTON (big, red, prominent) ── */
 .sos-btn-wrap {
   position: relative; z-index: 10;
   max-width: 520px;
@@ -286,7 +275,6 @@ body::after {
   font-weight: 300;
 }
 
-/* ── HEADLINE ── */
 .headline {
   margin-bottom: 1rem;
 }
@@ -328,7 +316,6 @@ body::after {
   line-height: 1.5;
 }
 
-/* ── HERO DIVIDER (gold constellation line) ── */
 .hero-divider {
   position: relative; z-index: 10;
   max-width: 520px;
@@ -360,8 +347,6 @@ body::after {
   box-shadow: 0 0 5px rgba(201,168,76,0.5);
 }
 
-
-/* ── CATEGORIES ── */
 .cats-label {
   font-size: 0.55rem;
   letter-spacing: 0.3em;
@@ -425,7 +410,6 @@ body::after {
   background: rgba(201,168,76,0.1);
 }
 
-/* ── COUNT + RANDOM ── */
 .list-controls {
   display: flex;
   align-items: center;
@@ -456,7 +440,6 @@ body::after {
 }
 .random-btn:active { color: var(--gold); border-color: rgba(201,168,76,0.3); }
 
-/* ── QUESTIONS LIST ── */
 .questions {
   display: flex;
   flex-direction: column;
@@ -511,9 +494,6 @@ body::after {
 }
 .q-item:active .q-arrow { transform: translateX(3px); color: var(--gold); }
 
-
-
-/* ── MODAL ── */
 .overlay {
   display: none;
   position: fixed; inset: 0;
@@ -717,7 +697,6 @@ body::after {
 }
 .timer-done-msg.visible { display: block; }
 
-/* Done button */
 .done-btn {
   width: 100%;
   margin-top: 1.4rem;
@@ -760,7 +739,6 @@ body::after {
 }
 .modal-close:active { background: var(--ink3); color: var(--prose); }
 
-/* ── EMERGENCY OVERLAY ── */
 .emergency-overlay {
   display: none;
   position: fixed; inset: 0;
@@ -871,7 +849,6 @@ body::after {
 }
 .em-close:active { background: rgba(201,168,76,0.2); }
 
-/* ── FOOTER ── */
 .footer {
   position: relative; z-index: 10;
   text-align: center;
@@ -899,7 +876,6 @@ body::after {
   color: var(--dim);
   opacity: 0.6;
 }
-/* ── WIN MESSAGE ── */
 .win-msg {
   display: none;
   margin-top: 0.75rem;
@@ -919,9 +895,9 @@ body::after {
 <body>
 <div id="space-bg"></div>
 
-<a href="pragma.apk" download class="corner-download-btn" title="Скачать APK для Android">
+<div id="pwaInstallBtn" title="Установить приложение">
     <span class="download-icon">📥</span>
-</a>
+</div>
 
 <div class="header">
   <div class="header-top">
@@ -1356,12 +1332,8 @@ const QA = [
     ]},
 ];
 
-
-
-
 let activeCat = 'all';
 
-// Fisher-Yates shuffle — fresh order each session
 function shuffleArray(arr) {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) {
@@ -1370,7 +1342,6 @@ function shuffleArray(arr) {
   }
   return a;
 }
-// Fixed once per session so "all" list stays stable during the visit
 const SHUFFLED_QA = shuffleArray(QA);
 
 function updateCounts() {
@@ -1416,7 +1387,6 @@ function openRandom() {
   openModal(q.id);
 }
 
-
 function filterCat(cat, btn) {
   activeCat = cat;
   document.querySelectorAll('.cat').forEach(b => b.classList.remove('active'));
@@ -1425,7 +1395,6 @@ function filterCat(cat, btn) {
   renderList(items);
 }
 
-// ── TIMERS ──
 const activeTimers = {};
 
 function parseSeconds(timeStr) {
@@ -1442,11 +1411,9 @@ function formatTime(sec) {
   return m > 0 ? `${m}:${String(s).padStart(2,'0')}` : `0:${String(s).padStart(2,'0')}`;
 }
 
-// ── BEEP: triple tone via Web Audio API ──
 function beep() {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    // Three rising tones: 520 Hz → 660 Hz → 880 Hz
     [[0, 520], [220, 660], [440, 880]].forEach(([delay, freq]) => {
       const osc  = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -1461,10 +1428,9 @@ function beep() {
       osc.start(t);
       osc.stop(t + 0.5);
     });
-  } catch(e) { /* AudioContext not supported — silent fallback */ }
+  } catch(e) {}
 }
 
-// ── VIBRATE: safe wrapper ──
 function vibrate(pattern) {
   try {
     if (navigator && navigator.vibrate) navigator.vibrate(pattern);
@@ -1477,7 +1443,6 @@ function startTimer(btnEl, stepIdx) {
   const doneMsg   = body.querySelector('.timer-done-msg');
   const seconds   = parseInt(btnEl.dataset.seconds);
 
-  // Toggle: if already running — stop/reset
   if (activeTimers[stepIdx]) {
     clearInterval(activeTimers[stepIdx]);
     delete activeTimers[stepIdx];
@@ -1495,35 +1460,27 @@ function startTimer(btnEl, stepIdx) {
   doneMsg.classList.remove('visible');
   btnEl.innerHTML = '⏸ Остановить';
   btnEl.classList.add('running');
-  vibrate(30); // subtle start buzz
+  vibrate(30);
 
   activeTimers[stepIdx] = setInterval(() => {
     remaining--;
     displayEl.textContent = formatTime(remaining);
-
-    // Last 3 seconds — tick pulse on display
-    if (remaining <= 3 && remaining > 0) {
-      displayEl.style.color = '#f0a070';
-    }
-
+    if (remaining <= 3 && remaining > 0) displayEl.style.color = '#f0a070';
     if (remaining <= 0) {
       clearInterval(activeTimers[stepIdx]);
       delete activeTimers[stepIdx];
       displayEl.classList.remove('visible');
-      displayEl.style.color = ''; // reset colour
+      displayEl.style.color = '';
       doneMsg.classList.add('visible');
       btnEl.innerHTML = '✓ Время вышло';
       btnEl.classList.remove('running');
       btnEl.classList.add('done-state');
-      // 🔔 Vibration: 200ms buzz, 100ms pause, 200ms buzz, 100ms pause, 400ms long buzz
       vibrate([200, 100, 200, 100, 400]);
-      // 🔔 Beep: three rising tones
       beep();
     }
   }, 1000);
 }
 
-// ── DONE / localStorage ──
 function getDoneSet() {
   try { return new Set(JSON.parse(localStorage.getItem('pragma_done') || '[]')); }
   catch(e) { return new Set(); }
@@ -1549,19 +1506,17 @@ function toggleDone(id, btnEl, winMsgEl) {
   saveDone(done);
 }
 
-// ── FIX TEXT TYPOS at render time ──
 function fixText(t) {
   return t
     .replace(/физичесечий/gi, 'физический')
     .replace(/физичесекий/gi, 'физический')
-    .replace(/физичеcкий/gi, 'физический')  // cyrillic с vs latin c
+    .replace(/физичеcкий/gi, 'физический') 
     .replace(/микро[\s-]шаг/gi, 'микрошаг')
     .replace(/кроссовки\s+кроссовки/gi, 'кроссовки')
     .replace(/\bмикро-шаг\b/gi, 'микрошаг');
 }
 
 function openModal(id) {
-  // Stop all running timers from previous card
   Object.keys(activeTimers).forEach(k => {
     clearInterval(activeTimers[k]);
     delete activeTimers[k];
@@ -1596,7 +1551,6 @@ function openModal(id) {
     </div>`;
   }).join('');
 
-  // ── Done button + win message ──
   const done   = getDoneSet();
   const isDone = done.has(id);
   const existingDoneBtn = document.getElementById('modalDoneBtn');
@@ -1604,7 +1558,6 @@ function openModal(id) {
   const existingWinMsg = document.getElementById('modalWinMsg');
   if (existingWinMsg) existingWinMsg.remove();
 
-  // "Победа!" message
   const winMsg = document.createElement('div');
   winMsg.id = 'modalWinMsg';
   winMsg.className = 'win-msg';
@@ -1647,18 +1600,37 @@ function closeEmergency() {
 updateCounts();
 renderList(QA);
 initCounts();
-</script>
 
-<link rel="manifest" href="manifest.json">
+/* --- МОИ ПРАВКИ ДЛЯ КНОПКИ УСТАНОВКИ (PWA) --- */
+let deferredPrompt;
+const installBtn = document.getElementById('pwaInstallBtn');
 
-<script>
-  if ('serviceWorker' in navigator) {
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'flex'; // Кнопка появится сама, когда браузер предложит установку
+});
+
+installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            installBtn.style.display = 'none';
+        }
+        deferredPrompt = null;
+    }
+});
+
+window.addEventListener('appinstalled', () => {
+    installBtn.style.display = 'none';
+});
+
+if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js?v=7')
-        .then(reg => console.log('Pragma готова к оффлайну!'))
-        .catch(err => console.log('Ошибка регистрации SW', err));
+      navigator.serviceWorker.register('/sw.js?v=7').catch(err => console.log('SW error', err));
     });
-  }
+}
 </script>
 </body>
 </html>
