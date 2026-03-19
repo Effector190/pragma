@@ -1599,29 +1599,12 @@ updateCounts();
 renderList(QA);
 initCounts();
 
-/* --- МОИ ПРАВКИ ДЛЯ КНОПКИ УСТАНОВКИ (PWA) --- */
-let deferredPrompt;
+/* --- КНОПКА СКАЧАТЬ APK --- */
 const installBtn = document.getElementById('pwaInstallBtn');
+installBtn.style.display = 'flex';
 
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installBtn.style.display = 'flex'; // Кнопка появится сама, когда браузер предложит установку
-});
-
-installBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-            installBtn.style.display = 'none';
-        }
-        deferredPrompt = null;
-    }
-});
-
-window.addEventListener('appinstalled', () => {
-    installBtn.style.display = 'none';
+installBtn.addEventListener('click', () => {
+    window.location.href = 'https://github.com/Effector190/pragma/releases/download/v1.0/app-debug.apk';
 });
 
 if ('serviceWorker' in navigator) {
