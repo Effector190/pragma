@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
   <style>
-  /* 1. Делаем фон черным сразу, чтобы не было белых/черных вспышек */
-  body {
-    background-color: #000000 !important;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: white;
-  }
-
-  /* 2. Скрываем весь контент, пока скрипты не расставят всё по местам */
-  #app-container, .main-content { 
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-  }
-  </style>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -866,16 +848,6 @@ document.querySelectorAll('a[href="#buy"]').forEach(a => {
     document.getElementById('buy').scrollIntoView({ behavior: 'smooth' });
   });
 });
-</script>
-<script>
-  window.onload = function() {
-    // Находим твой главный блок с контентом и делаем его видимым
-    // Если у тебя другой id (не main-wrapper), замени его ниже
-    const content = document.querySelector('body > div'); 
-    if (content) {
-      content.style.opacity = '1';
-    }
-  };
 </script>
 </body>
 </html>
