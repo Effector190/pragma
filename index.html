@@ -19,6 +19,7 @@
       --muted: rgba(232, 224, 208, 0.5);
       --card-bg: rgba(15, 12, 24, 0.8);
       --border: rgba(201, 168, 76, 0.15);
+      --tron-red: #ff3b30;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -99,82 +100,45 @@
     .includes li::before { content: '✦'; color: var(--gold); }
     
     .pay-btn-gold {
-      display: block; 
-      background: var(--gold); 
-      color: #000; 
-      padding: 18px; 
-      border-radius: 18px; 
-      text-decoration: none; 
-      font-weight: bold; 
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      border: none;
-      width: 100%;
-      margin-top: 20px;
+      display: block; background: var(--gold); color: #000; padding: 18px; border-radius: 18px; text-decoration: none; font-weight: bold; font-size: 1rem; transition: all 0.3s ease; cursor: pointer; border: none; width: 100%; margin-top: 10px;
     }
     .pay-btn-gold:active { transform: scale(0.98); }
-    .pay-btn-gold.back-mode { 
-      background: transparent; 
-      color: var(--gold); 
-      border: 1px solid var(--gold); 
-    }
+    .pay-btn-gold.back-mode { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
 
-    /* Стили для кнопки Telegram (Вариант 1) */
-    #p-btn {
-      display: block; 
-      background: linear-gradient(180deg, #1a1a2e 0%, #0a0a15 100%);
-      color: var(--gold); 
-      padding: 18px; 
-      border-radius: 18px; 
-      text-decoration: none; 
-      font-weight: bold; 
-      font-size: 0.9rem;
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
-      margin-bottom: 20px;
+    /* Instruction Button */
+    .ins-btn {
+      background: transparent; border: 1px solid var(--border); color: var(--prose); padding: 14px; border-radius: 18px; font-size: 0.85rem; margin-top: 20px; cursor: pointer; transition: 0.3s;
     }
-    #p-btn:active {
-      background: var(--border);
-      transform: scale(0.98);
+    .ins-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Modal */
+    .modal {
+      display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(3, 1, 10, 0.95); backdrop-filter: blur(10px); padding: 40px 20px; overflow-y: auto;
+    }
+    .modal-content {
+      background: #0f0c18; border: 1px solid var(--gold); border-radius: 24px; padding: 30px 20px; max-width: 440px; margin: 0 auto; position: relative;
+    }
+    .close-modal { position: absolute; top: 15px; right: 15px; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+    .modal-h { font-family: 'Cormorant Garamond', serif; color: var(--gold); font-size: 1.6rem; margin-bottom: 20px; text-align: center; line-height: 1.2; }
+    .step-box { margin-bottom: 20px; text-align: left; }
+    .step-h { color: var(--gold); font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; display: block; }
+    .step-p { font-size: 0.8rem; line-height: 1.5; color: var(--prose); opacity: 0.9; }
+    .step-p b { color: var(--gold); }
+    .step-p i { color: var(--tron-red); font-style: normal; font-weight: bold; }
+
+    #p-btn {
+      display: block; background: linear-gradient(180deg, #1a1a2e 0%, #0a0a15 100%); color: var(--gold); padding: 18px; border-radius: 18px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: all 0.3s ease; margin-bottom: 20px;
     }
 
     .crypto-box {
-      background: rgba(123, 63, 228, 0.05); 
-      padding: 20px; 
-      border-radius: 20px; 
-      border: 1px solid rgba(201, 168, 76, 0.2); 
-      text-align: center; 
-      margin: 25px 0;
+      background: rgba(123, 63, 228, 0.05); padding: 20px; border-radius: 20px; border: 1px solid rgba(201, 168, 76, 0.2); text-align: center; margin: 25px 0;
     }
 
     .address-container {
-      display: flex;
-      align-items: center;
-      background: #000;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      margin-bottom: 15px;
-      gap: 10px;
+      display: flex; align-items: center; background: #000; padding: 12px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 15px; gap: 10px;
     }
-    .address-text {
-      font-family: monospace;
-      font-size: 0.75rem;
-      word-break: break-all;
-      color: var(--prose);
-      text-align: left;
-      flex: 1;
-    }
-    .copy-btn {
-      background: none;
-      border: none;
-      color: var(--gold);
-      cursor: pointer;
-      padding: 5px;
-      display: flex;
-      align-items: center;
-    }
+    .address-text { font-family: monospace; font-size: 0.75rem; word-break: break-all; color: var(--prose); text-align: left; flex: 1; }
+    .copy-btn { background: none; border: none; color: var(--gold); cursor: pointer; padding: 5px; display: flex; align-items: center; }
 
     .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 40px 0; }
     .reveal { opacity: 0; transform: translateY(20px); transition: 0.8s ease-out; }
@@ -184,6 +148,16 @@
 <body>
 
 <div id="space-bg"></div>
+
+<div id="insModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeIns()">&times;</span>
+    <h3 class="modal-h" id="m-title">🚀 Как получить доступ к Pragma</h3>
+    <div id="m-steps">
+        </div>
+    <button class="pay-btn-gold" onclick="closeIns()" id="m-btn">Понятно</button>
+  </div>
+</div>
 
 <div class="container">
   <nav>
@@ -256,15 +230,14 @@
     «Action is not the effect of motivation. It is the cause of it.»
     <div id="quote-author" style="font-size: 0.6rem; margin-top: 15px; opacity: 0.5; letter-spacing: 0.2em;">— WILLIAM JAMES</div>
   </div>
-
+  
   <section class="payment-section reveal" id="buy">
     <div class="pay-card">
       <div id="p-eyebrow" style="font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px;">Full Access</div>
-      
       <h2 class="pay-title" id="pay-main-title">Pragma</h2>
       <p id="p-sub" style="font-size: 0.8rem; opacity: 0.5;">One-time payment. No subscription.</p>
       
-      <div class="price" id="price-display">9 <span>$</span></div>
+      <div class="price" id="price-display">10 <span>$</span></div>
       <p id="p-note" style="font-size: 0.7rem; opacity: 0.4; margin-top: -15px;">one-time payment · lifetime access</p>
       
       <ul class="includes" id="p-list">
@@ -287,15 +260,11 @@
           </div>
           <p style="color: #ffcc00; font-size: 0.75rem;">⚠️ Network: <b>Tron</b> | Asset: <b>USDT</b></p>
         </div>
-        
-        <a href="https://t.me/Ef1ect0r" id="p-btn">
-          ✈️ Confirm payment in Telegram
-        </a>
+        <a href="https://t.me/Ef1ect0r" id="p-btn">✈️ Confirm payment in Telegram</a>
       </div>
 
-      <button class="pay-btn-gold" id="pay-button-main" onclick="handleMainButtonClick()">
-        Get access
-      </button>
+      <button class="ins-btn" id="ins-trigger-btn" onclick="openIns()">Instruction 🚀</button>
+      <button class="pay-btn-gold" id="pay-button-main" onclick="handleMainButtonClick()">Get access</button>
     </div>
   </section>
 </div>
@@ -305,46 +274,63 @@
 
   const langData = {
     en: {
-      label: "EN", navBuy: "Access", hEyebrow: "Philosophy of action", hTitle: "When you <em>cannot</em><br>make yourself<br>start", hSub: "30 protocols to overcome procrastination", hSubText: "Not motivational quotes. Not planners. Ask a question — get a specific answer with steps and a timer.", label1: "Database examples", cat1: "Start", q1: "I don't know where to start — too many options", cat2: "Fear", q2: "I'm afraid it won't work out", cat3: "Path", q3: "Perfectionism prevents completion", label2: "What's inside", ft1: "30 techniques", fd1: "Start, Path, Power, Fear, Meaning — 5 categories", ft2: "Timers", fd2: "Each step with a precise completion time", ft3: "SOS mode", fd3: "5 steps to escape an acute stupor", ft4: "Progress", fd4: "Track your completed techniques", quote: "«Action is not the effect of motivation. It is the cause of it.»", author: "— WILLIAM JAMES", pEyebrow: "Full Access", pSub: "One-time payment. No subscription.", pPrice: "9", pCurr: "$", pNote: "one-time payment · lifetime access", pBtn: "✈️ Confirm payment in Telegram", cTitle: "💳 Crypto Payment", cCopy: "Copy address:", pMainBtn: "Get access", pBackBtn: "← Back", pList: ["All 30 questions and protocols", "5 categories: Start, Path, Power, Fear, Meaning", "Built-in timers with vibration", "SOS protocol and support"]
-    },
-    es: {
-      label: "ES", navBuy: "Acceso", hEyebrow: "Filosofía de acción", hTitle: "Cuando <em>не можешь</em><br>заставить себя<br>начать", hSub: "30 protocolos para superar la procrastinación", hSubText: "Ni citas motivacionales. Ni planificadores. Haz una pregunta — obtén una respuesta con pasos и temporizador.", label1: "Ejemplos de la base", cat1: "Inicio", q1: "No sé por dónde empezar — demasiadas opciones", cat2: "Miedo", q2: "Tengo miedo de что no funcione", cat3: "Camino", q3: "El perfeccionismo me impide terminar", label2: "Qué hay dentro", ft1: "30 técnicas", fd1: "Inicio, Camino, Poder, Miedo, Sentido — 5 categorías", ft2: "Temporizadores", fd2: "Cada paso con tiempo exacto de finalización", ft3: "Modo SOS", fd3: "5 pasos para salir de un estupor agudo", ft4: "Progreso", fd4: "Registra tus técnicas completadas", quote: "«La acción не является следствием мотивации. Это её причина.»", author: "— WILLIAM JAMES", pEyebrow: "Acceso Total", pSub: "Pago único. Sin suscripción.", pPrice: "9", pCurr: "€", pNote: "pago único · acceso de por vida", pBtn: "✈️ Confirmar pago en Telegram", cTitle: "💳 Pago Cripto", cCopy: "Copiar dirección:", pMainBtn: "Obtener acceso", pBackBtn: "← Volver", pList: ["Las 30 preguntas и protocolos", "5 categorías: Inicio, Camino, Poder, Miedo, Sentido", "Temporizadores con vibración", "Protocolo SOS и soporte"]
+      label: "EN", navBuy: "Access", hEyebrow: "Philosophy of action", hTitle: "When you <em>cannot</em><br>make yourself<br>start", hSub: "30 protocols to overcome procrastination", hSubText: "Not motivational quotes. Not planners. Ask a question — get a specific answer with steps and a timer.", label1: "Database examples", cat1: "Start", q1: "I don't know where to start — too many options", cat2: "Fear", q2: "I'm afraid it won't work out", cat3: "Path", q3: "Perfectionism prevents completion", label2: "What's inside", ft1: "30 techniques", fd1: "Start, Path, Power, Fear, Meaning — 5 categories", ft2: "Timers", fd2: "Each step with a precise completion time", ft3: "SOS mode", fd3: "5 steps to escape an acute stupor", ft4: "Progress", fd4: "Track your completed techniques", quote: "«Action is not the effect of motivation. It is the cause of it.»", author: "— WILLIAM JAMES", pEyebrow: "Full Access", pSub: "One-time payment. No subscription.", pPrice: "10", pCurr: "$", pNote: "one-time payment · lifetime access", pBtn: "✈️ Confirm payment in Telegram", cTitle: "💳 Crypto Payment", cCopy: "Copy address:", pMainBtn: "Get access", pBackBtn: "← Back", pList: ["All 30 questions and protocols", "5 categories", "Built-in timers", "SOS mode"],
+      insBtn: "Instruction 🚀", mTitle: "🚀 How to get Pragma access", mClose: "Got it",
+      mSteps: [
+        {h: "Step 1: Preparation", p: "Ensure you have 10 USDT on <b>Tron (TRC20)</b> network. You can use @Wallet in Telegram. Always choose <i>TRC20 (Red icon)</i>."},
+        {h: "Step 2: Payment", p: "Click 'Get Access' on the site. Scan QR with your wallet or tap the address to copy it automatically."},
+        {h: "Step 3: Transfer", p: "Send 10 USDT. <i>IMPORTANT:</i> verify it's the TRC20 network. Take a screenshot of the successful transaction."},
+        {h: "Step 4: Access", p: "Click 'Confirm in Telegram', send the screenshot, and I'll immediately send you the access link."}
+      ]
     },
     ru: {
-      label: "RU", navBuy: "Доступ", hEyebrow: "Философия действия", hTitle: "Когда <em>не можешь</em><br>заставить себя<br>начать", hSub: "30 протоколов выхода из прокрастинации", hSubText: "Не мотивационные цитаты. Не планировщики. Задай вопрос — получи конкретный ответ с шагами и таймером.", label1: "Примеры из базы", cat1: "Старт", q1: "Не знаю с чего начать — слишком много вариантов", cat2: "Страх", q2: "Боюсь, что не получится", cat3: "Путь", q3: "Перфекционизм мешает завершить дело", label2: "Что внутри", ft1: "30 техник", fd1: "Старт, Путь, Сила, Страх, Смысл — 5 категорий", ft2: "Таймеры", fd2: "Каждый шаг с точным временем завершения", ft3: "SOS режим", fd3: "5 шагов для выхода из острого ступора", ft4: "Progress", fd4: "Отмечай выполненные техники", quote: "«Действие — это не следствие мотивации. Это её причина.»", author: "— УИЛЬЯМ ДЖЕЙМС", pEyebrow: "Полный доступ", pSub: "Один раз — навсегда. Без подписки.", pPrice: "333", pCurr: "₽", pNote: "разовая оплата · доступ навсегда", pBtn: "✈️ Подтвердить оплату в Telegram", cTitle: "💳 Оплата криптой", cCopy: "Адрес для копирования:", pMainBtn: "Получить доступ", pBackBtn: "← Назад", pList: ["Все 30 вопросов и протоколов", "5 категорий: Старт, Путь, Сила, Страх, Смысл", "Встроенные таймеры с вибрацией", "Протокол SOS и поддержка"]
+      label: "RU", navBuy: "Доступ", hEyebrow: "Философия действия", hTitle: "Когда <em>не можешь</em><br>заставить себя<br>начать", hSub: "30 протоколов выхода из прокрастинации", hSubText: "Не мотивационные цитаты. Не планировщики. Задай вопрос — получи конкретный ответ с шагами и таймером.", label1: "Примеры из базы", cat1: "Старт", q1: "Не знаю с чего начать — слишком много вариантов", cat2: "Страх", q2: "Боюсь, что не получится", cat3: "Путь", q3: "Перфекционизм мешает завершить дело", label2: "Что внутри", ft1: "30 техник", fd1: "Старт, Путь, Сила, Страх, Смысл — 5 категорий", ft2: "Таймеры", fd2: "Каждый шаг с точным временем завершения", ft3: "SOS режим", fd3: "5 шагов для выхода из острого ступора", ft4: "Progress", fd4: "Отмечай выполненные техники", quote: "«Действие — это не следствие мотивации. Это её причина.»", author: "— УИЛЬЯМ ДЖЕЙМС", pEyebrow: "Полный доступ", pSub: "Один раз — навсегда. Без подписки.", pPrice: "10", pCurr: "$", pNote: "разовая оплата · доступ навсегда", pBtn: "✈️ Подтвердить оплату в TG", cTitle: "💳 Оплата криптой", cCopy: "Адрес для копирования:", pMainBtn: "Получить доступ", pBackBtn: "← Назад", pList: ["Все 30 вопросов и протоколов", "5 категорий", "Встроенные таймеры", "SOS режим"],
+      insBtn: "Инструкция 🚀", mTitle: "🚀 Как получить доступ к Pragma", mClose: "Понятно",
+      mSteps: [
+        {h: "Шаг 1: Подготовка", p: "Убедитесь, что у вас есть 10 USDT в сети <b>Tron (TRC20)</b>. Можно взять в @Wallet в Telegram. При отправке выбирайте <i>Tron (TRC20) (красная иконка)</i>."},
+        {h: "Шаг 2: Оплата", p: "Нажмите кнопку 'Получить доступ'. Отсканируйте QR или нажмите на адрес (начинается на T), он скопируется автоматически."},
+        {h: "Шаг 3: Перевод", p: "Введите 10 USDT. <i>ВНИМАНИЕ:</i> убедитесь, что выбрана сеть TRC20. Обязательно сделайте скриншот подтверждения."},
+        {h: "Шаг 4: Получение доступа", p: "Нажмите 'Подтвердить оплату в Telegram' и пришлите скриншот. Я проверю и сразу скину ссылку на доступ."}
+      ]
+    },
+    es: {
+        label: "ES", navBuy: "Acceso", hEyebrow: "Filosofía de acción", hTitle: "Cuando <em>no puedes</em><br>empezar", hSub: "30 protocolos contra la procrastinación", hSubText: "No son frases motivadoras. Haz una pregunta y obtén pasos y temporizador.", label1: "Ejemplos", cat1: "Inicio", q1: "No sé por dónde empezar", cat2: "Miedo", q2: "Tengo miedo de fallar", cat3: "Camino", q3: "El perfeccionismo me detiene", label2: "Contenido", ft1: "30 técnicas", fd1: "5 categorías de acción", ft2: "Temporizadores", fd2: "Tiempo exacto para cada paso", ft3: "Modo SOS", fd3: "5 pasos para salir del estupor", ft4: "Progreso", fd4: "Registra tus avances", quote: "«La acción no es el efecto de la motivación. Es su causa.»", author: "— WILLIAM JAMES", pEyebrow: "Acceso Total", pSub: "Pago único. Sin suscripción.", pPrice: "10", pCurr: "$", pNote: "pago único · acceso de por vida", pBtn: "✈️ Confirmar pago en TG", cTitle: "💳 Pago Cripto", cCopy: "Copiar dirección:", pMainBtn: "Obtener acceso", pBackBtn: "← Volver", pList: ["30 protocolos", "5 categorías", "Timers", "Modo SOS"],
+        insBtn: "Instrucción 🚀", mTitle: "🚀 Cómo obtener acceso a Pragma", mClose: "Entendido",
+        mSteps: [
+          {h: "Paso 1: Preparación", p: "Asegúrate de tener 10 USDT en la red <b>Tron (TRC20)</b>. Puedes usar @Wallet en Telegram. Elige siempre <i>TRC20 (Icono rojo)</i>."},
+          {h: "Paso 2: Pago", p: "Haz clic en 'Obtener acceso'. Escanea el QR o toca la dirección para copiarla automáticamente."},
+          {h: "Paso 3: Transferencia", p: "Envía 10 USDT. <i>ATENCIÓN:</i> verifica que sea la red TRC20. Toma una captura de pantalla del éxito."},
+          {h: "Paso 4: Acceso", p: "Haz clic en 'Confirmar en Telegram' y envía la captura. Te enviaré el enlace de acceso al instante."}
+        ]
     }
   };
 
-  function toggleLangMenu() {
-    document.getElementById("langDropdown").classList.toggle("active");
-  }
+  function openIns() { document.getElementById('insModal').style.display = 'block'; }
+  function closeIns() { document.getElementById('insModal').style.display = 'none'; }
+  function toggleLangMenu() { document.getElementById("langDropdown").classList.toggle("active"); }
 
   window.onclick = function(event) {
-    if (!event.target.closest('.dropdown')) {
-      document.getElementById("langDropdown").classList.remove("active");
-    }
+    if (!event.target.closest('.dropdown')) document.getElementById("langDropdown").classList.remove("active");
+    if (event.target == document.getElementById('insModal')) closeIns();
   }
 
   function handleMainButtonClick() {
     const btn = document.getElementById('pay-button-main');
+    const insTrigger = document.getElementById('ins-trigger-btn');
     const crypto = document.getElementById('crypto-details');
     const elementsToHide = [
-      document.getElementById('pay-main-title'),
-      document.getElementById('price-display'),
-      document.getElementById('p-note'),
-      document.getElementById('p-list'),
-      document.getElementById('p-sub')
+      document.getElementById('pay-main-title'), document.getElementById('price-display'),
+      document.getElementById('p-note'), document.getElementById('p-list'), document.getElementById('p-sub')
     ];
-
-    const isBack = btn.classList.contains('back-mode');
-
-    if (!isBack) {
+    if (!btn.classList.contains('back-mode')) {
       elementsToHide.forEach(el => el.style.display = 'none');
+      insTrigger.style.display = 'none';
       crypto.style.display = 'block';
       btn.classList.add('back-mode');
       btn.innerText = langData[currentLanguage].pBackBtn;
     } else {
       elementsToHide.forEach(el => el.style.display = 'block');
+      insTrigger.style.display = 'block';
       crypto.style.display = 'none';
       btn.classList.remove('back-mode');
       btn.innerText = langData[currentLanguage].pMainBtn;
@@ -354,22 +340,15 @@
   async function copyAddress() {
     const address = document.getElementById('wallet-address').innerText;
     const icon = document.getElementById('copy-icon');
-    try {
-      await navigator.clipboard.writeText(address);
-      icon.innerHTML = '<polyline points="20 6 9 17 4 12"></polyline>';
-      setTimeout(() => {
-        icon.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>';
-      }, 1500);
-    } catch (err) {
-      console.error('Failed to copy: ', err);
-    }
+    await navigator.clipboard.writeText(address);
+    icon.innerHTML = '<polyline points="20 6 9 17 4 12"></polyline>';
+    setTimeout(() => { icon.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>'; }, 1500);
   }
 
   function setLang(lang) {
     currentLanguage = lang;
     const d = langData[lang];
     document.getElementById('current-lang-label').innerText = d.label;
-    document.getElementById("langDropdown").classList.remove("active");
     document.getElementById('nav-buy').innerText = d.navBuy;
     document.getElementById('h-eyebrow').innerText = d.hEyebrow;
     document.getElementById('h-title').innerHTML = d.hTitle;
@@ -397,18 +376,24 @@
     document.getElementById('price-display').innerHTML = `${d.pPrice} <span>${d.pCurr}</span>`;
     document.getElementById('p-note').innerText = d.pNote;
     document.getElementById('p-btn').innerText = d.pBtn;
-    const mainBtn = document.getElementById('pay-button-main');
-    mainBtn.innerText = mainBtn.classList.contains('back-mode') ? d.pBackBtn : d.pMainBtn;
+    document.getElementById('pay-button-main').innerText = document.getElementById('pay-button-main').classList.contains('back-mode') ? d.pBackBtn : d.pMainBtn;
+    document.getElementById('ins-trigger-btn').innerText = d.insBtn;
+    document.getElementById('m-title').innerText = d.mTitle;
+    document.getElementById('m-btn').innerText = d.mClose;
+    document.getElementById('m-steps').innerHTML = d.mSteps.map(s => `<div class="step-box"><span class="step-h">${s.h}</span><p class="step-p">${s.p}</p></div>`).join('');
     document.getElementById('crypto-title').innerText = d.cTitle;
     document.getElementById('crypto-copy').innerText = d.cCopy;
-    const list = document.getElementById('p-list');
-    list.innerHTML = d.pList.map(i => `<li>${i}</li>`).join('');
+    document.getElementById('p-list').innerHTML = d.pList.map(i => `<li>${i}</li>`).join('');
+    document.getElementById("langDropdown").classList.remove("active");
   }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  
+  // Init default language
+  setLang('en');
 </script>
 
 </body>
