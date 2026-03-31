@@ -127,8 +127,9 @@
     .step-p i { color: var(--tron-red); font-style: normal; font-weight: bold; }
 
     #p-btn {
-      display: block; background: linear-gradient(180deg, #1a1a2e 0%, #0a0a15 100%); color: var(--gold); padding: 18px; border-radius: 18px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: all 0.3s ease; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(180deg, #1a1a2e 0%, #0a0a15 100%); color: var(--gold); padding: 18px; border-radius: 18px; text-decoration: none; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); transition: all 0.3s ease; margin-bottom: 20px;
     }
+    #p-btn svg { flex-shrink: 0; }
 
     .crypto-box {
       background: rgba(123, 63, 228, 0.05); padding: 20px; border-radius: 20px; border: 1px solid rgba(201, 168, 76, 0.2); text-align: center; margin: 25px 0;
@@ -230,14 +231,14 @@
     «Action is not the effect of motivation. It is the cause of it.»
     <div id="quote-author" style="font-size: 0.6rem; margin-top: 15px; opacity: 0.5; letter-spacing: 0.2em;">— WILLIAM JAMES</div>
   </div>
-  
+
   <section class="payment-section reveal" id="buy">
     <div class="pay-card">
       <div id="p-eyebrow" style="font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px;">Full Access</div>
       <h2 class="pay-title" id="pay-main-title">Pragma</h2>
       <p id="p-sub" style="font-size: 0.8rem; opacity: 0.5;">One-time payment. No subscription.</p>
       
-      <div class="price" id="price-display">10 <span>$</span></div>
+      <div class="price" id="price-display">9 <span>$</span></div>
       <p id="p-note" style="font-size: 0.7rem; opacity: 0.4; margin-top: -15px;">one-time payment · lifetime access</p>
       
       <ul class="includes" id="p-list">
@@ -260,7 +261,10 @@
           </div>
           <p style="color: #ffcc00; font-size: 0.75rem;">⚠️ Network: <b>Tron</b> | Asset: <b>USDT</b></p>
         </div>
-        <a href="https://t.me/Ef1ect0r" id="p-btn">✈️ Confirm payment in Telegram</a>
+        <a href="https://t.me/Ef1ect0r" id="p-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.38 15.84 14.19 15.51 15.96C15.37 16.71 15.09 16.96 14.82 16.99C14.24 17.04 13.8 16.6 13.24 16.23C12.36 15.65 11.86 15.29 11.01 14.73C10.02 14.08 10.66 13.72 11.23 13.13C11.38 12.98 13.94 10.65 13.99 10.43C13.99 10.4 14 10.3 13.94 10.25C13.88 10.2 13.79 10.22 13.72 10.23C13.63 10.25 12.23 11.17 9.51 13.01C9.11 13.28 8.75 13.42 8.43 13.41C8.08 13.4 7.4 13.21 6.89 13.05C6.27 12.85 5.77 12.74 5.82 12.4C5.84 12.22 6.09 12.04 6.55 11.86C9.39 10.62 11.3 9.79 12.27 9.39C15.03 8.24 15.61 8.04 15.98 8.04C16.06 8.04 16.25 8.06 16.37 8.16C16.47 8.24 16.5 8.36 16.51 8.44C16.51 8.52 16.53 8.7 16.52 8.8H16.64Z" fill="#24A1DE"/></svg>
+          <span id="p-btn-text">Confirm payment in Telegram</span>
+        </a>
       </div>
 
       <button class="ins-btn" id="ins-trigger-btn" onclick="openIns()">Instruction 🚀</button>
@@ -271,10 +275,11 @@
 
 <script>
   let currentLanguage = 'en';
+  const tgLogo = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.38 15.84 14.19 15.51 15.96C15.37 16.71 15.09 16.96 14.82 16.99C14.24 17.04 13.8 16.6 13.24 16.23C12.36 15.65 11.86 15.29 11.01 14.73C10.02 14.08 10.66 13.72 11.23 13.13C11.38 12.98 13.94 10.65 13.99 10.43C13.99 10.4 14 10.3 13.94 10.25C13.88 10.2 13.79 10.22 13.72 10.23C13.63 10.25 12.23 11.17 9.51 13.01C9.11 13.28 8.75 13.42 8.43 13.41C8.08 13.4 7.4 13.21 6.89 13.05C6.27 12.85 5.77 12.74 5.82 12.4C5.84 12.22 6.09 12.04 6.55 11.86C9.39 10.62 11.3 9.79 12.27 9.39C15.03 8.24 15.61 8.04 15.98 8.04C16.06 8.04 16.25 8.06 16.37 8.16C16.47 8.24 16.5 8.36 16.51 8.44C16.51 8.52 16.53 8.7 16.52 8.8H16.64Z" fill="#24A1DE"/></svg>`;
 
   const langData = {
     en: {
-      label: "EN", navBuy: "Access", hEyebrow: "Philosophy of action", hTitle: "When you <em>cannot</em><br>make yourself<br>start", hSub: "30 protocols to overcome procrastination", hSubText: "Not motivational quotes. Not planners. Ask a question — get a specific answer with steps and a timer.", label1: "Database examples", cat1: "Start", q1: "I don't know where to start — too many options", cat2: "Fear", q2: "I'm afraid it won't work out", cat3: "Path", q3: "Perfectionism prevents completion", label2: "What's inside", ft1: "30 techniques", fd1: "Start, Path, Power, Fear, Meaning — 5 categories", ft2: "Timers", fd2: "Each step with a precise completion time", ft3: "SOS mode", fd3: "5 steps to escape an acute stupor", ft4: "Progress", fd4: "Track your completed techniques", quote: "«Action is not the effect of motivation. It is the cause of it.»", author: "— WILLIAM JAMES", pEyebrow: "Full Access", pSub: "One-time payment. No subscription.", pPrice: "10", pCurr: "$", pNote: "one-time payment · lifetime access", pBtn: "✈️ Confirm payment in Telegram", cTitle: "💳 Crypto Payment", cCopy: "Copy address:", pMainBtn: "Get access", pBackBtn: "← Back", pList: ["All 30 questions and protocols", "5 categories", "Built-in timers", "SOS mode"],
+      label: "EN", navBuy: "Access", hEyebrow: "Philosophy of action", hTitle: "When you <em>cannot</em><br>make yourself<br>start", hSub: "30 protocols to overcome procrastination", hSubText: "Not motivational quotes. Not planners. Ask a question — get a specific answer with steps and a timer.", label1: "Database examples", cat1: "Start", q1: "I don't know where to start — too many options", cat2: "Fear", q2: "I'm afraid it won't work out", cat3: "Path", q3: "Perfectionism prevents completion", label2: "What's inside", ft1: "30 techniques", fd1: "Start, Path, Power, Fear, Meaning — 5 categories", ft2: "Timers", fd2: "Each step with a precise completion time", ft3: "SOS mode", fd3: "5 steps to escape an acute stupor", ft4: "Progress", fd4: "Track your completed techniques", quote: "«Action is not the effect of motivation. It is the cause of it.»", author: "— WILLIAM JAMES", pEyebrow: "Full Access", pSub: "One-time payment. No subscription.", pPrice: "10", pCurr: "$", pNote: "one-time payment · lifetime access", pBtn: "Confirm payment in Telegram", cTitle: "💳 Crypto Payment", cCopy: "Copy address:", pMainBtn: "Get access", pBackBtn: "← Back", pList: ["All 30 questions and protocols", "5 categories", "Built-in timers", "SOS mode"],
       insBtn: "Instruction 🚀", mTitle: "🚀 How to get Pragma access", mClose: "Got it",
       mSteps: [
         {h: "Step 1: Preparation", p: "Ensure you have 10 USDT on <b>Tron (TRC20)</b> network. You can use @Wallet in Telegram. Always choose <i>TRC20 (Red icon)</i>."},
@@ -284,7 +289,7 @@
       ]
     },
     ru: {
-      label: "RU", navBuy: "Доступ", hEyebrow: "Философия действия", hTitle: "Когда <em>не можешь</em><br>заставить себя<br>начать", hSub: "30 протоколов выхода из прокрастинации", hSubText: "Не мотивационные цитаты. Не планировщики. Задай вопрос — получи конкретный ответ с шагами и таймером.", label1: "Примеры из базы", cat1: "Старт", q1: "Не знаю с чего начать — слишком много вариантов", cat2: "Страх", q2: "Боюсь, что не получится", cat3: "Путь", q3: "Перфекционизм мешает завершить дело", label2: "Что внутри", ft1: "30 техник", fd1: "Старт, Путь, Сила, Страх, Смысл — 5 категорий", ft2: "Таймеры", fd2: "Каждый шаг с точным временем завершения", ft3: "SOS режим", fd3: "5 шагов для выхода из острого ступора", ft4: "Progress", fd4: "Отмечай выполненные техники", quote: "«Действие — это не следствие мотивации. Это её причина.»", author: "— УИЛЬЯМ ДЖЕЙМС", pEyebrow: "Полный доступ", pSub: "Один раз — навсегда. Без подписки.", pPrice: "10", pCurr: "$", pNote: "разовая оплата · доступ навсегда", pBtn: "✈️ Подтвердить оплату в TG", cTitle: "💳 Оплата криптой", cCopy: "Адрес для копирования:", pMainBtn: "Получить доступ", pBackBtn: "← Назад", pList: ["Все 30 вопросов и протоколов", "5 категорий", "Встроенные таймеры", "SOS режим"],
+      label: "RU", navBuy: "Доступ", hEyebrow: "Философия действия", hTitle: "Когда <em>не можешь</em><br>заставить себя<br>начать", hSub: "30 протоколов выхода из прокрастинации", hSubText: "Не мотивационные цитаты. Не планировщики. Задай вопрос — получи конкретный ответ с шагами и таймером.", label1: "Примеры из базы", cat1: "Старт", q1: "Не знаю с чего начать — слишком много вариантов", cat2: "Страх", q2: "Боюсь, что не получится", cat3: "Путь", q3: "Перфекционизм мешает завершить дело", label2: "Что внутри", ft1: "30 техник", fd1: "Старт, Путь, Сила, Страх, Смысл — 5 категорий", ft2: "Таймеры", fd2: "Каждый шаг с точным временем завершения", ft3: "SOS режим", fd3: "5 шагов для выхода из острого ступора", ft4: "Progress", fd4: "Отмечай выполненные техники", quote: "«Действие — это не следствие мотивации. Это её причина.»", author: "— УИЛЬЯМ ДЖЕЙМС", pEyebrow: "Полный доступ", pSub: "Один раз — навсегда. Без подписки.", pPrice: "10", pCurr: "$", pNote: "разовая оплата · доступ навсегда", pBtn: "Подтвердить оплату в Telegram", cTitle: "💳 Оплата криптой", cCopy: "Адрес для копирования:", pMainBtn: "Получить доступ", pBackBtn: "← Назад", pList: ["Все 30 вопросов и протоколов", "5 категорий", "Встроенные таймеры", "SOS режим"],
       insBtn: "Инструкция 🚀", mTitle: "🚀 Как получить доступ к Pragma", mClose: "Понятно",
       mSteps: [
         {h: "Шаг 1: Подготовка", p: "Убедитесь, что у вас есть 10 USDT в сети <b>Tron (TRC20)</b>. Можно взять в @Wallet в Telegram. При отправке выбирайте <i>Tron (TRC20) (красная иконка)</i>."},
@@ -294,7 +299,7 @@
       ]
     },
     es: {
-        label: "ES", navBuy: "Acceso", hEyebrow: "Filosofía de acción", hTitle: "Cuando <em>no puedes</em><br>empezar", hSub: "30 protocolos contra la procrastinación", hSubText: "No son frases motivadoras. Haz una pregunta y obtén pasos y temporizador.", label1: "Ejemplos", cat1: "Inicio", q1: "No sé por dónde empezar", cat2: "Miedo", q2: "Tengo miedo de fallar", cat3: "Camino", q3: "El perfeccionismo me detiene", label2: "Contenido", ft1: "30 técnicas", fd1: "5 categorías de acción", ft2: "Temporizadores", fd2: "Tiempo exacto para cada paso", ft3: "Modo SOS", fd3: "5 pasos para salir del estupor", ft4: "Progreso", fd4: "Registra tus avances", quote: "«La acción no es el efecto de la motivación. Es su causa.»", author: "— WILLIAM JAMES", pEyebrow: "Acceso Total", pSub: "Pago único. Sin suscripción.", pPrice: "10", pCurr: "$", pNote: "pago único · acceso de por vida", pBtn: "✈️ Confirmar pago en TG", cTitle: "💳 Pago Cripto", cCopy: "Copiar dirección:", pMainBtn: "Obtener acceso", pBackBtn: "← Volver", pList: ["30 protocolos", "5 categorías", "Timers", "Modo SOS"],
+        label: "ES", navBuy: "Acceso", hEyebrow: "Filosofía de acción", hTitle: "Cuando <em>no puedes</em><br>empezar", hSub: "30 protocolos contra la procrastinación", hSubText: "No son frases motivadoras. Haz una pregunta y obtén pasos y temporizador.", label1: "Ejemplos", cat1: "Inicio", q1: "No sé por dónde empezar", cat2: "Miedo", q2: "Tengo miedo de fallar", cat3: "Camino", q3: "El perfeccionismo me detiene", label2: "Contenido", ft1: "30 técnicas", fd1: "5 categorías de acción", ft2: "Temporizadores", fd2: "Tiempo exacto para cada paso", ft3: "Modo SOS", fd3: "5 pasos para salir del estupor", ft4: "Progreso", fd4: "Registra tus avances", quote: "«La acción no es el efecto de la motivación. Es su causa.»", author: "— WILLIAM JAMES", pEyebrow: "Acceso Total", pSub: "Pago único. Sin suscripción.", pPrice: "10", pCurr: "$", pNote: "pago único · acceso de por vida", pBtn: "Confirmar pago en Telegram", cTitle: "💳 Pago Cripto", cCopy: "Copiar dirección:", pMainBtn: "Obtener acceso", pBackBtn: "← Volver", pList: ["30 protocolos", "5 categorías", "Timers", "Modo SOS"],
         insBtn: "Instrucción 🚀", mTitle: "🚀 Cómo obtener acceso a Pragma", mClose: "Entendido",
         mSteps: [
           {h: "Paso 1: Preparación", p: "Asegúrate de tener 10 USDT en la red <b>Tron (TRC20)</b>. Puedes usar @Wallet en Telegram. Elige siempre <i>TRC20 (Icono rojo)</i>."},
@@ -375,7 +380,10 @@
     document.getElementById('p-sub').innerText = d.pSub;
     document.getElementById('price-display').innerHTML = `${d.pPrice} <span>${d.pCurr}</span>`;
     document.getElementById('p-note').innerText = d.pNote;
-    document.getElementById('p-btn').innerText = d.pBtn;
+    
+    // Update Telegram Button with Logo
+    document.getElementById('p-btn-text').innerText = d.pBtn;
+    
     document.getElementById('pay-button-main').innerText = document.getElementById('pay-button-main').classList.contains('back-mode') ? d.pBackBtn : d.pMainBtn;
     document.getElementById('ins-trigger-btn').innerText = d.insBtn;
     document.getElementById('m-title').innerText = d.mTitle;
@@ -392,7 +400,6 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   
-  // Init default language
   setLang('en');
 </script>
 
