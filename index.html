@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#03010a">
-  <title>Pragma — Философия действия</title>
+  <title id="site-title">Pragma — Philosophy of Action</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +31,6 @@
       overflow-x: hidden;
     }
 
-    /* ФОН КАК НА СКРИНЕ */
     #space-bg {
       position: fixed; inset: 0; z-index: -1;
       background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1200&q=80');
@@ -42,120 +41,77 @@
       background: radial-gradient(circle at center, rgba(10, 5, 25, 0.4) 0%, rgba(3, 1, 10, 0.95) 100%);
     }
 
-    .container {
-      width: 100%;
-      max-width: 500px; /* Идеально для мобильного вида */
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+    .container { width: 100%; max-width: 500px; margin: 0 auto; padding: 0 20px; }
 
-    /* ШАПКА */
-    nav {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 25px 0;
-    }
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem; letter-spacing: 0.1em;
-    }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 0; position: relative; z-index: 100; }
+    .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; letter-spacing: 0.1em; }
     .logo span { color: var(--gold); }
 
-    /* ГЕРОЙ-БЛОК (Скрин 2) */
+    .nav-tools { display: flex; align-items: center; gap: 15px; }
+
+    .dropdown { position: relative; display: inline-block; }
+    .dropbtn {
+      background: none; border: 1px solid var(--border); color: var(--gold); padding: 6px 12px; font-size: 0.7rem; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-weight: 600; display: flex; align-items: center; gap: 5px;
+    }
+    .dropdown-content { display: none; position: absolute; right: 0; top: 110%; background: #0f0c18; border: 1px solid var(--border); min-width: 120px; border-radius: 10px; box-shadow: 0 8px 16px rgba(0,0,0,0.5); z-index: 101; overflow: hidden; }
+    .dropdown-content button { color: var(--prose); padding: 12px 16px; display: block; background: none; border: none; width: 100%; text-align: left; font-size: 0.8rem; cursor: pointer; }
+    .dropdown-content button:hover { background: var(--border); color: var(--gold); }
+    .dropdown.active .dropdown-content { display: block; }
+
     .hero { text-align: center; padding: 40px 0; }
-    .hero-eyebrow {
-      font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 25px;
-      display: flex; align-items: center; justify-content: center; gap: 15px;
-    }
+    .hero-eyebrow { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 15px; }
     .hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 20px; height: 1px; background: var(--border); }
-
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.2rem; line-height: 1.05; font-weight: 500;
-      margin-bottom: 30px;
-    }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; line-height: 1.05; font-weight: 500; margin-bottom: 30px; }
     .hero-title em { font-style: italic; color: var(--gold-2); }
+    .hero-sub { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--gold); margin-bottom: 30px; opacity: 0.9; }
+    .hero-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.8; max-width: 90%; margin: 0 auto; font-weight: 300; }
     
-    .hero-sub {
-      font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic;
-      color: var(--gold); margin-bottom: 30px; opacity: 0.9;
-    }
-    .hero-desc {
-      font-size: 0.85rem; color: var(--muted); line-height: 1.8;
-      max-width: 90%; margin: 0 auto; font-weight: 300;
-    }
-
-    /* КАРТОЧКИ (Скрин 1 и 3) */
-    .section-label {
-      font-size: 0.5rem; letter-spacing: 0.25em; text-transform: uppercase;
-      text-align: center; margin: 50px 0 25px; color: var(--gold); opacity: 0.6;
-    }
-    
+    .section-label { font-size: 0.5rem; letter-spacing: 0.25em; text-transform: uppercase; text-align: center; margin: 50px 0 25px; color: var(--gold); opacity: 0.6; }
     .cards-stack { display: flex; flex-direction: column; gap: 12px; }
-    
-    .pcard {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 18px; padding: 22px;
-      backdrop-filter: blur(10px);
-      transition: 0.3s;
-    }
-    .pcard-cat {
-      font-size: 0.45rem; text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--gold); margin-bottom: 8px; display: block;
-    }
+    .pcard { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 22px; backdrop-filter: blur(10px); }
+    .pcard-cat { font-size: 0.45rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 8px; display: block; }
     .pcard-q { font-size: 0.95rem; font-weight: 300; color: rgba(232, 224, 208, 0.9); }
-
-    /* ГРИД "ЧТО ВНУТРИ" (Скрин 3) */
-    .features-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-      margin-top: 20px;
-    }
-    .feat-card {
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 20px; padding: 20px; backdrop-filter: blur(10px);
-    }
+    
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+    .feat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 20px; backdrop-filter: blur(10px); }
     .feat-icon { font-size: 1.2rem; margin-bottom: 15px; display: block; }
     .feat-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
     .feat-desc { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
-
-    /* ЦИТАТА */
-    .quote {
-      text-align: center; padding: 60px 0;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem; font-style: italic; color: var(--gold);
-    }
-
-    /* ТАРИФ (Скрин 4) */
-    .pay-card {
-      background: linear-gradient(180deg, rgba(20, 15, 30, 0.9) 0%, rgba(5, 3, 10, 1) 100%);
-      border: 1px solid var(--gold); border-radius: 32px;
-      padding: 45px 25px; text-align: center; margin-bottom: 80px;
-    }
+    
+    .quote { text-align: center; padding: 60px 0; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--gold); }
+    
+    .pay-card { background: linear-gradient(180deg, rgba(20, 15, 30, 0.9) 0%, rgba(5, 3, 10, 1) 100%); border: 1px solid var(--gold); border-radius: 32px; padding: 45px 25px; text-align: center; margin-bottom: 80px; }
     .pay-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; margin-bottom: 10px; }
-    .price {
-      font-family: 'Cormorant Garamond', serif; font-size: 3.8rem; 
-      color: var(--gold); font-weight: 600; margin: 20px 0;
-    }
-    .price span { font-size: 1.5rem; font-weight: 400; }
-
+    .price { font-family: 'Cormorant Garamond', serif; font-size: 3.8rem; color: var(--gold); font-weight: 600; margin: 20px 0; }
+    .price span { font-size: 1.5rem; font-weight: 400; margin-left: 5px; }
+    
     .includes { list-style: none; text-align: left; margin: 30px 0; }
-    .includes li { 
-      font-size: 0.85rem; margin-bottom: 15px; display: flex; gap: 12px; 
-      color: rgba(232, 224, 208, 0.8);
-    }
+    .includes li { font-size: 0.85rem; margin-bottom: 15px; display: flex; gap: 12px; color: rgba(232, 224, 208, 0.8); }
     .includes li::before { content: '✦'; color: var(--gold); }
+    
+    .pay-btn-gold {
+      display: block; 
+      background: var(--gold); 
+      color: #000; 
+      padding: 18px; 
+      border-radius: 18px; 
+      text-decoration: none; 
+      font-weight: bold; 
+      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+    .pay-btn-gold:active { transform: scale(0.98); }
 
-    .pay-btn {
-      display: block; width: 100%; background: var(--gold);
-      color: #000; text-decoration: none; padding: 20px; border-radius: 18px;
-      font-weight: 700; font-size: 1rem; transition: 0.3s;
-      box-shadow: 0 10px 30px rgba(201, 168, 76, 0.2);
+    .crypto-box {
+      background: rgba(123, 63, 228, 0.1); 
+      padding: 20px; 
+      border-radius: 20px; 
+      border: 1px solid #7b3fe4; 
+      text-align: center; 
+      margin: 25px 0;
     }
 
     .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 40px 0; }
-
-    /* Анимация плавного появления */
     .reveal { opacity: 0; transform: translateY(20px); transition: 0.8s ease-out; }
     .reveal.active { opacity: 1; transform: translateY(0); }
   </style>
@@ -167,94 +123,189 @@
 <div class="container">
   <nav>
     <div class="logo">Pragma<span>.</span></div>
-    <a href="#buy" style="color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;">Доступ</a>
+    <div class="nav-tools">
+        <div class="dropdown" id="langDropdown">
+            <button class="dropbtn" onclick="toggleLangMenu()">
+                <span id="current-lang-label">EN</span> <span>⌄</span>
+            </button>
+            <div class="dropdown-content">
+                <button onclick="setLang('en')">English</button>
+                <button onclick="setLang('es')">Español</button>
+                <button onclick="setLang('ru')">Русский</button>
+            </div>
+        </div>
+        <a href="#buy" id="nav-buy" style="color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;">Access</a>
+    </div>
   </nav>
 
   <section class="hero reveal">
-    <div class="hero-eyebrow">Философия действия</div>
-    <h1 class="hero-title">Когда <em>не можешь</em><br>заставить себя<br>начать</h1>
-    <p class="hero-sub">30 протоколов выхода из прокрастинации</p>
-    <p class="hero-desc">Не мотивационные цитаты. Не планировщики. Задай вопрос — получи конкретный ответ с шагами и таймером.</p>
+    <div class="hero-eyebrow" id="h-eyebrow">Philosophy of action</div>
+    <h1 class="hero-title" id="h-title">When you <em>cannot</em><br>make yourself<br>start</h1>
+    <p class="hero-sub" id="h-sub">30 protocols to overcome procrastination</p>
+    <p class="hero-desc" id="h-desc">Not motivational quotes. Not planners. Ask a question — get a specific answer with steps and a timer.</p>
   </section>
 
   <div class="divider"></div>
 
-  <div class="section-label">Примеры из базы</div>
+  <div class="section-label" id="label-1">Database examples</div>
   <section class="cards-stack reveal">
     <div class="pcard">
-      <span class="pcard-cat">Старт</span>
-      <p class="pcard-q">Не знаю с чего начать — слишком много вариантов</p>
+      <span class="pcard-cat" id="cat-1">Start</span>
+      <p class="pcard-q" id="q-1">I don't know where to start — too many options</p>
     </div>
     <div class="pcard">
-      <span class="pcard-cat">Страх</span>
-      <p class="pcard-q">Боюсь, что не получится</p>
+      <span class="pcard-cat" id="cat-2">Fear</span>
+      <p class="pcard-q" id="q-2">I'm afraid it won't work out</p>
     </div>
     <div class="pcard" style="opacity: 0.5;">
-      <span class="pcard-cat">Путь</span>
-      <p class="pcard-q">Перфекционизм мешает завершить дело</p>
+      <span class="pcard-cat" id="cat-3">Path</span>
+      <p class="pcard-q" id="q-3">Perfectionism prevents completion</p>
     </div>
   </section>
 
-  <div class="section-label">Что внутри</div>
+  <div class="section-label" id="label-2">What's inside</div>
   <section class="features-grid reveal">
     <div class="feat-card">
       <span class="feat-icon">⚡</span>
-      <div class="feat-title">50 техник</div>
-      <div class="feat-desc">Тело, тревога, фокус, сон, действие — 5 категорий</div>
+      <div class="feat-title" id="f-t1">30 techniques</div>
+      <div class="feat-desc" id="f-d1">Start, Path, Power, Fear, Meaning — 5 categories</div>
     </div>
     <div class="feat-card">
       <span class="feat-icon">⏱</span>
-      <div class="feat-title">Таймеры</div>
-      <div class="feat-desc">Каждый шаг с точным временем завершения</div>
+      <div class="feat-title" id="f-t2">Timers</div>
+      <div class="feat-desc" id="f-d2">Each step with a precise completion time</div>
     </div>
     <div class="feat-card">
       <span class="feat-icon">🆘</span>
-      <div class="feat-title">SOS режим</div>
-      <div class="feat-desc">3 шага для выхода из острого ступора</div>
+      <div class="feat-title" id="f-t3">SOS mode</div>
+      <div class="feat-desc" id="f-d3">5 steps to escape an acute stupor</div>
     </div>
     <div class="feat-card">
       <span class="feat-icon">✦</span>
-      <div class="feat-title">Прогресс</div>
-      <div class="feat-desc">Отмечай выполненные техники</div>
+      <div class="feat-title" id="f-t4">Progress</div>
+      <div class="feat-desc" id="f-d4">Track your completed techniques</div>
     </div>
   </section>
 
-  <div class="quote reveal">
-    «Действие — это не следствие мотивации. Это её причина.»
-    <div style="font-size: 0.6rem; margin-top: 15px; opacity: 0.5; letter-spacing: 0.2em;">— УИЛЬЯМ ДЖЕЙМС</div>
+  <div class="quote reveal" id="quote-main">
+    «Action is not the effect of motivation. It is the cause of it.»
+    <div id="quote-author" style="font-size: 0.6rem; margin-top: 15px; opacity: 0.5; letter-spacing: 0.2em;">— WILLIAM JAMES</div>
   </div>
 
   <section class="payment-section reveal" id="buy">
     <div class="pay-card">
-      <div style="font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px;">Полный доступ</div>
+      <div id="p-eyebrow" style="font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 15px;">Full Access</div>
       <h2 class="pay-title">Pragma</h2>
-      <p style="font-size: 0.8rem; opacity: 0.5;">Один раз — навсегда. Без подписки.</p>
+      <p id="p-sub" style="font-size: 0.8rem; opacity: 0.5;">One-time payment. No subscription.</p>
       
-      <div class="price">999 <span>₽</span></div>
-      <p style="font-size: 0.7rem; opacity: 0.4; margin-top: -15px;">разовая оплата · доступ навсегда</p>
+      <div class="price" id="price-display">9 <span>$</span></div>
+      <p id="p-note" style="font-size: 0.7rem; opacity: 0.4; margin-top: -15px;">one-time payment · lifetime access</p>
       
-      <ul class="includes">
-        <li>Все 30 вопросов и протоколов</li>
-        <li>5 категорий: Старт, Путь, Сила, Страх...</li>
-        <li>Встроенные таймеры с вибрацией</li>
-        <li>Протокол SOS и поддержка</li>
+      <ul class="includes" id="p-list">
+        <li>All 30 questions and protocols</li>
+        <li>5 categories: Start, Path, Power, Fear, Meaning</li>
+        <li>Built-in timers with vibration</li>
+        <li>SOS protocol and support</li>
       </ul>
 
-      <a href="ТВОЯ_ССЫЛКА_STRIPE" class="pay-btn">Получить доступ</a>
+      <a href="javascript:void(0)" class="pay-btn-gold" id="pay-button-main" onclick="showPaymentMethods()">
+        Get access
+      </a>
+
+      <div id="crypto-details" style="display: none;">
+        <div class="crypto-box">
+          <h3 style="margin-top: 0; color: white; font-size: 1.1rem;" id="crypto-title">💳 Crypto Payment</h3>
+          
+          <img src="qr.png" alt="Оплата по QR" style="width: 200px; height: 200px; border-radius: 12px; margin: 15px 0; border: 4px solid white; background: white; display: block; margin-left: auto; margin-right: auto;">
+          
+          <p style="font-size: 0.8rem; margin-bottom: 5px; color: var(--muted);" id="crypto-copy">Copy address:</p>
+          <div style="background: #000; padding: 10px; border-radius: 8px; font-family: monospace; font-size: 0.75rem; word-break: break-all; border: 1px solid #333; margin-bottom: 15px; color: var(--prose);">
+            0x9fbdb5D6B406A30920948D1b1A37C99b46eb2990
+          </div>
+          <p style="color: #ffcc00; font-size: 0.75rem;">⚠️ Network: <b>Polygon</b> | Asset: <b>USDT</b></p>
+        </div>
+
+        <a href="https://t.me/@Ef1ect0r" style="display: block; background: #0088cc; color: white; padding: 18px; border-radius: 18px; text-decoration: none; font-weight: bold; font-size: 0.9rem;" id="p-btn">
+          ✈️ Confirm payment in Telegram
+        </a>
+      </div>
     </div>
   </section>
 </div>
 
 <script>
-  // Скрипт для плавного появления блоков
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-      }
-    });
-  }, { threshold: 0.1 });
+  const langData = {
+    en: {
+      label: "EN", navBuy: "Access", hEyebrow: "Philosophy of action", hTitle: "When you <em>cannot</em><br>make yourself<br>start", hSub: "30 protocols to overcome procrastination", hDesc: "Not motivational quotes. Not planners. Ask a question — get a specific answer with steps and a timer.", label1: "Database examples", cat1: "Start", q1: "I don't know where to start — too many options", cat2: "Fear", q2: "I'm afraid it won't work out", cat3: "Path", q3: "Perfectionism prevents completion", label2: "What's inside", ft1: "30 techniques", fd1: "Start, Path, Power, Fear, Meaning — 5 categories", ft2: "Timers", fd2: "Each step with a precise completion time", ft3: "SOS mode", fd3: "5 steps to escape an acute stupor", ft4: "Progress", fd4: "Track your completed techniques", quote: "«Action is not the effect of motivation. It is the cause of it.»", author: "— WILLIAM JAMES", pEyebrow: "Full Access", pSub: "One-time payment. No subscription.", pPrice: "9", pCurr: "$", pNote: "one-time payment · lifetime access", pBtn: "✈️ Confirm payment in Telegram", cTitle: "💳 Crypto Payment", cCopy: "Copy address:", pMainBtn: "Get access", pList: ["All 30 questions and protocols", "5 categories: Start, Path, Power, Fear, Meaning", "Built-in timers with vibration", "SOS protocol and support"]
+    },
+    es: {
+      label: "ES", navBuy: "Acceso", hEyebrow: "Filosofía de acción", hTitle: "Cuando <em>no puedes</em><br>obligarte a<br>empezar", hSub: "30 protocolos para superar la procrastinación", hDesc: "Ni citas motivacionales. Ni planificadores. Haz una pregunta — obtén una respuesta con pasos и temporizador.", label1: "Ejemplos de la base", cat1: "Inicio", q1: "No sé por dónde empezar — demasiadas opciones", cat2: "Miedo", q2: "Tengo miedo de que no funcione", cat3: "Camino", q3: "El perfeccionismo me impide terminar", label2: "Qué hay dentro", ft1: "30 técnicas", fd1: "Inicio, Camino, Poder, Miedo, Sentido — 5 categorías", ft2: "Temporizadores", fd2: "Cada paso con tiempo exacto de finalización", ft3: "Modo SOS", fd3: "5 pasos para salir de un estupor agudo", ft4: "Progreso", fd4: "Registra tus técnicas completadas", quote: "«La acción no es el efecto de la motivación. Es su causa.»", author: "— WILLIAM JAMES", pEyebrow: "Acceso Total", pSub: "Pago único. Sin suscripción.", pPrice: "9", pCurr: "€", pNote: "pago único · acceso de por vida", pBtn: "✈️ Confirmar pago en Telegram", cTitle: "💳 Pago Cripto", cCopy: "Copiar dirección:", pMainBtn: "Obtener acceso", pList: ["Las 30 preguntas и protocolos", "5 categorías: Inicio, Camino, Poder, Miedo, Sentido", "Temporizadores con vibración", "Protocolo SOS и soporte"]
+    },
+    ru: {
+      label: "RU", navBuy: "Доступ", hEyebrow: "Философия действия", hTitle: "Когда <em>не можешь</em><br>заставить себя<br>начать", hSub: "30 протоколов выхода из прокрастинации", hDesc: "Не мотивационные цитаты. Не планировщики. Задай вопрос — получи конкретный ответ с шагами и таймером.", label1: "Примеры из базы", cat1: "Старт", q1: "Не знаю с чего начать — слишком много вариантов", cat2: "Страх", q2: "Боюсь, что не получится", cat3: "Путь", q3: "Перфекционизм мешает завершить дело", label2: "Что внутри", ft1: "30 техник", fd1: "Старт, Путь, Сила, Страх, Смысл — 5 категорий", ft2: "Таймеры", fd2: "Каждый шаг с точным временем завершения", ft3: "SOS режим", fd3: "5 шагов для выхода из острого ступора", ft4: "Progress", fd4: "Отмечай выполненные техники", quote: "«Действие — это не следствие мотивации. Это её причина.»", author: "— УИЛЬЯМ ДЖЕЙМС", pEyebrow: "Полный доступ", pSub: "Один раз — навсегда. Без подписки.", pPrice: "333", pCurr: "₽", pNote: "разовая оплата · доступ навсегда", pBtn: "✈️ Подтвердить оплату в Telegram", cTitle: "💳 Оплата криптой", cCopy: "Адрес для копирования:", pMainBtn: "Получить доступ", pList: ["Все 30 вопросов и протоколов", "5 категорий: Старт, Путь, Сила, Страх, Смысл", "Встроенные таймеры с вибрацией", "Протокол SOS и поддержка"]
+    }
+  };
 
+  function toggleLangMenu() {
+    document.getElementById("langDropdown").classList.toggle("active");
+  }
+
+  window.onclick = function(event) {
+    if (!event.target.closest('.dropdown')) {
+      document.getElementById("langDropdown").classList.remove("active");
+    }
+  }
+
+  function showPaymentMethods() {
+    document.getElementById('pay-button-main').style.display = 'none';
+    document.getElementById('crypto-details').style.display = 'block';
+  }
+
+  function setLang(lang) {
+    const d = langData[lang];
+    document.getElementById('current-lang-label').innerText = d.label;
+    document.getElementById("langDropdown").classList.remove("active");
+
+    document.getElementById('nav-buy').innerText = d.navBuy;
+    document.getElementById('h-eyebrow').innerText = d.hEyebrow;
+    document.getElementById('h-title').innerHTML = d.hTitle;
+    document.getElementById('h-sub').innerText = d.hSub;
+    document.getElementById('h-desc').innerText = d.hDesc;
+    document.getElementById('label-1').innerText = d.label1;
+    document.getElementById('cat-1').innerText = d.cat1;
+    document.getElementById('q-1').innerText = d.q1;
+    document.getElementById('cat-2').innerText = d.cat2;
+    document.getElementById('q-2').innerText = d.q2;
+    document.getElementById('cat-3').innerText = d.cat3;
+    document.getElementById('q-3').innerText = d.q3;
+    document.getElementById('label-2').innerText = d.label2;
+    document.getElementById('f-t1').innerText = d.ft1;
+    document.getElementById('f-d1').innerText = d.fd1;
+    document.getElementById('f-t2').innerText = d.ft2;
+    document.getElementById('f-d2').innerText = d.fd2;
+    document.getElementById('f-t3').innerText = d.ft3;
+    document.getElementById('f-d3').innerText = d.fd3;
+    document.getElementById('f-t4').innerText = d.ft4;
+    document.getElementById('f-d4').innerText = d.fd4;
+    document.getElementById('quote-main').innerHTML = d.quote + `<div id="quote-author" style="font-size: 0.6rem; margin-top: 15px; opacity: 0.5; letter-spacing: 0.2em;">${d.author}</div>`;
+    
+    document.getElementById('p-eyebrow').innerText = d.pEyebrow;
+    document.getElementById('p-sub').innerText = d.pSub;
+    document.getElementById('price-display').innerHTML = `${d.pPrice} <span>${d.pCurr}</span>`;
+    document.getElementById('p-note').innerText = d.pNote;
+    document.getElementById('p-btn').innerText = d.pBtn;
+    document.getElementById('pay-button-main').innerText = d.pMainBtn;
+    
+    document.getElementById('crypto-title').innerText = d.cTitle;
+    document.getElementById('crypto-copy').innerText = d.cCopy;
+    
+    const list = document.getElementById('p-list');
+    list.innerHTML = d.pList.map(i => `<li>${i}</li>`).join('');
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+  }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
