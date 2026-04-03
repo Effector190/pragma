@@ -65,19 +65,19 @@
     .hero-title { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; line-height: 1.05; font-weight: 500; margin-bottom: 30px; }
     .hero-title em { font-style: italic; color: var(--gold-2); }
     .hero-sub { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; color: var(--gold); margin-bottom: 30px; opacity: 0.9; }
-    .hero-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.8; max-width: 90%; margin: 0 auto; font-weight: 300; }
+    .hero-desc { font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 90%; margin: 0 auto; font-weight: 300; }
     
     .section-label { font-size: 0.5rem; letter-spacing: 0.25em; text-transform: uppercase; text-align: center; margin: 50px 0 25px; color: var(--gold); opacity: 0.6; }
     .cards-stack { display: flex; flex-direction: column; gap: 12px; }
     .pcard { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 22px; backdrop-filter: blur(10px); }
     .pcard-cat { font-size: 0.45rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 8px; display: block; }
-    .pcard-q { font-size: 0.95rem; font-weight: 300; color: rgba(232, 224, 208, 0.9); }
+    .pcard-q { font-size: 1.1rem; font-weight: 300; color: rgba(232, 224, 208, 0.9); }
     
     .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
     .feat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 20px; backdrop-filter: blur(10px); }
     .feat-icon { font-size: 1.2rem; margin-bottom: 15px; display: block; }
     .feat-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
-    .feat-desc { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+    .feat-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
     
     .quote { text-align: center; padding: 60px 0; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--gold); }
     
@@ -93,7 +93,6 @@
     }
     .pay-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; margin-bottom: 10px; }
     
-    /* Исправленный шрифт цены */
     .price { 
       font-family: 'Cormorant Garamond', serif; 
       font-size: 4.2rem; 
@@ -111,7 +110,7 @@
     }
     
     .includes { list-style: none; text-align: left; margin: 30px 0; }
-    .includes li { font-size: 0.85rem; margin-bottom: 15px; display: flex; gap: 12px; color: rgba(232, 224, 208, 0.8); }
+    .includes li { font-size: 1rem; margin-bottom: 15px; display: flex; gap: 12px; color: rgba(232, 224, 208, 0.8); }
     .includes li::before { content: '✦'; color: var(--gold); }
     
     .pay-btn-gold {
@@ -139,9 +138,10 @@
     .modal-h { font-family: 'Cormorant Garamond', serif; color: var(--gold); font-size: 1.6rem; margin-bottom: 20px; text-align: center; line-height: 1.2; }
     .step-box { margin-bottom: 20px; text-align: left; }
     .step-h { color: var(--gold); font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; display: block; }
-    .step-p { font-size: 0.8rem; line-height: 1.5; color: var(--prose); opacity: 0.9; }
+    .step-p { font-size: 0.95rem; line-height: 1.5; color: var(--prose); opacity: 0.9; }
     .step-p b { color: var(--gold); }
     .step-p i { color: var(--tron-red); font-style: normal; font-weight: bold; }
+    .step-p a { color: var(--gold); font-weight: bold; text-decoration: underline; }
 
     .confirm-grid {
       display: grid;
@@ -161,7 +161,7 @@
     .confirm-btn svg { width: 22px; height: 22px; }
 
     .crypto-box {
-      background: rgba(123, 63, 228, 0.05); padding: 20px; border-radius: 20px; border: 1px solid rgba(201, 168, 76, 0.2); text-align: center; margin: 25px 0;
+      background: rgba(123, 63, 228, 0.05); padding: 20px; border-radius: 20px; border: 1px solid rgba(201, 168, 76, 0.2); text-align: center; margin: 15px 0;
     }
 
     .address-container {
@@ -173,6 +173,11 @@
     .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 40px 0; }
     .reveal { opacity: 0; transform: translateY(20px); transition: 0.8s ease-out; }
     .reveal.active { opacity: 1; transform: translateY(0); }
+
+    #inline-instruction {
+        text-align: left;
+        margin-bottom: 25px;
+    }
   </style>
 </head>
 <body>
@@ -183,6 +188,21 @@
   <div class="modal-content">
     <span class="close-modal" onclick="closeIns()">&times;</span>
     <h3 class="modal-h" id="m-title">🚀 Как получить доступ к Pragma</h3>
+    
+    <div id="crypto-modal-ui" style="display: none;">
+        <div class="crypto-box">
+          <img src="qr.png" alt="QR" style="width: 180px; height: 180px; border-radius: 12px; margin: 0 auto 15px; border: 4px solid white; background: white; display: block;">
+          <p style="font-size: 0.8rem; margin-bottom: 5px; color: var(--muted);" id="modal-c-copy">Copy address:</p>
+          <div class="address-container">
+            <div class="address-text" id="modal-wallet-address">UQB6YQe9ezl_igzSMzKCCslUOW_kwAhqLyG9XBFBVQqR_RXL</div>
+            <button class="copy-btn" onclick="copyAddressModal()">
+              <svg id="modal-copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+          </div>
+          <p style="color: #ffcc00; font-size: 0.75rem;">⚠️ <span id="net-label">Network</span>: <b>Ton</b> | <span id="ast-label">Asset</span>: <b>USDT</b></p>
+        </div>
+    </div>
+
     <div id="m-steps"></div>
     
     <div id="modal-confirm-section" style="display: none;">
@@ -288,6 +308,8 @@
       <div class="price" id="price-display">9.99 <span>$</span></div>
       <p id="p-note" style="font-size: 0.7rem; opacity: 0.4; margin-top: -15px;">one-time payment · lifetime access</p>
       
+      <div id="inline-instruction" style="display: none;"></div>
+
       <ul class="includes" id="p-list">
         <li>All 30 questions and protocols</li>
         <li>5 categories: Start, Path, Power, Fear, Meaning</li>
@@ -300,38 +322,7 @@
         <button class="pay-btn-gold pay-btn-no-crypto" onclick="openNoCryptoIns()" id="sel-no-crypto">No Crypto</button>
       </div>
 
-      <div id="crypto-details" style="display: none;">
-        <div class="crypto-box">
-          <h3 style="margin-top: 0; color: white; font-size: 1.1rem;" id="crypto-title">💳 Crypto Payment</h3>
-          <img src="qr.png" alt="Оплата по QR" style="width: 200px; height: 200px; border-radius: 12px; margin: 15px 0; border: 4px solid white; background: white; display: block; margin-left: auto; margin-right: auto;">
-          <p style="font-size: 0.8rem; margin-bottom: 5px; color: var(--muted);" id="crypto-copy">Copy address:</p>
-          <div class="address-container">
-            <div class="address-text" id="wallet-address">UQB6YQe9ezl_igzSMzKCCslUOW_kwAhqLyG9XBFBVQqR_RXL</div>
-            <button class="copy-btn" onclick="copyAddress()">
-              <svg id="copy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-            </button>
-          </div>
-          <p style="color: #ffcc00; font-size: 0.75rem;">⚠️ Network: <b>Ton</b> | Asset: <b>USDT</b></p>
-        </div>
-        
-        <p id="confirm-label" style="font-size: 0.7rem; color: var(--muted); margin-bottom: 10px; text-transform: uppercase;">Confirm Payment:</p>
-        <div class="confirm-grid">
-          <a href="https://t.me/Ef1ect0r" class="confirm-btn">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.38 15.84 14.19 15.51 15.96C15.37 16.71 15.09 16.96 14.82 16.99C14.24 17.04 13.8 16.6 13.24 16.23C12.36 15.65 11.86 15.29 11.01 14.73C10.02 14.08 10.66 13.72 11.23 13.13C11.38 12.98 13.94 10.65 13.99 10.43C13.99 10.4 14 10.3 13.94 10.25C13.88 10.2 13.79 10.22 13.72 10.23C13.63 10.25 12.23 11.17 9.51 13.01C9.11 13.28 8.75 13.42 8.43 13.41C8.08 13.4 7.4 13.21 6.89 13.05C6.27 12.85 5.77 12.74 5.82 12.4C5.84 12.22 6.09 12.04 6.55 11.86C9.39 10.62 11.3 9.79 12.27 9.39C15.03 8.24 15.61 8.04 15.98 8.04C16.06 8.04 16.25 8.06 16.37 8.16C16.47 8.24 16.5 8.36 16.51 8.44C16.51 8.52 16.53 8.7 16.52 8.8H16.64Z" fill="#24A1DE"/></svg>
-            Telegram
-          </a>
-          <a href="https://wa.me/79265420749" class="confirm-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.63 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            WhatsApp
-          </a>
-          <a href="mailto:pragma.app0@gmail.com" class="confirm-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            Email
-          </a>
-        </div>
-      </div>
-
-      <button class="ins-btn" id="ins-trigger-btn" onclick="openIns()">Instruction 🚀</button>
+      <button class="ins-btn" id="ins-trigger-btn" onclick="openIns()" style="display: none;">Instruction 🚀</button>
       <button class="pay-btn-gold" id="pay-button-main" onclick="handleMainButtonClick()">Get access</button>
     </div>
   </section>
@@ -345,21 +336,23 @@
       label: "EN", navBuy: "Access", hEyebrow: "Philosophy of action", hTitle: "When you <em>cannot</em><br>make yourself<br>start", hSub: "30 protocols to overcome procrastination", hSubText: "Not motivational quotes. Not planners. Ask a question — get a specific answer with steps and a timer.", label1: "Database examples", cat1: "Start", q1: "I don't know where to start — too many options", cat2: "Fear", q2: "I'm afraid it won't work out", cat3: "Path", q3: "Perfectionism prevents completion", label2: "What's inside", ft1: "30 techniques", fd1: "Start, Path, Power, Fear, Meaning — 5 categories", ft2: "Timers", fd2: "Each step with a precise completion time", ft3: "SOS mode", fd3: "5 steps to escape an acute stupor", ft4: "Progress", fd4: "Track your completed techniques", quote: "«Rise. Begin the work.»", author: "— MARCUS AURELIUS", pEyebrow: "Full Access", pSub: "One-time payment. No subscription.", 
       pPrice: "9.99", pCurr: "$", pNote: "one-time payment · lifetime access", 
       confirmLabel: "Confirm payment:", cTitle: "💳 Crypto Payment", cCopy: "Copy address:", pMainBtn: "Get access", pBackBtn: "← Back", pList: ["All 30 questions and protocols", "5 categories", "Built-in timers", "SOS mode"],
-      insBtn: "Instruction 🚀", mTitle: "🚀 How to get Pragma access", mClose: "Got it",
-      selCrypto: "Pay with Crypto", selNoCrypto: "No Crypto",
+      insBtn: "Instruction 🚀", mTitle: "🚀 How to get Pragma access", mClose: "Proceed",
+      selCrypto: "Pay with Crypto", selNoCrypto: "No Crypto", netLabel: "Network", astLabel: "Asset",
       mSteps: [
-        { h: "Choose your payment method:", p: "• Have cryptocurrency? Click \"Pay with Crypto\". Transfer 9.99 USDT strictly via the TON network." },
-        { h: "", p: "• No cryptocurrency? Click \"No Crypto\" — a step-by-step guide will open for purchasing via any bank card using the @xRocket service." },
-        { h: "Confirm:", p: "Save a screenshot of your payment and send it via Telegram, WhatsApp, or Email to get your access." }
+        { h: "Choose your payment method:", p: "• Have cryptocurrency? Click \"Pay with Crypto\"." },
+        { h: "", p: "• No cryptocurrency? Click \"No Crypto\" — a step-by-step guide will open for purchasing via any bank card using the @xRocket service." }
       ],
-      noCryptoTitle: "How to pay without crypto",
+      cryptoTitle: "💳 Crypto Payment",
+      cryptoSteps: [
+          {h: "Network TON", p: "Send exactly <b>9.99 USDT</b> using the TON network."},
+          {h: "Confirmation", p: "Take a screenshot of the transaction and send it to us via the buttons below."}
+      ],
+      noCryptoTitle: "How to pay if you don't have Crypto",
       noCryptoSteps: [
-        {h: "Service xRocket", p: "We use @xRocket in Telegram. It is a secure P2P platform to buy USDT with your card."},
-        {h: "Step 1: Market", p: "Find @xRocket bot. Select P2P → Buy."},
-        {h: "Step 2: Method", p: "Choose USDT. Select your local currency and bank."},
-        {h: "Step 3: Trade", p: "Click Buy. Enter amount (we recommend 10.5 USDT). Create trade."},
-        {h: "Step 4: Transfer", p: "Send money to seller's card. Return to bot and click 'Payment Confirmed'."},
-        {h: "Step 5: Access", p: "Once USDT is on your balance, return here and confirm payment via the buttons below."}
+        {h: "Service xRocket", p: "An official wallet and P2P platform right inside Telegram. All operations are secure, anonymous, and handled within the messenger."},
+        {h: "Step 1: Buying USDT (P2P Market)", p: "1. Go to @xRocket bot → P2P → Buy. Select USDT and your payment method.<br>2. How it works: You transfer funds to the seller via their details, and the service (acting as a guarantor) instantly credits the crypto to your bot balance. No ID required.<br>3. We recommend buying 10.5 USDT."},
+        {h: "Step 2: Make Payment", p: "Once USDT is in your balance, click here to pay the invoice:<br><a href='https://t.me/xrocket?start=inv_95nBIQspz1OMxPE'>👉 PAY FOR PRAGMA</a>"},
+        {h: "Step 3: Confirmation", p: "Take a screenshot of your payment receipt and send it to any chat below. We will send your Pragma link to the same social network where you sent the screenshot."}
       ]
     },
     ru: {
@@ -367,56 +360,65 @@
       pPrice: "9.99", pCurr: "$", pNote: "разовая оплата · доступ навсегда", 
       confirmLabel: "Подтвердить оплату:", cTitle: "💳 Оплата криптой", cCopy: "Адрес для копирования:", pMainBtn: "Получить доступ", pBackBtn: "← Назад", pList: ["Все 30 вопросов и протоколов", "5 категорий", "Встроенные таймеры", "SOS режим"],
       insBtn: "Инструкция 🚀", mTitle: "🚀 Как получить доступ к Pragma", mClose: "Понятно",
-      selCrypto: "Оплата криптой", selNoCrypto: "Нет крипты",
+      selCrypto: "Оплата криптой", selNoCrypto: "Нет крипты", netLabel: "Сеть", astLabel: "Актив",
       mSteps: [
-        { h: "Выберите удобный способ оплаты:", p: "• Есть криптовалюта? Нажмите \"Оплата криптой\". Переведите 9.99 USDT строго в сети TON." },
-        { h: "", p: "• Нет криптовалюты? Нажмите \"Нет крипты\" — откроется пошаговый гайд по покупке через карту любого банка в сервисе @xRocket." },
-        { h: "Подтверждение:", p: "Обязательно сделайте скриншот оплаты и пришлите его нам через Telegram, WhatsApp или Email для получения доступа." }
+        { h: "Выберите удобный способ оплаты:", p: "• Есть криптовалюта? Нажмите \"Оплата криптой\"." },
+        { h: "", p: "• Нет криптовалюты? Нажмите \"Нет крипты\" — откроется пошаговый гайд по покупке через карту любого банка в сервисе @xRocket." }
       ],
-      noCryptoTitle: "Как оплатить, если нет криптовалюты",
+      cryptoTitle: "💳 Оплата криптовалютой",
+      cryptoSteps: [
+          {h: "Сеть TON", p: "Переведите <b>9.99 USDT</b> строго в сети <b>TON</b> на адрес выше."},
+          {h: "Подтверждение", p: "Сделайте скриншот перевода и пришлите его нам для активации доступа через кнопки ниже."}
+      ],
+      noCryptoTitle: "Как оплатить, если нет Криптовалюты",
       noCryptoSteps: [
-        {h: "Сервис xRocket", p: "Для оплаты мы используем сервис <b>@xRocket</b> внутри Telegram. Это безопасная P2P-платформа."},
-        {h: "Шаг 1: Маркет", p: "Найдите в Telegram бота @xRocket. В главном меню выберите раздел <b>P2P → Купить</b>."},
-        {h: "Шаг 2: Валюта", p: "Выберите монету <b>USDT</b>. Выберите вашу валюту и банк."},
-        {h: "Шаг 3: Сделка", p: "Нажмите «Купить». Рекомендуем покупать 10.5 USDT. Нажмите «Создать сделку»."},
-        {h: "Шаг 4: Перевод", p: "Отправьте сумму по реквизитам в вашем банке. Вернитесь в Telegram и нажмите <b>«Оплата подтверждена»</b>."},
-        {h: "Шаг 5: Завершение", p: "Как только USDT зачислятся, подтвердите оплату, написав мне через любую кнопку ниже."}
+        {h: "Сервис xRocket", p: "Это официальный кошелек и P2P-платформа прямо внутри Telegram. Все операции проходят внутри мессенджера — это безопасно и анонимно."},
+        {h: "Шаг 1: Покупка USDT (P2P-маркет)", p: "1. Зайдите в бот @xRocket → раздел P2P → Купить.<br>2. Выберите монету USDT и ваш метод оплаты (банк или сервис).<br>3. Как это работает: Вы переводите деньги продавцу по его реквизитам, а сервис (как гарант) мгновенно зачисляет криптовалюту на ваш баланс в боте. Паспорт не требуется.<br>4. Рекомендуем покупать 10.5 USDT (с небольшим запасом)."},
+        {h: "Шаг 2: Оплата доступа", p: "Когда USDT появятся на вашем балансе в @xRocket, перейдите по этой ссылке для оплаты счета:<br><a href='https://t.me/xrocket?start=inv_95nBIQspz1OMxPE'>👉 ОПЛАТИТЬ PRAGMA</a>"},
+        {h: "Шаг 3: Подтверждение", p: "Сделайте скриншот чека об оплате и отправьте его в любой чат ниже. Мы вышлем вам ссылку на Pragma в ту же соцсеть, через которую вы отправили скриншот."}
       ]
     },
     es: {
-        label: "ES", navBuy: "Acceso", hEyebrow: "Filosofía de acción", hTitle: "Cuando <em>no puedes</em><br>empezar", hSub: "30 protocolos contra la procrastinación", hSubText: "No son frases motivadoras. Haz una pregunta и obtén pasos и temporizador.", label1: "Ejemplos", cat1: "Inicio", q1: "No sé por dónde empezar", cat2: "Miedo", q2: "Tengo miedo de fallar", cat3: "Camino", q3: "El perfeccionismo me detiene", label2: "Contenido", ft1: "30 técnicas", fd1: "5 categorías de acción", ft2: "Temporizadores", fd2: "Tiempo exacto para cada paso", ft3: "Modo SOS", fd3: "5 pasos para salir del estupor", ft4: "Progreso", fd4: "Registra tus avances", quote: "«Levántate. Ponte a trabajar.»", author: "— MARCO AURELIO", pEyebrow: "Acceso Total", pSub: "Pago único. Sin suscripción.", 
+        label: "ES", navBuy: "Acceso", hEyebrow: "Filosofía de acción", hTitle: "Cuando <em>no puedes</em><br>empezar", hSub: "30 protocolos contra la procrastinación", hSubText: "No son frases motivadoras. Haz una pregunta y obtén pasos y temporizador.", label1: "Ejemplos", cat1: "Inicio", q1: "No sé por dónde empezar", cat2: "Miedo", q2: "Tengo miedo de fallar", cat3: "Camino", q3: "El perfeccionismo me detiene", label2: "Contenido", ft1: "30 técnicas", fd1: "5 categorías de acción", ft2: "Temporizadores", fd2: "Tiempo exacto para cada paso", ft3: "Modo SOS", fd3: "5 pasos para salir del estupor", ft4: "Progreso", fd4: "Registra tus avances", quote: "«Levántate. Ponte a trabajar.»", author: "— MARCO AURELIO", pEyebrow: "Acceso Total", pSub: "Pago único. Sin suscripción.", 
         pPrice: "9.99", pCurr: "$", pNote: "pago único · acceso de de vida", 
         confirmLabel: "Confirmar pago:", cTitle: "💳 Pago Cripto", cCopy: "Copiar dirección:", pMainBtn: "Obtener acceso", pBackBtn: "← Volver", pList: ["30 protocolos", "5 categorías", "Timers", "Modo SOS"],
         insBtn: "Instrucción 🚀", mTitle: "🚀 Cómo obtener acceso a Pragma", mClose: "Entendido",
-        selCrypto: "Pago Cripto", selNoCrypto: "Sin Cripto",
+        selCrypto: "Pago Cripto", selNoCrypto: "Sin Cripto", netLabel: "Red", astLabel: "Activo",
         mSteps: [
-          { h: "Seleccione su método de pago:", p: "• ​¿Tiene criptomonedas? Haga clic en \"Pago con Cripto\". Transfiera 9.99 USDT estrictamente a través de la red TON." },
-          { h: "", p: "• ​¿No tiene criptomonedas? Haga clic en \"Sin Cripto\" — se abrirá una guía paso a paso para comprar mediante cualquier tarjeta bancaria." },
-          { h: "Confirmar:", p: "Guarde una captura de pantalla de su pago y envíela por Telegram, WhatsApp o Email para obtener su acceso." }
+          { h: "Seleccione su método de pago:", p: "• ¿Tiene criptomonedas? Haga clic en \"Pago Cripto\"." },
+          { h: "", p: "• ¿No tiene criptomonedas? Haga clic en \"Sin Cripto\" — se abrirá una guía para comprar mediante tarjeta bancaria en @xRocket." }
         ],
-        noCryptoTitle: "Cómo pagar sin criptomonedas",
+        cryptoTitle: "💳 Pago con Criptomonedas",
+        cryptoSteps: [
+            {h: "Red TON", p: "Envía exactamente <b>9.99 USDT</b> a través de la red <b>TON</b> a la dirección arriba indicada."},
+            {h: "Confirmación", p: "Toma una captura de pantalla de la transacción y envíanosla para activar tu acceso."}
+        ],
+        noCryptoTitle: "Cómo pagar si no tienes Criptomonedas",
         noCryptoSteps: [
-            {h: "Servicio xRocket", p: "Usamos @xRocket en Telegram. Es una plataforma P2P segura."},
-            {h: "Paso 1: Mercado", p: "Busca @xRocket. Selecciona P2P → Comprar."},
-            {h: "Paso 2: Método", p: "Elige USDT y tu moneda local."},
-            {h: "Paso 3: Trato", p: "Click Comprar. Ingresa el monto (recomendamos 10.5 USDT)."},
-            {h: "Paso 4: Envío", p: "Envía el dinero por tu banco. Vuelve al bot и confirma el pago."},
-            {h: "Paso 5: Acceso", p: "Vuelve aquí и confirma el pago con los botones de contacto."}
+            {h: "Servicio xRocket", p: "Es una billetera oficial y plataforma P2P dentro de Telegram. Todas las operaciones son seguras y anónimas."},
+            {h: "Paso 1: Comprar USDT (Mercado P2P)", p: "1. Ve al bot @xRocket → P2P → Comprar.<br>2. Selecciona USDT y tu método de pago local (banco).<br>3. Transfieres el dinero al vendedor y el bot te acredita la cripto al instante. No requiere identificación.<br>4. Recomendamos comprar 10.5 USDT."},
+            {h: "Paso 2: Realizar el Pago", p: "Una vez que tengas USDT, haz clic aquí para pagar la factura:<br><a href='https://t.me/xrocket?start=inv_95nBIQspz1OMxPE'>👉 PAGAR PRAGMA</a>"},
+            {h: "Paso 3: Confirmación", p: "Envía la captura de pantalla del recibo a cualquier chat de abajo. Te enviaremos el enlace de acceso por la misma vía."}
         ]
     }
   };
 
   function openIns() { 
-    renderSteps(langData[currentLanguage].mSteps, langData[currentLanguage].mTitle, false);
+    renderSteps(langData[currentLanguage].mSteps, langData[currentLanguage].mTitle, false, false);
     document.getElementById('insModal').style.display = 'block'; 
   }
 
   function openNoCryptoIns() {
-    renderSteps(langData[currentLanguage].noCryptoSteps, langData[currentLanguage].noCryptoTitle, true);
+    renderSteps(langData[currentLanguage].noCryptoSteps, langData[currentLanguage].noCryptoTitle, true, false);
     document.getElementById('insModal').style.display = 'block';
   }
 
-  function renderSteps(steps, title, showConfirm) {
+  function openCryptoMode() {
+    renderSteps(langData[currentLanguage].cryptoSteps, langData[currentLanguage].cryptoTitle, true, true);
+    document.getElementById('insModal').style.display = 'block';
+  }
+
+  function renderSteps(steps, title, showConfirm, isCrypto) {
     document.getElementById('m-title').innerText = title;
     document.getElementById('m-steps').innerHTML = steps.map(s => `
         <div class="step-box">
@@ -424,6 +426,8 @@
             <p class="step-p">${s.p}</p>
         </div>
     `).join('');
+    
+    document.getElementById('crypto-modal-ui').style.display = isCrypto ? 'block' : 'none';
     
     const confirmSection = document.getElementById('modal-confirm-section');
     if (showConfirm) {
@@ -445,36 +449,41 @@
   function handleMainButtonClick() {
     const btn = document.getElementById('pay-button-main');
     const selection = document.getElementById('method-selection');
-    const crypto = document.getElementById('crypto-details');
+    const inlineIns = document.getElementById('inline-instruction');
     const elementsToHide = [
       document.getElementById('pay-main-title'), document.getElementById('price-display'),
       document.getElementById('p-note'), document.getElementById('p-list'), 
-      document.getElementById('p-sub'), document.getElementById('ins-trigger-btn')
+      document.getElementById('p-sub')
     ];
 
     if (!btn.classList.contains('back-mode')) {
       elementsToHide.forEach(el => el.style.display = 'none');
+      const d = langData[currentLanguage];
+      inlineIns.innerHTML = `
+        <h3 class="modal-h" style="font-size: 1.2rem;">${d.mTitle}</h3>
+        ${d.mSteps.map(s => `
+            <div class="step-box">
+                <span class="step-h" style="font-size: 0.8rem;">${s.h}</span>
+                <p class="step-p" style="font-size: 0.95rem;">${s.p}</p>
+            </div>
+        `).join('')}
+      `;
+      inlineIns.style.display = 'block';
       selection.style.display = 'block';
-      crypto.style.display = 'none';
       btn.classList.add('back-mode');
       btn.innerText = langData[currentLanguage].pBackBtn;
     } else {
       elementsToHide.forEach(el => el.style.display = 'block');
+      inlineIns.style.display = 'none';
       selection.style.display = 'none';
-      crypto.style.display = 'none';
       btn.classList.remove('back-mode');
       btn.innerText = langData[currentLanguage].pMainBtn;
     }
   }
 
-  function openCryptoMode() {
-    document.getElementById('method-selection').style.display = 'none';
-    document.getElementById('crypto-details').style.display = 'block';
-  }
-
-  async function copyAddress() {
-    const address = document.getElementById('wallet-address').innerText;
-    const icon = document.getElementById('copy-icon');
+  async function copyAddressModal() {
+    const address = document.getElementById('modal-wallet-address').innerText;
+    const icon = document.getElementById('modal-copy-icon');
     await navigator.clipboard.writeText(address);
     icon.innerHTML = '<polyline points="20 6 9 17 4 12"></polyline>';
     setTimeout(() => { icon.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>'; }, 1500);
@@ -510,17 +519,33 @@
     document.getElementById('p-sub').innerText = d.pSub;
     document.getElementById('price-display').innerHTML = `${d.pPrice} <span>${d.pCurr}</span>`;
     document.getElementById('p-note').innerText = d.pNote;
-    document.getElementById('confirm-label').innerText = d.confirmLabel;
     
-    document.getElementById('pay-button-main').innerText = document.getElementById('pay-button-main').classList.contains('back-mode') ? d.pBackBtn : d.pMainBtn;
+    const mainBtn = document.getElementById('pay-button-main');
+    mainBtn.innerText = mainBtn.classList.contains('back-mode') ? d.pBackBtn : d.pMainBtn;
+    
     document.getElementById('ins-trigger-btn').innerText = d.insBtn;
     document.getElementById('m-btn').innerText = d.mClose;
-    document.getElementById('crypto-title').innerText = d.cTitle;
-    document.getElementById('crypto-copy').innerText = d.cCopy;
     document.getElementById('p-list').innerHTML = d.pList.map(i => `<li>${i}</li>`).join('');
     
     document.getElementById('sel-crypto').innerText = d.selCrypto;
     document.getElementById('sel-no-crypto').innerText = d.selNoCrypto;
+    document.getElementById('modal-c-copy').innerText = d.cCopy;
+    
+    document.getElementById('net-label').innerText = d.netLabel;
+    document.getElementById('ast-label').innerText = d.astLabel;
+
+    const inlineIns = document.getElementById('inline-instruction');
+    if (inlineIns.style.display === 'block') {
+        inlineIns.innerHTML = `
+            <h3 class="modal-h" style="font-size: 1.2rem;">${d.mTitle}</h3>
+            ${d.mSteps.map(s => `
+                <div class="step-box">
+                    <span class="step-h" style="font-size: 0.8rem;">${s.h}</span>
+                    <p class="step-p" style="font-size: 0.95rem;">${s.p}</p>
+                </div>
+            `).join('')}
+        `;
+    }
 
     document.getElementById("langDropdown").classList.remove("active");
   }
